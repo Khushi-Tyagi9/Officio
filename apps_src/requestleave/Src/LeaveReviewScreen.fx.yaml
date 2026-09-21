@@ -1,0 +1,431 @@
+LeaveReviewScreen As screen:
+    Fill: |-
+        =ColorValue("#FAF9F8")
+    OnHidden: =
+    OnVisible: =
+    Orientation: =If(LeaveReviewScreen.Width < LeaveReviewScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= LeaveReviewScreen.Width)
+
+    ContainerMainH_3 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =1
+
+        ContainerHeaderH_3 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =varGlobals.MainThemeColor.Fill
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Icon1_4 As icon.BackArrow:
+                AlignInContainer: =AlignInContainer.Center
+                Color: =Color.White
+                Height: =60
+                Icon: =Icon.BackArrow
+                OnSelect: =If(_requestType = "Edit",Navigate(HomeScreen),Back())
+                PaddingLeft: =10
+                Width: =60
+                X: =18
+                ZIndex: =1
+
+            Label8_4 As label:
+                Align: =LayoutAlignItems.Center
+                AlignInContainer: =AlignInContainer.Stretch
+                Color: =RGBA(255, 255, 255, 1)
+                FillPortions: =1
+                FocusedBorderColor: =Label8_4.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverBorderColor: =Label8_4.BorderColor
+                HoverColor: =Label8_4.Color
+                HoverFill: =Label8_4.Fill
+                PressedBorderColor: =Label8_4.BorderColor
+                PressedColor: =Label8_4.Color
+                PressedFill: =Label8_4.Fill
+                Size: =If(LeaveReviewScreen.Size = 1,varGlobals.Header.FontSize-4,varGlobals.Header.FontSize)
+                Text: =If(_requestType = "New","Review new leave request",_requestType = "Edit","Edit leave request","View leave request")
+                Width: =1366
+                ZIndex: =2
+
+            Icon1_8 As icon.BackArrow:
+                AlignInContainer: =AlignInContainer.Center
+                Color: =Color.White
+                Height: =60
+                Icon: =Icon.CancelBadge
+                OnSelect: =Navigate(HomeScreen)
+                PaddingRight: =10
+                Width: =60
+                X: =18
+                ZIndex: =3
+
+        Container3 As groupContainer.verticalAutoLayoutContainer:
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            ZIndex: =2
+
+            "GalleryLeaveRequestActions As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver4.0'":
+                FillPortions: =0
+                Height: =50
+                Items: |-
+                    =Filter(Table(
+                        {
+                            ID: 1,
+                            Title: "Recall",
+                            Visible: If(First(ColTmpLeaveRequest).ApprovalStatus = ApprovalStatus.FirstLevel || First(ColTmpLeaveRequest).ApprovalStatus = ApprovalStatus.Declined,true,false)
+                        },
+                        {
+                            ID: 2,
+                            Title: "Reassign",
+                            Visible: false//If(First(ColTmpLeaveRequest).ApprovalStatus = ApprovalStatus.FirstLevel,true,false)
+                        },
+                        {
+                            ID: 3,
+                            Title: "Audit History",
+                            Visible: true
+                        },
+                        {
+                            ID: 4,
+                            Title: "Delete",
+                            Visible: If(First(ColTmpLeaveRequest).ApprovalStatus = ApprovalStatus.Draft,true,false)
+                        }
+                    ),Visible = true)
+                LayoutMinHeight: =50
+                LayoutMinWidth: =320
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =170
+                Visible: =_requestType <> "New"
+                Width: =1134
+                X: =20
+                Y: =71
+                ZIndex: =1
+
+                FilterButton_3 As button:
+                    BorderColor: =varGlobals.BlueRobot.Fill
+                    Color: =varGlobals.BlueRobot.Fill
+                    DisabledBorderColor: =ColorFade(FilterButton_3.BorderColor, 70%)
+                    Fill: =Color.White
+                    FocusedBorderColor: =FilterButton_3.BorderColor
+                    FocusedBorderThickness: =2
+                    Font: =varGlobals.Body.Font
+                    FontWeight: =FontWeight.Bold
+                    Height: =36
+                    HoverBorderColor: =ColorFade(FilterButton_3.BorderColor, 20%)
+                    HoverColor: =FilterButton_3.Color
+                    HoverFill: =ColorFade(FilterButton_3.Fill, 20%)
+                    OnSelect: |-
+                        =Switch(
+                            ThisItem.Title,
+                            "Recall",
+                            Collect(
+                                colDialogInstructions,
+                                {
+                                    // -- Generic Popup Info -- //
+                                    type: "YesNo",
+                                    message: "Would you like to recall this request, so that you can edit and resubmit?",
+                                    source: "RecallAction",
+                                    iconType: Icon.QuestionMark,
+                                    iconColor: varGlobals.GreenRobot.Fill,
+                                    responseAction: "RecallAction",
+                                    originalFunctionRequestID: Blank()
+                                }
+                            ),
+                            "Reassign",
+                            Navigate(LeaveApproverScreen),
+                            "Delete",
+                             Collect(
+                                colDialogInstructions,
+                                {
+                                    // -- Generic Popup Info -- //
+                                    type: "YesNo",
+                                    message: "Would you like to permanently delete this request?",
+                                    source: "DeleteAction",
+                                    iconType: Icon.QuestionMark,
+                                    iconColor: varGlobals.GreenRobot.Fill,
+                                    responseAction: "DeleteAction",
+                                    originalFunctionRequestID: Blank()
+                                }
+                            ),
+                            "Audit History",Navigate(AuditHistoryScreen,ScreenTransition.None,{varLeaveRequestGUID: First(ColTmpLeaveRequest).ID})
+                        )
+                    PressedBorderColor: =FilterButton_3.Fill
+                    PressedColor: =
+                    PressedFill: =FilterButton_3.Color
+                    Size: =varGlobals.Navigation.FontSize
+                    Text: =ThisItem.Title
+                    Width: =150
+                    X: =10
+                    Y: =5
+                    ZIndex: =4
+
+            "GalReviewRequest As gallery.'BrowseLayout_Flexible_SocialFeed_ver4.0'":
+                Items: |-
+                    =//table of user inputs for new request. Dynamically updates to reflect changes made by user on app screens
+                    Sort(
+                        Table(
+                            {
+                                Header: "Status",
+                                Value: If(
+                                    _requestType = "New",
+                                    "Draft",
+                                    First(ColTmpLeaveRequest).ApprovalStatus
+                                ),
+                                Icon: Icon.Signal,
+                                Screen: LeaveTypeScreen,
+                                Selectable: false,
+                                ID: 0
+                            },
+                            {
+                                Header: "Leave type",
+                                Value: First(ColTmpLeaveRequest).LeaveType.Name,
+                                Icon: Icon.Leave,
+                                Screen: LeaveTypeScreen,
+                                Selectable: true,
+                                ID: 1
+                            },
+                            {
+                                Header: "Comment",
+                                Value: Left(
+                                    First(ColTmpLeaveRequest).Details,
+                                    200
+                                ),
+                                Icon: Icon.Text,
+                                Screen: LeaveJustificationScreen,
+                                Selectable: true,
+                                ID: 2
+                            },
+                            {
+                                Header: "Time Off Dates",
+                                Value: Text(
+                                    First(ColTmpLeaveRequest).StartDate,
+                                    DateTimeFormat.ShortDate
+                                ) & " - " & Text(
+                                    First(ColTmpLeaveRequest).EndDate,
+                                    DateTimeFormat.ShortDate
+                                ),
+                                Icon: Icon.CalendarBlank,
+                                Screen: LeaveDatesScreen,
+                                Selectable: true,
+                                ID: 3
+                            },
+                            {
+                                Header: "Total time off requested",
+                                Value: First(ColTmpLeaveRequest).Duration & " day(s)",
+                                Icon: Icon.Clock,
+                                Screen: LeaveDatesScreen,
+                                Selectable: false,
+                                ID: 4
+                            },
+                            {
+                                Header: If(
+                                    _requestType = "View",
+                                    "Manager approval sent to",
+                                    "Manager for approval"
+                                ),
+                                Value: First(ColTmpLeaveRequest).ApproverEmail,
+                                Icon: Icon.Person,
+                                Screen: LeaveApproverScreen,
+                                Selectable: true,
+                                ID: 5
+                            }
+                        ),
+                        ID,
+                        SortOrder.Ascending
+                    )
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =200
+                LayoutMinWidth: =320
+                OnSelect: |-
+                    =If(
+                        icoArrow.Visible,
+                        If(
+                            _requestType <> "View",
+                            Set(
+                                _sourceScreen,
+                                "Review"
+                            );
+                            Navigate(
+                                ThisItem.Screen,
+                                ScreenTransition.None
+                            )
+                        )
+                    )
+                TemplateFill: =Color.White
+                TemplatePadding: =4
+                TemplateSize: =Min(80, GalReviewRequest.Height - 60)
+                Width: =Parent.Width
+                ZIndex: =3
+
+                Rectangle9_15 As rectangle:
+                    DisabledFill: =Rectangle9_15.Fill
+                    Fill: =ColorFade(varGlobals.Body.FontColor,90%)
+                    FocusedBorderColor: =Rectangle9_15.BorderColor
+                    Height: =2
+                    HoverFill: =Rectangle9_15.Fill
+                    PressedFill: =Rectangle9_15.Fill
+                    Width: =Parent.TemplateWidth
+                    Y: =lblRequestItemValue.Y + lblRequestItemValue.Height + 10
+                    ZIndex: =2
+
+                lblRequestItemTitle As label:
+                    Color: =varGlobals.MainThemeColor.Fill
+                    FocusedBorderColor: =lblRequestItemTitle.BorderColor
+                    FocusedBorderThickness: =02
+                    Font: =varGlobals.Body.Font
+                    FontWeight: =FontWeight.Semibold
+                    Height: =32
+                    HoverBorderColor: =lblRequestItemTitle.BorderColor
+                    HoverColor: =lblRequestItemTitle.Color
+                    HoverFill: =lblRequestItemTitle.Fill
+                    OnSelect: =Select(Parent)
+                    PressedBorderColor: =lblRequestItemTitle.BorderColor
+                    PressedColor: =lblRequestItemTitle.Color
+                    PressedFill: =lblRequestItemTitle.Fill
+                    Size: =varGlobals.Navigation.FontSize
+                    Text: =Upper(ThisItem.Header)
+                    Width: =406
+                    X: =62
+                    Y: =10
+                    ZIndex: =3
+
+                lblRequestItemValue As label:
+                    AutoHeight: =true
+                    Color: =If(ThisItem.Selectable = false || _requestType="View",varGlobals.Body.FontColor,varGlobals.BlueRobot.Fill)
+                    FocusedBorderColor: =lblRequestItemValue.BorderColor
+                    FocusedBorderThickness: =02
+                    Font: =varGlobals.Body.Font
+                    Height: =50
+                    HoverBorderColor: =lblRequestItemValue.BorderColor
+                    HoverColor: =lblRequestItemValue.Color
+                    HoverFill: =lblRequestItemValue.Fill
+                    OnSelect: =Select(Parent)
+                    PressedBorderColor: =lblRequestItemValue.BorderColor
+                    PressedColor: =lblRequestItemValue.Color
+                    PressedFill: =lblRequestItemValue.Fill
+                    Size: =varGlobals.Navigation.FontSize
+                    Text: =ThisItem.Value
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.TemplateWidth - 120
+                    X: =62
+                    Y: =40
+                    ZIndex: =4
+
+                icoArrow As icon.ChevronRight:
+                    AccessibleLabel: ="Edit this request"
+                    Color: =varGlobals.BlueRobot.Fill
+                    DisabledFill: =icoArrow.Fill
+                    FocusedBorderColor: =icoArrow.BorderColor
+                    HoverBorderColor: =ColorFade(icoArrow.BorderColor, 20%)
+                    HoverColor: =ColorFade(icoArrow.Color, 20%)
+                    HoverFill: =icoArrow.Fill
+                    Icon: =Icon.ArrowRight
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =15
+                    PaddingLeft: =15
+                    PaddingRight: =15
+                    PaddingTop: =15
+                    PressedBorderColor: =ColorFade(icoArrow.BorderColor, -20%)
+                    PressedColor: =ColorFade(icoArrow.Color, -20%)
+                    PressedFill: =icoArrow.Fill
+                    TabIndex: =0
+                    Visible: =_requestType <> "View" && ThisItem.Selectable = true
+                    X: =Parent.TemplateWidth - Self.Width
+                    Y: =8
+                    ZIndex: =5
+
+                Icon3 As icon.Bell:
+                    Color: =varGlobals.Body.FontColor
+                    Height: =40
+                    Icon: =ThisItem.Icon
+                    OnSelect: =Select(Parent)
+                    Width: =40
+                    X: =12
+                    Y: =20
+                    ZIndex: =6
+
+        Container1 As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =80
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =5
+            PaddingLeft: =20
+            PaddingRight: =20
+            PaddingTop: =5
+            ZIndex: =3
+
+            btnSubmitLeaveRequest As button:
+                Align: =LayoutAlignItems.Center
+                BorderColor: =varGlobals.BlueRobot.Fill
+                BorderThickness: =1
+                Color: =Color.White
+                DisabledBorderColor: =ColorFade(btnSubmitLeaveRequest.BorderColor, 70%)
+                Fill: =varGlobals.BlueRobot.Fill
+                FillPortions: =1
+                FocusedBorderColor: =btnSubmitLeaveRequest.BorderColor
+                Font: =varGlobals.Body.Font
+                Height: =80
+                HoverBorderColor: =ColorFade(btnSubmitLeaveRequest.BorderColor, 20%)
+                HoverColor: =Self.Fill
+                HoverFill: =Self.Color
+                OnSelect: |-
+                    =Set(_submittingRequest,true);
+                    Navigate(ConfirmationScreen, BorderStyle.None)
+                PressedBorderColor: =btnSubmitLeaveRequest.Fill
+                PressedColor: =btnSubmitLeaveRequest.Fill
+                PressedFill: =btnSubmitLeaveRequest.Color
+                Size: =varGlobals.Navigation.FontSize
+                Text: ="Submit Leave Request"
+                Visible: =_requestType<>"View"
+                Width: =Parent.Width
+                Y: =688
+                ZIndex: =1
+
+    cmpModalDialog_2 As cmpModalDialog:
+        Theme: |-
+            =//////////////////////////////////////////////////////////////////////
+            //                                                                  //
+            //  NB! Please only use RGBA colors for this theming section,       //
+            //      as using color names or Hex values will most likely break   //
+            //      the app. We are busy talking to Microsoft about this as     //
+            //      we suspect there is a problem with the way the colors       //
+            //      are evaluated in dynamically created properties.            //
+            //                                                                  //
+            //      If you are looking for an easy way to convert color names   //
+            //      to RGBA, please use https://htmlcolorcodes.com/color-names  //
+            //                                                                  //
+            //////////////////////////////////////////////////////////////////////
+            
+            {
+                modalBackground: RGBA(255, 255, 255, 1),        //Color for the background of the modal dialog
+                primaryColor: RGBA(26, 115, 232, 1),            //Color for the main controls
+                buttonOkFill: RGBA(26, 115, 232, 1),            //Color of the 'Ok' button
+                buttonOkFontColor: RGBA(255, 255, 255, 1),      //Color of the 'Ok' button font
+                buttonYesFill: RGBA(26, 115, 232, 1),           //Color of the 'Yes' button
+                buttonYesFontColor: RGBA(255, 255, 255, 1),     //Color of the 'Yes' button font
+                buttonNoFill: RGBA(26, 115, 232, 1),              //Color of the 'No' button
+                buttonNoFontColor: RGBA(255, 255, 255, 1),      //Color of the 'Yes' button font
+                buttonCancelFill: RGBA(26, 115, 232, 1),       //Color of the 'Cancel' button
+                buttonCancelFontColor: RGBA(255, 255, 255, 1),  //Color of the 'Yes' button font
+                fontType: Font.'Open Sans',                           //Type of font to be used in messages and buttons
+                fontColor: RGBA(80, 82, 84,1),                    //Font color
+                fontSize: 13                                    //Base size for fonts. The message will be 10% larger for focus
+            }
+        Visible: =!IsEmpty(colDialogInstructions) || !IsEmpty(colDialogResponses) || !IsBlank(Last(Filter(colFunctionQueue,functionActive)).action)
+        ZIndex: =2
+

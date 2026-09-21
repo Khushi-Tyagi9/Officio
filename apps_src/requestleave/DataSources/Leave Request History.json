@@ -1,0 +1,101 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "contoso_leaverequesthistories",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "contoso_leaverequesthistory",
+    "MaxGetRowsCount": 500,
+    "Name": "Leave Request History",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "contoso_action": "Action",
+      "contoso_actor": "Actor",
+      "contoso_actorcomments": "Actor Comments",
+      "contoso_LeaveRequest": "Leave Request",
+      "contoso_leaverequesthistory_AsyncOperations": "System Jobs",
+      "contoso_leaverequesthistory_BulkDeleteFailures": "Bulk Delete Failures",
+      "contoso_leaverequesthistory_DuplicateBaseRecord": "Duplicate Records (contoso_leaverequesthistory_DuplicateBaseRecord)",
+      "contoso_leaverequesthistory_DuplicateMatchingRecord": "Duplicate Records (contoso_leaverequesthistory_DuplicateMatchingRecord)",
+      "contoso_leaverequesthistory_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "contoso_leaverequesthistory_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "contoso_leaverequesthistory_ProcessSession": "Process Sessions",
+      "contoso_leaverequesthistory_SyncErrors": "Sync Errors",
+      "contoso_leaverequesthistoryid": "Leave Request History",
+      "contoso_name": "Name",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Leave Request History",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Leave Request History (Views)",
+    "Name": "_contoso_leaverequesthistory_views",
+    "RelatedEntityName": "Leave Request History",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "23e9d28c-608c-4caa-b768-8174e38b1f00": "Active Leave Request History",
+      "536dcb7c-21a5-472e-9318-c0a66d6af107": "Inactive Leave Request History",
+      "980f7f40-b707-41c7-bb56-d4ba5b33d4e9": "Leave Request History Advanced Find View",
+      "9c518cca-65fd-4640-80a8-a1924a96bf22": "Leave Request History Associated View",
+      "ca63b522-2892-4b3e-aabc-c7b8b6fa75ab": "Leave Request History Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Status (Leave Request History)",
+    "Name": "contoso_leaverequesthistory_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Leave Request History"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Leave Request History",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Leave Request History)",
+    "Name": "contoso_leaverequesthistory_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Leave Request History"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Leave Request History",
+    "Type": "OptionSetInfo"
+  }
+]

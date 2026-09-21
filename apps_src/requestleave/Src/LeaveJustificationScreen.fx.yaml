@@ -1,0 +1,371 @@
+LeaveJustificationScreen As screen:
+    Fill: |-
+        =ColorValue("#FAF9F8")
+    OnHidden: =
+    OnVisible: |
+        =//if for this leave type you need to suppy doc for more than X consective days, check for previous leave that ends the day before today
+        //where sick not was not provided
+        //todo: this says leave ends day before start of this leave, however, you need to then check totaldays between that leave request + this leave request exeeds
+        //logic 
+        // 1 - if leave type requires support file, then show/require file upload
+        //2 - if require where total days taken is more than required amount, then show/require file upload
+        //3 - if you need to look back in time, then look based on approved/pending leave requests where file was not uploaded, select top 1 only i.e. last item of same leave type as current leave type!
+        //reset variables
+        Set(
+            varConsecutiveLeave,
+            0
+        );
+        Set(
+            varRequireUploadDoc,
+            false
+        );
+        Set(x,0);
+        Set(varTmpLeaveRequests,Blank());
+        //1 - if fileupload required, then set it to required
+        If(
+            First(ColTmpLeaveRequest).LeaveType.'Require Supporting Document',
+            Set(
+                varRequireUploadDoc,
+                true
+            );
+            Set(
+                varUploadMessage,
+                "For " & First(ColTmpLeaveRequest).LeaveType.Name & " leave type you must upload a supporting file e.g. note"
+            )
+        );
+        //2 - if more days taken than min required for supporting docs
+        If(
+            First(ColTmpLeaveRequest).LeaveType.'Require Supporting Doc Days' > 0 && !varRequireUploadDoc,
+            If(
+                First(ColTmpLeaveRequest).Duration >= First(ColTmpLeaveRequest).LeaveType.'Require Supporting Doc Days',
+                Set(
+                    varRequireUploadDoc,
+                    true
+                );
+                Set(
+                    varUploadMessage,
+                    "For " & First(ColTmpLeaveRequest).LeaveType.Name & " you are taking " & First(ColTmpLeaveRequest).LeaveType.'Require Supporting Doc Days' & " or more days, so supporting document is required e.g. note"
+                )
+            )
+        );
+        //3 - look back X amount of days and see if there is Y amount of days, which then require you to add evidence
+        //filter to return records which have a start date of 'Require Support Doc in Past Days' in the past (not going to get too complicated on stuff like end date here)
+        // and where leavetype is same as current leave type
+        // then sum all the days taken in this peripd, and if its larger number than 'Require Supporting Doc Days', then you must upload supportimng doc
+        If(
+            First(ColTmpLeaveRequest).LeaveType.'Require Support Doc in Past Days' > 0 && First(ColTmpLeaveRequest).LeaveType.'Require Supporting Doc Days' > 0 && !varRequireUploadDoc,
+            With(
+                {
+                    startTime: DateAdd(
+                        First(ColTmpLeaveRequest).StartDate,
+                        -First(ColTmpLeaveRequest).LeaveType.'Require Support Doc in Past Days',
+                        TimeUnit.Days
+                    ) + Time(
+                        0,
+                        -TimeZoneOffset(),
+                        0
+                    ),
+                    endTime: First(ColTmpLeaveRequest).StartDate + Time(
+                        0,
+                        -TimeZoneOffset(),
+                        0
+                    )
+                },
+                Set(
+                    varTmpLeaveRequests,
+                    Filter(
+                        'Leave Requests',
+                        Employee.Id = GUID(_myProfile.Id) && ('Start Date' >= startTime && 'End Date' <= endTime) && ('Approval Status' <> "Declined" || 'Approval Status' <> "Cancelled") && 'Leave Type'.'Leave Type' = First(ColTmpLeaveRequest).LeaveType.'Leave Type'
+                    )
+                );
+                Set(
+                    x,
+                    Sum(
+                        varTmpLeaveRequests,
+                        Duration
+                    )
+                )
+            );
+            If(
+                x + First(ColTmpLeaveRequest).Duration >= First(ColTmpLeaveRequest).LeaveType.'Require Supporting Doc Days', Set(
+                    varRequireUploadDoc,
+                    true
+                );
+                Set(
+                    varUploadMessage,
+                    "For " & First(ColTmpLeaveRequest).LeaveType.Name & " you are taking " & First(ColTmpLeaveRequest).LeaveType.'Require Supporting Doc Days' & " or more days, over the past " & First(ColTmpLeaveRequest).LeaveType.'Require Support Doc in Past Days' & " days, so you need to upload a supporting document"
+                )
+            )
+        );
+    Orientation: =If(LeaveJustificationScreen.Width < LeaveJustificationScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= LeaveJustificationScreen.Width)
+
+    ContainerMain As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =57
+
+        ContainerHeader As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =varGlobals.MainThemeColor.Fill
+            FillPortions: =0
+            Height: =70
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Icon1_2 As icon.BackArrow:
+                AlignInContainer: =AlignInContainer.Stretch
+                Color: =Color.White
+                Icon: =Icon.BackArrow
+                OnSelect: =Back();
+                PaddingLeft: =10
+                Width: =60
+                X: =18
+                Y: =6
+                ZIndex: =1
+
+            Label8_2 As label:
+                Align: =LayoutAlignItems.Center
+                Color: =RGBA(255, 255, 255, 1)
+                FillPortions: =1
+                FocusedBorderColor: =Label8_2.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverBorderColor: =Label8_2.BorderColor
+                HoverColor: =Label8_2.Color
+                HoverFill: =Label8_2.Fill
+                PressedBorderColor: =Label8_2.BorderColor
+                PressedColor: =Label8_2.Color
+                PressedFill: =Label8_2.Fill
+                Size: =varGlobals.Header.FontSize
+                Text: ="Comments"
+                Width: =1134
+                X: =232
+                ZIndex: =2
+
+        ContainerBody As groupContainer.verticalAutoLayoutContainer:
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =15
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            ZIndex: =2
+
+            Label1_6 As label:
+                FocusedBorderColor: =Label1_6.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Bold
+                Height: =21
+                HoverBorderColor: =Label1_6.BorderColor
+                HoverColor: =Label1_6.Color
+                HoverFill: =Label1_6.Fill
+                PressedBorderColor: =Label1_6.BorderColor
+                PressedColor: =Label1_6.Color
+                PressedFill: =Label1_6.Fill
+                Size: =varGlobals.Body.FontSize
+                Text: |-
+                    ="Confirm Persal Number:"
+                Width: =300
+                X: =36
+                Y: =104
+                ZIndex: =1
+
+            txtPersalNumber As text:
+                AccessibleLabel: ="Leave detail"
+                BorderColor: =varGlobals.BlueRobot.Fill
+                BorderThickness: =1
+                Default: =First(ColTmpLeaveRequest).PersalNumber
+                DisplayMode: =DisplayMode.View
+                FocusedBorderColor: =txtPersalNumber.BorderColor
+                Font: =varGlobals.Body.Font
+                Height: =30
+                MaxLength: =100
+                PressedBorderColor: =txtPersalNumber.HoverBorderColor
+                PressedColor: =txtPersalNumber.Color
+                PressedFill: =txtPersalNumber.Fill
+                RadiusBottomLeft: =1
+                RadiusBottomRight: =1
+                RadiusTopLeft: =1
+                RadiusTopRight: =1
+                Size: =varGlobals.Body.FontSize
+                Width: =200
+                X: =36
+                Y: =30
+                ZIndex: =2
+
+            Label1_5 As label:
+                FocusedBorderColor: =Label1_5.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Bold
+                Height: =21
+                HoverBorderColor: =Label1_5.BorderColor
+                HoverColor: =Label1_5.Color
+                HoverFill: =Label1_5.Fill
+                PressedBorderColor: =Label1_5.BorderColor
+                PressedColor: =Label1_5.Color
+                PressedFill: =Label1_5.Fill
+                Size: =varGlobals.Body.FontSize
+                Text: |-
+                    ="Describe reason for leave:"
+                Width: =300
+                X: =36
+                Y: =89
+                ZIndex: =3
+
+            txtLeaveDetails As text:
+                AccessibleLabel: ="Leave detail"
+                AlignInContainer: =AlignInContainer.Stretch
+                BorderColor: =varGlobals.BlueRobot.Fill
+                BorderThickness: =1
+                Default: =First(ColTmpLeaveRequest).Details
+                EnableSpellCheck: =true
+                FocusedBorderColor: =txtLeaveDetails.BorderColor
+                Font: =varGlobals.Body.Font
+                Height: =130
+                MaxLength: =1000
+                Mode: =TextMode.MultiLine
+                PressedBorderColor: =txtLeaveDetails.HoverBorderColor
+                PressedColor: =txtLeaveDetails.Color
+                PressedFill: =txtLeaveDetails.Fill
+                RadiusBottomLeft: =1
+                RadiusBottomRight: =1
+                RadiusTopLeft: =1
+                RadiusTopRight: =1
+                Size: =varGlobals.Body.FontSize
+                Width: =1027
+                X: =36
+                Y: =123
+                ZIndex: =4
+
+            lblRequireUpload As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                FocusedBorderColor: =lblRequireUpload.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Bold
+                Height: =35
+                HoverBorderColor: =lblRequireUpload.BorderColor
+                HoverColor: =lblRequireUpload.Color
+                HoverFill: =lblRequireUpload.Fill
+                PressedBorderColor: =lblRequireUpload.BorderColor
+                PressedColor: =lblRequireUpload.Color
+                PressedFill: =lblRequireUpload.Fill
+                Size: =varGlobals.Body.FontSize
+                Text: =varUploadMessage
+                Visible: =varRequireUploadDoc
+                Width: =425
+                X: =36
+                Y: =276
+                ZIndex: =5
+
+            attachDocument As attachments:
+                AddAttachmentText: ="Upload file"
+                BorderColor: =varGlobals.BlueRobot.Fill
+                BorderThickness: =1
+                Font: =varGlobals.Body.Font
+                Height: =124
+                IsInDataCard: =true
+                Items: |-
+                    =If(!IsBlank(First(ColTmpLeaveRequest).SupportingDocument),
+                    Table({Name: First(ColTmpLeaveRequest).SupportingDocument.FileName, Value: First(ColTmpLeaveRequest).SupportingDocument.Value}))
+                MaxAttachments: =1
+                MaxAttachmentsText: =""
+                NoAttachmentsText: ="There is no file."
+                PaddingBottom: =5
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                PaddingRight: =5
+                PaddingTop: =5
+                Size: =varGlobals.Body.FontSize
+                Tooltip: ="Upload supporting documentation"
+                Visible: =varRequireUploadDoc
+                Width: =300
+                X: =36
+                Y: =323
+                ZIndex: =8
+
+        ContainerFooter As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =80
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =80
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =5
+            PaddingLeft: =20
+            PaddingRight: =20
+            PaddingTop: =5
+            ZIndex: =3
+
+            btnSubmitRequest_2 As button:
+                Align: =LayoutAlignItems.Center
+                AlignInContainer: =AlignInContainer.Stretch
+                BorderColor: =RGBA(0,0,0,1)
+                BorderThickness: =0
+                Color: =Color.White
+                DisabledBorderColor: =ColorFade(btnSubmitRequest_2.BorderColor, 70%)
+                DisplayMode: =If( IsBlank(txtLeaveDetails.Text) || IsBlank(txtPersalNumber.Text) || (attachDocument.Visible && CountRows(attachDocument.Attachments)=0) , DisplayMode.Disabled, DisplayMode.Edit)
+                Fill: =varGlobals.BlueRobot.Fill
+                FillPortions: =1
+                FocusedBorderColor: =btnSubmitRequest_2.BorderColor
+                Font: =varGlobals.Body.Font
+                Height: =80
+                HoverBorderColor: =ColorFade(btnSubmitRequest_2.BorderColor, 20%)
+                HoverColor: =btnSubmitRequest_2.Color
+                HoverFill: =ColorFade(btnSubmitRequest_2.Fill, 20%)
+                OnSelect: |
+                    =Patch(
+                        ColTmpLeaveRequest,
+                        First(ColTmpLeaveRequest),
+                        {
+                            PersalNumber: txtPersalNumber.Text,
+                            Details: txtLeaveDetails.Text
+                        }
+                    );
+                    If(
+                        !IsBlank(First(attachDocument.Attachments)),
+                        Patch(
+                            ColTmpLeaveRequest,
+                            First(ColTmpLeaveRequest),
+                            {
+                                SupportingDocument: {
+                                    FileName: First(attachDocument.Attachments).Name,
+                                    Value: First(attachDocument.Attachments).Value
+                                }
+                            }
+                        );
+                        
+                    );
+                    If(
+                        _sourceScreen = "Review",
+                        Navigate(LeaveReviewScreen),
+                        Set(
+                            _sourceScreen,
+                            "Step"
+                        );
+                        Navigate(
+                            LeaveApproverScreen,
+                            ScreenTransition.None
+                        )
+                    )
+                    //Set(t,First(ColTmpLeaveRequest).SupportingDocument)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingTop: =0
+                PressedBorderColor: =btnSubmitRequest_2.Fill
+                PressedColor: =btnSubmitRequest_2.Fill
+                PressedFill: =btnSubmitRequest_2.Color
+                Size: =varGlobals.Navigation.FontSize
+                Text: =If(_sourceScreen = "Review","Save","Next")
+                Width: =
+                Y: =688
+                ZIndex: =1
+

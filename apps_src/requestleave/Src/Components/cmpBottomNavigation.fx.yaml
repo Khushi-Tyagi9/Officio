@@ -1,0 +1,112 @@
+cmpBottomNavigation As CanvasComponent:
+    Background: =Color.White
+    Color: =RGBA(0, 0, 0, 1)
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =60
+    MenuItems: |-
+        =Table(
+            {
+                Title: "SampleText",
+                Screen: App.ActiveScreen,
+                Icon: Icon.Alarm
+            }, {
+                Title: "SampleText",
+                Screen: App.ActiveScreen,
+                Icon: Icon.Alarm
+            }, {
+                Title: "SampleText",
+                Screen: App.ActiveScreen,
+                Icon: Icon.Alarm
+            }, {
+                Title: "SampleText",
+                Screen: App.ActiveScreen,
+                Icon: Icon.Alarm
+            }
+        )
+    SelectedBarColor: =RGBA(0, 0, 0, 1)
+    Width: =600
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Container9 As groupContainer.horizontalAutoLayoutContainer:
+        Fill: =cmpBottomNavigation.Background
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =1
+
+        GalBottomNav As gallery.galleryVertical:
+            Items: =cmpBottomNavigation.MenuItems
+            Layout: =Layout.Vertical
+            LayoutMinHeight: =287
+            LayoutMinWidth: =320
+            TemplateFill: =If(ThisItem.Screen = App.ActiveScreen,Color.White,cmpBottomNavigation.Background)
+            TemplatePadding: =0
+            TemplateSize: =Parent.Height
+            Width: =Parent.Width
+            WrapCount: =CountRows(cmpBottomNavigation.MenuItems)
+            ZIndex: =3
+
+            Icon2_2 As icon.Add:
+                Color: =cmpBottomNavigation.Color
+                Height: =30
+                Icon: =ThisItem.Icon
+                OnSelect: =Select(Parent)
+                PaddingBottom: =5
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                Width: =30
+                X: =(Parent.TemplateWidth/2) - (Self.Width/2)
+                Y: =10
+                ZIndex: =2
+
+            Label6_4 As label:
+                Align: =Align.Center
+                Color: =cmpBottomNavigation.Color
+                Font: =Font.Lato
+                Height: =21
+                OnSelect: =Select(Parent)
+                Size: =10
+                Text: =ThisItem.Title
+                Width: =117
+                X: =(Parent.TemplateWidth/2) - (Self.Width/2)
+                Y: =36
+                ZIndex: =3
+
+            btnNavSelect_2 As button:
+                BorderThickness: =0
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =Parent.TemplateHeight
+                OnSelect: =Navigate(ThisItem.Screen)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =12
+                Text: =""
+                Width: =Parent.TemplateWidth
+                ZIndex: =4
+
+            Rectangle4 As rectangle:
+                Fill: =cmpBottomNavigation.SelectedBarColor
+                Height: =3
+                OnSelect: =Select(Parent)
+                Visible: =(ThisItem.Screen = App.ActiveScreen)
+                Width: =Parent.TemplateWidth /4
+                X: =Parent.TemplateWidth/2 - Self.Width/2
+                Y: =4
+                ZIndex: =5
+
+    RectNavSep_8 As rectangle:
+        DisabledFill: =RectNavSep_8.Fill
+        Fill: =RGBA(204, 204, 204, 1)
+        FocusedBorderColor: =RectNavSep_8.BorderColor
+        Height: =2
+        HoverFill: =RectNavSep_8.Fill
+        PressedFill: =RectNavSep_8.Fill
+        Width: =Parent.Width
+        ZIndex: =2
+

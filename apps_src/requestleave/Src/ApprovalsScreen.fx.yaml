@@ -1,0 +1,349 @@
+ApprovalsScreen As screen:
+    Fill: |-
+        =ColorValue("#FAF9F8")
+    OnHidden: =Set(_showDetails, false)
+    OnVisible: =
+    Orientation: =If(ApprovalsScreen.Width < ApprovalsScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= ApprovalsScreen.Width)
+
+    ContainerMainH_10 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =17
+
+        ContainerHeaderH_10 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =varGlobals.MainThemeColor.Fill
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Label8_10 As label:
+                Align: =LayoutAlignItems.Center
+                Color: =RGBA(255, 255, 255, 1)
+                FillPortions: =1
+                FocusedBorderColor: =Label8_10.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverBorderColor: =Label8_10.BorderColor
+                HoverColor: =Label8_10.Color
+                HoverFill: =Label8_10.Fill
+                PressedBorderColor: =Label8_10.BorderColor
+                PressedColor: =Label8_10.Color
+                PressedFill: =Label8_10.Fill
+                Size: =If(ApprovalsScreen.Size = 1,varGlobals.Header.FontSize-4,varGlobals.Header.FontSize)
+                Text: ="My Approvals"
+                Width: =1366
+                ZIndex: =1
+
+        Container16_9 As groupContainer.horizontalAutoLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Y: =70
+            ZIndex: =2
+
+            Container16_10 As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =0
+                LayoutAlignItems: =LayoutAlignItems.Stretch
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                Visible: =ApprovalsScreen.Size > 2
+                Width: =232
+                ZIndex: =1
+
+                cmpLeftNavigation_5 As cmpLeftNavigation:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    Background: |-
+                        =ColorValue("#EFEFEF")
+                    Color: =varGlobals.Body.FontColor
+                    FillPortions: =1
+                    Height: =Parent.Height
+                    LayoutMinWidth: =232
+                    MenuItems: =EmployeeNavigation
+                    SelectedBarColor: =varGlobals.MainThemeColor.Fill
+                    Visible: =true
+                    Width: =232
+                    Y: =70
+
+            Container16_11 As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =7
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutGap: =15
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                ZIndex: =2
+
+                "GalleryApprovalsFilter As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver4.0'":
+                    Default: |-
+                        ={Filter: "Pending"}
+                    DisabledBorderColor: =GalleryApprovalsFilter.BorderColor
+                    DisabledFill: =GalleryApprovalsFilter.Fill
+                    FillPortions: =0
+                    Height: =46
+                    HoverBorderColor: =GalleryApprovalsFilter.BorderColor
+                    HoverFill: =GalleryApprovalsFilter.Fill
+                    Items: |-
+                        =Table({Filter: "Pending"}, {Filter: "Other"})
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    LoadingSpinnerColor: =GalleryApprovalsFilter.BorderColor
+                    PressedBorderColor: =GalleryApprovalsFilter.BorderColor
+                    PressedFill: =GalleryApprovalsFilter.Fill
+                    ShowScrollbar: =false
+                    TemplatePadding: =0
+                    TemplateSize: =140
+                    Width: =564
+                    X: =254
+                    Y: =90
+                    ZIndex: =1
+
+                    FilterButton_2 As button:
+                        BorderColor: =If(ThisItem.IsSelected,varGlobals.MainThemeColor.Fill,varGlobals.BlueRobot.Fill)
+                        BorderThickness: =1
+                        Color: =If(ThisItem.IsSelected,RGBA(255, 255, 255, 1),varGlobals.BlueRobot.Fill)
+                        DisabledBorderColor: =ColorFade(FilterButton_2.BorderColor, 70%)
+                        Fill: =If(ThisItem.IsSelected,varGlobals.MainThemeColor.Fill,RGBA(255, 255, 255, 1))
+                        FocusedBorderColor: =FilterButton_2.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =varGlobals.Body.Font
+                        Height: =36
+                        HoverBorderColor: =ColorFade(FilterButton_2.BorderColor, 20%)
+                        HoverColor: =FilterButton_2.Color
+                        HoverFill: =ColorFade(FilterButton_2.Fill, 20%)
+                        OnSelect: =
+                        PressedBorderColor: =FilterButton_2.Fill
+                        PressedColor: =If(_requestTypeFilter=ThisItem.Filter,RGBA(255, 255, 255, 1),RGBA(10, 106, 204, 1))
+                        PressedFill: =FilterButton_2.Color
+                        Size: =varGlobals.Navigation.FontSize
+                        Text: =ThisItem.Filter
+                        Width: =116
+                        X: =12
+                        Y: =5
+                        ZIndex: =1
+
+                LblEmptyRequests_2 As label:
+                    FocusedBorderColor: =LblEmptyRequests_2.BorderColor
+                    Font: =varGlobals.Body.Font
+                    FontWeight: =FontWeight.Semibold
+                    Height: =45
+                    HoverBorderColor: =LblEmptyRequests_2.BorderColor
+                    HoverColor: =LblEmptyRequests_2.Color
+                    HoverFill: =LblEmptyRequests_2.Fill
+                    PressedBorderColor: =LblEmptyRequests_2.BorderColor
+                    PressedColor: =LblEmptyRequests_2.Color
+                    PressedFill: =LblEmptyRequests_2.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: ="No " & GalleryApprovalsFilter.Selected.Filter & " approval requests"
+                    Visible: =!GalleryApprovals.Visible
+                    Width: =341
+                    X: =268
+                    Y: =180
+                    ZIndex: =2
+
+                "GalleryApprovals As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                    AccessibleLabel: ="Leave request gallery"
+                    Default: =Blank()
+                    DisabledBorderColor: =GalleryApprovals.BorderColor
+                    DisabledFill: =GalleryApprovals.Fill
+                    Fill: =RGBA(249, 249, 249, 1)
+                    Height: =620
+                    HoverBorderColor: =GalleryApprovals.BorderColor
+                    HoverFill: =GalleryApprovals.Fill
+                    Items: |-
+                        =//filter rows only where approver SID matches current user SID
+                        //if permissions setup correctly, employee will only see their own records anyway
+                        Switch(
+                            GalleryApprovalsFilter.Selected.Filter,
+                            "Pending",
+                            Sort(
+                                Filter(
+                                    'Leave Requests',
+                                    'Approver ID' = _myProfile.Id && 'Approval Status' = ApprovalStatus.FirstLevel
+                                ),
+                                'Start Date',
+                                SortOrder.Descending
+                            ),
+                            "Other",
+                            Sort(
+                                Filter(
+                                    'Leave Requests',
+                                    'Approver ID' = _myProfile.Id && 'Approval Status' <> ApprovalStatus.FirstLevel
+                                ),
+                                'Start Date',
+                                SortOrder.Descending
+                            )
+                        )
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    LoadingSpinnerColor: =GalleryApprovals.BorderColor
+                    OnSelect: =
+                    PressedBorderColor: =GalleryApprovals.BorderColor
+                    PressedFill: =GalleryApprovals.Fill
+                    ShowScrollbar: =false
+                    TemplateFill: =Color.White
+                    TemplatePadding: =15
+                    TemplateSize: =90
+                    Transition: =Transition.Pop
+                    Visible: =CountRows(GalleryApprovals.AllItems) > 0
+                    Width: =1134
+                    X: =232
+                    Y: =148
+                    ZIndex: =3
+
+                    Label5_2 As label:
+                        Color: =varGlobals.Body.FontColor
+                        FocusedBorderColor: =Label5_2.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =varGlobals.Body.Font
+                        Height: =Label5_2.Size * 1.8
+                        HoverBorderColor: =Label5_2.BorderColor
+                        HoverColor: =Label5_2.Color
+                        HoverFill: =Label5_2.Fill
+                        OnSelect: =Select(Parent)
+                        PressedBorderColor: =Label5_2.BorderColor
+                        PressedColor: =Label5_2.Color
+                        PressedFill: =Label5_2.Fill
+                        Size: =varGlobals.Body.FontSize
+                        Text: =Text(ThisItem.'Start Date',"[$-en-US]mmm dd, yyyy") & If(DateDiff(ThisItem.'Start Date', ThisItem.'End Date', TimeUnit.Days) <> 0, " - " & Text(ThisItem.'End Date',"[$-en-US]mmm dd, yyyy"))
+                        Width: =400
+                        X: =If(ApprovalsScreen.Size = 1,20,80)
+                        Y: =32
+                        ZIndex: =1
+
+                    Rectangle2_1 As rectangle:
+                        AccessibleLabel: =ThisItem.Name
+                        DisabledFill: =Rectangle2_1.Fill
+                        Fill: =ColorFade(varGlobals.Body.FontColor,80%)
+                        FocusedBorderColor: =Rectangle2_1.BorderColor
+                        Height: =1
+                        HoverFill: =Rectangle2_1.Fill
+                        OnSelect: =Select(Parent)
+                        PressedFill: =Rectangle2_1.Fill
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - Rectangle2_1.Height
+                        ZIndex: =2
+
+                    rctStatus_1 As rectangle:
+                        Fill: |-
+                            =Switch(
+                                ThisItem.'Approval Status',
+                                "Draft",
+                                ColorFade(varGlobals.Body.FontColor,70%),
+                                "Approved",
+                                varGlobals.GreenRobot.Fill,
+                                "Declined",
+                                varGlobals.RedRobot.Fill,
+                                varGlobals.OrangeRobot.Fill
+                            )
+                        Height: =Parent.TemplateHeight
+                        OnSelect: =Select(Parent)
+                        Width: =5
+                        ZIndex: =3
+
+                    Label3_3 As label:
+                        Color: =varGlobals.MainThemeColor.Fill
+                        FocusedBorderColor: =Label3_3.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =varGlobals.Body.Font
+                        FontWeight: =FontWeight.Bold
+                        Height: =30
+                        HoverBorderColor: =Label3_3.BorderColor
+                        HoverColor: =Label3_3.Color
+                        HoverFill: =Label3_3.Fill
+                        OnSelect: =Select(Parent)
+                        PaddingRight: =0
+                        PressedBorderColor: =Label3_3.BorderColor
+                        PressedColor: =Label3_3.Color
+                        PressedFill: =Label3_3.Fill
+                        Size: =varGlobals.Navigation.FontSize
+                        Text: =ThisItem.Employee.'Display Name' & " (" & ThisItem.'Leave Type'.Name & ") - " & ThisItem.Duration & " day(s)"
+                        Width: =Parent.TemplateWidth
+                        Wrap: =false
+                        X: =If(ApprovalsScreen.Size = 1,20,80)
+                        Y: =4
+                        ZIndex: =4
+
+                    Circle2_1 As circle:
+                        Fill: =rctStatus_1.Fill
+                        Height: =50
+                        OnSelect: =Select(Parent)
+                        Visible: =ApprovalsScreen.Size<>1
+                        Width: =50
+                        X: =20
+                        Y: =9
+                        ZIndex: =5
+
+                    Label7_1 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(255, 255, 255, 1)
+                        FontWeight: =FontWeight.Semibold
+                        Height: =50
+                        OnSelect: =Select(Parent)
+                        Size: =14
+                        Text: =Left(ThisItem.'Approval Status',1)
+                        Visible: =ApprovalsScreen.Size<>1
+                        Width: =50
+                        X: =20
+                        Y: =9
+                        ZIndex: =6
+
+                    Label5_8 As label:
+                        Color: =varGlobals.Body.FontColor
+                        FocusedBorderColor: =Label5_8.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =varGlobals.Body.Font
+                        Height: =Label5_8.Size * 1.8
+                        HoverBorderColor: =Label5_8.BorderColor
+                        HoverColor: =Label5_8.Color
+                        HoverFill: =Label5_8.Fill
+                        OnSelect: =Select(Parent)
+                        PaddingRight: =0
+                        PressedBorderColor: =Label5_8.BorderColor
+                        PressedColor: =Label5_8.Color
+                        PressedFill: =Label5_8.Fill
+                        Size: =varGlobals.Body.FontSize
+                        Text: =ThisItem.'Approval Status'
+                        Width: =Parent.TemplateWidth
+                        Wrap: =false
+                        X: =If(ApprovalsScreen.Size = 1,20,80)
+                        Y: =56
+                        ZIndex: =7
+
+                    btnSelectLeaveItem_1 As button:
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =Parent.TemplateHeight
+                        OnSelect: =Navigate(ApproveRejectScreen);
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Text: =""
+                        Width: =Parent.TemplateWidth
+                        ZIndex: =8
+
+    cmpBottomNavigation_8 As cmpBottomNavigation:
+        Background: |-
+            =ColorValue("#EFEFEF")
+        Color: =varGlobals.Body.FontColor
+        Fill: =Color.White
+        MenuItems: =Filter(EmployeeNavigation,VisibleOnMobile = true)
+        SelectedBarColor: =varGlobals.MainThemeColor.Fill
+        Visible: =ApprovalsScreen.Size = 1
+        Width: =Parent.Width
+        Y: =Parent.Height - Self.Height
+        ZIndex: =18
+

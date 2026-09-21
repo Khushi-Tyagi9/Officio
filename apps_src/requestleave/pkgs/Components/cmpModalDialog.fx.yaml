@@ -1,0 +1,1065 @@
+cmpModalDialog As CanvasComponent:
+    Fill: =Color.Transparent
+    Height: |-
+        =//This no longer has to be replaced with Parent.Height and can be left as is
+        App.ActiveScreen.Height
+    OnReset: =Set(varMdPenInputVerification,false)
+    Theme: |-
+        =//////////////////////////////////////////////////////////////////////
+        //                                                                  //
+        //  NB! Please only use RGBA colors for this theming section,       //
+        //      as using color names or Hex values will most likely break   //
+        //      the app. We are busy talking to Microsoft about this as     //
+        //      we suspect there is a problem with the way the colors       //
+        //      are evaluated in dynamically created properties.            //
+        //                                                                  //
+        //      If you are looking for an easy way to convert color names   //
+        //      to RGBA, please use https://htmlcolorcodes.com/color-names  //
+        //                                                                  //
+        //////////////////////////////////////////////////////////////////////
+        
+        {
+            modalBackground: RGBA(255, 255, 255, 1),        //Color for the background of the modal dialog
+            primaryColor: RGBA(70, 130, 180, 1),            //Color for the main controls
+            buttonOkFill: RGBA(154, 205, 50, 1),            //Color of the 'Ok' button
+            buttonOkFontColor: RGBA(255, 255, 255, 1),      //Color of the 'Ok' button font
+            buttonYesFill: RGBA(154, 205, 50, 1),           //Color of the 'Yes' button
+            buttonYesFontColor: RGBA(255, 255, 255, 1),     //Color of the 'Yes' button font
+            buttonNoFill: RGBA(255, 69, 0, 1),              //Color of the 'No' button
+            buttonNoFontColor: RGBA(255, 255, 255, 1),      //Color of the 'Yes' button font
+            buttonCancelFill: RGBA(128, 128, 128, 1),       //Color of the 'Cancel' button
+            buttonCancelFontColor: RGBA(255, 255, 255, 1),  //Color of the 'Yes' button font
+            fontType: Font.'Segoe UI',                           //Type of font to be used in messages and buttons
+            fontColor: RGBA(60,60,60,1),                    //Font color
+            fontSize: 13                                    //Base size for fonts. The message will be 10% larger for focus
+        }
+    Version: =lblVersion.Text
+    Width: |-
+        =//This no longer has to be replaced with Parent.Width and can be left as is
+        App.ActiveScreen.Width
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    "'IGNORE BUT DONT DELETE - REQUIRED SCHEMA' As button":
+        BorderColor: =ColorFade('IGNORE BUT DONT DELETE - REQUIRED SCHEMA'.Fill, -15%)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Fill: =RGBA(56, 96, 178, 1)
+        FocusedBorderColor: ='IGNORE BUT DONT DELETE - REQUIRED SCHEMA'.BorderColor
+        HoverBorderColor: =ColorFade('IGNORE BUT DONT DELETE - REQUIRED SCHEMA'.BorderColor, 20%)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+        OnSelect: |-
+            =//////////////////////////////////////////////////////////////////////////////////////
+            //                                                                                  //
+            // IGNORE BUT DON'T DELETE: This is just a dummy button to make sure that           //
+            //                                                                                  //
+            // the component recognises the required Collection schemas                         //
+            //////////////////////////////////////////////////////////////////////////////////////
+            
+            ClearCollect(
+                colDialogInstructions,
+                {
+                    // -- Generic Popup Info -- //
+                    type: "Ok",
+                    inputType: "",
+                    message: "",
+                    source: "",
+                    iconType: Icon.Information,
+                    iconColor: Color.OrangeRed,
+                    // -- Input Type Configuration (REQUIRED if type = "input") -- //
+                    configTextInput: {
+                        default: "",
+                        hintText: "",
+                        tooltip: ""
+                    },
+                    configTextArray: {
+                        tooltip: "",
+                        arrayList: [""],
+                        defaultValue: "",
+                        allowMultipleSelect: false
+                    },
+                    configOffice365Users: {
+                        tooltip: "",
+                        allowMultipleSelect: false
+                    },
+                    configRating: {
+                        default: 1,
+                        tooltip: "",
+                        max: 1,
+                        showValue: true
+                    },
+                    configSlider: {
+                        default: 1,
+                        tooltip: "",
+                        min: 1,
+                        max: 1,
+                        showValue: true
+                    },
+                    configPenInput: {
+                        tooltip:"",
+                        size:1,
+                        showControls: true
+                    },
+                    // -- Link Information (OPTIONAL) -- //
+                    link: {
+                        label: "",
+                        url: "",
+                        tooltip: ""
+                    },
+                    // -- Response Section. (REQUIRED if you want to trigger an action) -- //
+                    responseAction: "",
+                    originalFunctionRequestID: Blank()
+                }
+            );
+            ClearCollect(
+                colFunctionQueue,
+                {
+                    function: "Validation",
+                    action: "",
+                    calledFrom: "",
+                    userActivatedCall: true,
+                    sessionID: "",
+                    requestID: Text(GUID()),
+                    requestTime: Now(),
+                    startTime: Blank(),
+                    endTime: Blank(),
+                    functionActive: true,
+                    haltProcess: false,
+                    inputResponse: Blank(),
+                    dialogButtonPressed: Blank()
+                }
+            )
+        PressedBorderColor: ='IGNORE BUT DONT DELETE - REQUIRED SCHEMA'.Fill
+        PressedColor: ='IGNORE BUT DONT DELETE - REQUIRED SCHEMA'.Fill
+        PressedFill: ='IGNORE BUT DONT DELETE - REQUIRED SCHEMA'.Color
+        Text: ="Button"
+        Visible: =false
+        X: =480
+        Y: =0-'IGNORE BUT DONT DELETE - REQUIRED SCHEMA'.Height
+        ZIndex: =1
+
+    btnExamplePopupInstruction As button:
+        BorderColor: =ColorFade(btnExamplePopupInstruction.Fill, -15%)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Fill: =RGBA(56, 96, 178, 1)
+        FocusedBorderColor: =btnExamplePopupInstruction.BorderColor
+        HoverBorderColor: =ColorFade(btnExamplePopupInstruction.BorderColor, 20%)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+        OnSelect: |-
+            =//////////////////////////////////////////////////////////////////////////////////////////////////////
+            //                                                                                                  //
+            //  For more information on how to structure the instruction to the popup as well as the response   //
+            //  that it will be sending back please refer to:                                                   //
+            //  https://aka.ms/powerapps-popup                                                                  //
+            //                                                                                                  //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            Collect(
+                colDialogInstructions,
+                {
+                    // -- Generic Popup Info -- //
+                    type: "Ok",
+                    inputType: Blank(),
+                    message: "Congratulations with installing your brand new Modal Dialog Component into your first app. You are a rock star! If you agree, click on Ok below.",
+                    source: "ThisButton",
+                    iconType: Icon.Information,
+                    iconColor: ColorValue("#712773"),
+                    // -- Input Type Configuration (REQUIRED if type = "input") -- //
+                    configTextInput: {
+                        default: "Default Value",
+                        hintText: "Check this out"
+                    },
+                    configTextArray: {
+                        tooltip: "Please choose one of these options",
+                        arrayList: [
+                            "Power Apps Rocks",
+                            "Power Apps is the best"
+                        ],
+                        defaultValue: "Power Apps Rocks",
+                        allowMultipleSelect: false
+                    },
+                    configOffice365Users: {
+                        tooltip: "Please select one of the users in you address list",
+                        allowMultipleSelect: false
+                    },
+                    configRating: {
+                        default: 0,
+                        tooltip: "Please rate the component from 1 to 5",
+                        max: 5,
+                        showValue: true
+                    },
+                    configSlider: {
+                        default: 0,
+                        tooltip: "How many times did you struggle during this installation",
+                        min: 1,
+                        max: 10,
+                        showValue: true
+                    },
+                    configPenInput: {
+                        tooltip:"Give us your million dollar signature",
+                        size:1,
+                        showControls: true
+                    },
+                    // -- Link Information (OPTIONAL) -- //
+                    link: {
+                        label: "More Cool Info",
+                        url: "https://aka.ms/powerapps-popup",
+                        tooltip: "Please check out more information about the modal dialog component"
+                    },
+                    // -- Response Section. (REQUIRED if you want to trigger an action) -- //
+                    responseAction: "",
+                    originalFunctionRequestID: Blank()
+                }
+            )
+        PressedBorderColor: =btnExamplePopupInstruction.Fill
+        PressedColor: =btnExamplePopupInstruction.Fill
+        PressedFill: =btnExamplePopupInstruction.Color
+        Text: ="Test Dialog"
+        X: =0-200
+        Y: =40
+        ZIndex: =4
+
+    tglDialogResponseTrigger As toggleSwitch:
+        BorderColor: =RGBA(32, 54, 71, 1)
+        Color: =RGBA(0, 0, 0, 1)
+        Default: |-
+            =//////////////////////////////////////////////////////////////////////////////////////////////////////
+            //                                                                                                  //
+            // If there are responseActions that are received from the dialog, then this toggle should fire     //
+            // to execute the code in the OnCheck event of this control                                         //
+            //                                                                                                  //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+            //REMOVE THE 'false' BELOW AND REPLACE WITH THIS==> !IsEmpty(colDialogResponses)
+            false
+        DisplayMode: =DisplayMode.Disabled
+        FalseHoverFill: =ColorFade(tglDialogResponseTrigger.FalseFill, 15%)
+        FalseText: ="Idle"
+        FocusedBorderColor: =tglDialogResponseTrigger.BorderColor
+        Font: =Font.'Segoe UI'
+        HoverBorderColor: =ColorFade(tglDialogResponseTrigger.BorderColor, 15%)
+        OnCheck: |-
+            =//////////////////////////////////////////////////////////////////////////////////////////////////////
+            //                                                                                                  //
+            //  This toggle control triggers on the colDialogResponses collection and is used to                //
+            //  action responses from the model dialog. As part of the object that is 'sent' to the             //
+            //  modal dialog, we include a responseAction property which identifies the action to take place    //
+            //  if the user selects an option or selects an item from the drop down. This responseAction can    //
+            //  then be tracked by this toggle to initiate certain code or functions. If the responseAction     //
+            //  doesn't contain a value, then we don't have to do anything.                                     //
+            //                                                                                                  //
+            //  For more information about the popup, please go to aka.ms/powerapps-popup                       //
+            //                                                                                                  //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  START: Function Initiation (NO modification required)                                           //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Get a handle on the response object that caused this toggle to trigger
+            Set(
+                varDialogResponse,
+                Last(colDialogResponses)
+            );
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  Send trace information of debug is enabled                                                      //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            /*--Dawid van Heerden-V0.14-2020/05/24: Ugly workaround to remove the image from the pen input from the response before sending it to the trace because images are not supported in trace*/
+            If(
+                varPopupDebugTrace,
+                Trace(
+                    "cmpPopup Response received",
+                    TraceSeverity.Information,
+                    First(
+                        DropColumns(
+                            Table(varDialogResponse.responseData),
+                            "penInput"
+                        )
+                    )
+                )
+            );
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  END: Function Initiation (NO modification required)                                             //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  START: Actions (Modify as per business requirement)                                             //
+            //      -Here we use a switch statement to determine which responseAction was 'sent' to the dialog, //
+            //      and what should happen when then user clicks on Yes or selects an option from the drop down //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            If(
+                !IsBlank(varDialogResponse.responseAction),
+                //The trigger will only action something if a responseAction value was sent to the dialog
+                //The below examples are added to show the different ways that data is retrieved based on the type of       input that was specified in the popup instruction
+                Switch(
+                    varDialogResponse.responseAction,
+                    "Get Text Value",
+                    Set(
+                        varText,
+                        varDialogResponse.responseData.textInput
+                    ),
+                    "Get Text Array Value(s)",
+                    Set(
+                        varTextArray,
+                        varDialogResponse.responseData.textArray
+                    ),
+                    "Get Office365Users Selected Value(s)",
+                    Set(
+                        varO365,
+                        varDialogResponse.responseData.office365Users
+                    ),
+                    "Get Rating Value",
+                    Set(
+                        varRating,
+                        varDialogResponse.responseData.rating
+                    ),
+                    "Get Slider Value",
+                    Set(
+                        varSlider,
+                        varDialogResponse.responseData.slider
+                    ),
+                    "Get Pen Input Value",
+                    Set(
+                        VarPenInput,
+                        varDialogResponse.responseData.penInput
+                    ),
+                    "Get Pen Input Value in Base64",
+                    Set(
+                        VarPenInputBase64,
+                        varDialogResponse.responseData.penInputBase64
+                    )
+                )
+            );
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  END: Actions (Modify as per ber business requirement)                                           //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  Send trace information of debug is enabled                                                      //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            /*--Dawid van Heerden-V0.14-2020/05/24: Ugly workaround to remove the image from the pen input from the response before sending it to the trace because images are not supported in trace*/
+            If(
+                varPopupDebugTrace,
+                Trace(
+                    "cmpPopup Response actioned",
+                    TraceSeverity.Information,
+                    First(
+                        DropColumns(
+                            Table(varDialogResponse.responseData),
+                            "penInput"
+                        )
+                    )
+                )
+            );
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  Remove the response that was received from the dialog                                           //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            Remove(
+                colDialogResponses,
+                varDialogResponse
+            );
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  This section can be ignore, but not deleted. It is required to set variables in the app         //
+            //  that the component might need.                                                                  //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            If(
+                false,//This will obviously never set the variable and just sets the variable schema
+                Set(
+                    varPopupDebugTrace,
+                    false
+                )
+            )
+        PressedBorderColor: =ColorFade(tglDialogResponseTrigger.BorderColor, -15%)
+        Size: =12
+        TrueFill: =RGBA(100, 118, 132, 1)
+        TrueHoverFill: =ColorFade(tglDialogResponseTrigger.TrueFill, 15%)
+        TrueText: ="Running"
+        X: =0-200
+        Y: =60
+        ZIndex: =5
+
+    grpModalDialog As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =6
+
+        mdInactiveRect As rectangle:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            DisabledFill: =mdInactiveRect.Fill
+            Fill: =RGBA(0,0,0,0.30)
+            FocusedBorderColor: =mdInactiveRect.BorderColor
+            Height: =Parent.Height
+            HoverFill: =mdInactiveRect.Fill
+            PressedFill: =mdInactiveRect.Fill
+            Visible: =!IsEmpty(colDialogInstructions) || !IsEmpty(colDialogResponses) || !IsBlank(Last(Filter(colFunctionQueue,functionActive)).action)
+            Width: =Parent.Width
+            X: =0+0
+            Y: =0+0
+            ZIndex: =2
+
+        mdGalPopup As gallery.variableTemplateHeightGallery:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            DisabledBorderColor: =mdGalPopup.BorderColor
+            DisabledFill: =mdGalPopup.Fill
+            Fill: =cmpModalDialog.Theme.modalBackground
+            Height: =mdLblLink.Y + mdLblLink.Height + mdGalPopup.TemplateHeight * 4%
+            HoverBorderColor: =mdGalPopup.BorderColor
+            HoverFill: =mdGalPopup.Fill
+            Items: =First(colDialogInstructions)
+            Layout: =Layout.Vertical
+            LoadingSpinnerColor: =mdGalPopup.BorderColor
+            PressedBorderColor: =mdGalPopup.BorderColor
+            PressedFill: =mdGalPopup.Fill
+            TemplatePadding: =0
+            TemplateSize: =325
+            Visible: =!IsEmpty(colDialogInstructions)
+            Width: =If(App.ActiveScreen.Width > 499, 500,400)
+            X: =((cmpModalDialog.X + Parent.Width) / 2) - (mdGalPopup.Width / 2)
+            Y: =((cmpModalDialog.Y + Parent.Height) / 2) - (mdGalPopup.Height /2)
+            ZIndex: =3
+
+            mdLblLink As htmlViewer:
+                Color: =cmpModalDialog.Theme.primaryColor
+                Font: =cmpModalDialog.Theme.fontType
+                Height: =If(!IsBlank(ThisItem.link), (Parent.TemplateHeight/9) - 10% , 0)
+                HoverBorderColor: =mdLblLink.BorderColor
+                HtmlText: |-
+                    ="<div align='center'> <a href='" & ThisItem.link.url & "' style='text-decoration:none'>" & ThisItem.link.label & "</a>
+                    </div>"
+                PaddingBottom: =0
+                PaddingTop: =0
+                PressedBorderColor: =mdLblLink.BorderColor
+                Size: =cmpModalDialog.Theme.fontSize - 10%
+                Tooltip: =ThisItem.link.tooltip
+                Visible: =!IsBlank(ThisItem.link)
+                Width: =Parent.Width * 90%
+                X: =(Parent.Width/2) - mdLblLink.Width/2
+                Y: =mdGalButtons.Y + mdGalButtons.Height
+                ZIndex: =1
+
+            "mdGalButtons As gallery.'BrowseLayout_Flexible_SocialFeed_ver4.0'":
+                BorderColor: =RGBA(0, 18, 107, 1)
+                DisabledBorderColor: =mdGalButtons.BorderColor
+                DisabledFill: =mdGalButtons.Fill
+                Height: |-
+                    =mdGalPopup.TemplateHeight * 5% +                                          // Leading padding
+                    (CountRows(mdGalButtons.AllItems) * ((mdGalPopup.TemplateHeight / 9) +    // Space for buttons
+                    mdGalPopup.TemplateHeight * 5%))                                          // Trailing padding
+                HoverBorderColor: =mdGalButtons.BorderColor
+                HoverFill: =mdGalButtons.Fill
+                Items: |-
+                    =Filter(
+                        Table(
+                            {
+                                key: "ok",
+                                displayName: "Ok",
+                                fill: cmpModalDialog.Theme.buttonOkFill,
+                                fontColor: cmpModalDialog.Theme.buttonOkFontColor,
+                                instructionRequest: ThisItem,
+                                visible: ThisItem.type in ["Ok","Input","PenInput"]
+                            },
+                            {
+                                key: "yes",
+                                displayName: "Yes",
+                                fill: cmpModalDialog.Theme.buttonYesFill,
+                                fontColor: cmpModalDialog.Theme.buttonYesFontColor,
+                                instructionRequest: ThisItem,
+                                visible: ThisItem.type in ["YesNo", "YesNoCancel"]
+                            },
+                            {
+                                key: "no",
+                                displayName: "No",
+                                fill: cmpModalDialog.Theme.buttonNoFill,
+                                fontColor: cmpModalDialog.Theme.buttonNoFontColor,
+                                instructionRequest: ThisItem,
+                                visible: ThisItem.type in ["YesNo", "YesNoCancel"]
+                            },
+                            {
+                                key: "cancel",
+                                displayName: "Cancel",
+                                fill: cmpModalDialog.Theme.buttonCancelFill,
+                                fontColor: cmpModalDialog.Theme.buttonCancelFontColor,
+                                instructionRequest: ThisItem,
+                                visible: ThisItem.type in ["Input", "YesNoCancel", "PenInput"]
+                            }
+                        ),
+                        visible
+                    )
+                Layout: =Layout.Vertical
+                LoadingSpinnerColor: =mdGalButtons.BorderColor
+                OnSelect: |-
+                    =//////////////////////////////////////////////////////////////////////////////////////////////////
+                    //  Write response to colDialogResponses collection in order for action toggle in main app      //
+                    //  to fire actions on response                                                                 //
+                    //////////////////////////////////////////////////////////////////////////////////////////////////
+                    Switch(
+                        mdGalButtons.Selected.key,
+                        "ok",
+                        Collect(
+                            colDialogResponses,
+                            {
+                                dialogButtonPressed: "Ok",
+                                responseData: {
+                                    textInput: If(
+                                        ThisItem.instructionRequest.type = "Input" && ThisItem.instructionRequest.inputType = "TextInput",
+                                        mdInputText.Text,
+                                        Blank()
+                                    ),
+                                    rating: If(
+                                        ThisItem.instructionRequest.type = "Input" && ThisItem.instructionRequest.inputType = "Rating",
+                                        mdInputRating.Value,
+                                        Blank()
+                                    ),
+                                    slider: If(
+                                        ThisItem.instructionRequest.type = "Input" && ThisItem.instructionRequest.inputType = "Slider",
+                                        mdInputSlider.Value,
+                                        Blank()
+                                    ),
+                                    textArray: If(
+                                        ThisItem.instructionRequest.type = "Input" && ThisItem.instructionRequest.inputType = "TextArray",
+                                        mdInputArrayText.SelectedItems.Value,
+                                        Blank()
+                                    ),
+                                    office365Users: If(
+                                        ThisItem.instructionRequest.type = "Input" && ThisItem.instructionRequest.inputType = "Office365Users",
+                                        mdInput365Users.SelectedItems,
+                                        Blank()
+                                    ),
+                                    penInput: If(
+                                        ThisItem.instructionRequest.type = "Input" && ThisItem.instructionRequest.inputType = "PenInput",
+                                        mdInputPen.Image,
+                                        Blank()
+                                    ),
+                                    penInputBase64: If(
+                                        ThisItem.instructionRequest.type = "Input" && ThisItem.instructionRequest.inputType = "PenInput",
+                                        Substitute(
+                                            Last(
+                                                ForAll(Split(
+                                                    JSON(
+                                                        mdInputPen.Image,
+                                                        JSONFormat.IncludeBinaryData
+                                                    ),
+                                                    ","
+                                                ), {Result: ThisRecord.Value})
+                                            ).Result,
+                                            """",
+                                            ""
+                                        ),
+                                        Blank()
+                                    )
+                                },
+                                responseAction: ThisItem.instructionRequest.responseAction,
+                                originalFunctionRequestID: ThisItem.instructionRequest.originalFunctionRequestID
+                            }
+                        );
+                        Remove(
+                            colDialogInstructions,
+                            ThisItem.instructionRequest
+                        ),
+                        "yes",
+                        Collect(
+                            colDialogResponses,
+                            {
+                                dialogButtonPressed: "Yes",
+                                responseAction: ThisItem.instructionRequest.responseAction,
+                                originalFunctionRequestID: ThisItem.instructionRequest.originalFunctionRequestID
+                            }
+                        );
+                        Remove(
+                            colDialogInstructions,
+                            ThisItem.instructionRequest
+                        ),
+                        "no",
+                        Collect(
+                            colDialogResponses,
+                            {
+                                dialogButtonPressed: "No",
+                                responseAction: ThisItem.instructionRequest.responseAction,
+                                originalFunctionRequestID: ThisItem.instructionRequest.originalFunctionRequestID
+                            }
+                        );
+                        Remove(
+                            colDialogInstructions,
+                            ThisItem.instructionRequest
+                        ),
+                        "cancel",
+                        Remove(
+                            colDialogInstructions,
+                            ThisItem.instructionRequest
+                        )
+                    );
+                    Reset(cmpModalDialog)
+                PressedBorderColor: =mdGalButtons.BorderColor
+                PressedFill: =mdGalButtons.Fill
+                TemplateFill: =Color.Transparent
+                TemplatePadding: =mdGalPopup.TemplateHeight * 5%
+                TemplateSize: =Parent.TemplateHeight/9
+                Width: =Parent.TemplateWidth/2
+                X: =(Parent.TemplateWidth - mdGalButtons.Width) /2
+                Y: =Max(mdInputText.Y + mdInputText.Height,mdInputPen.Y + mdInputPen.Height)
+                ZIndex: =2
+
+                mdButton As button:
+                    BorderColor: =ColorFade(mdButton.Fill, -15%)
+                    BorderThickness: =1
+                    Color: =ThisItem.fontColor
+                    DisabledBorderColor: =ColorFade(mdButton.DisabledFill, -15%)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: |-
+                        =If(
+                            ThisItem.instructionRequest.type = "Input" && ThisItem.key="ok",
+                            Switch(
+                                ThisItem.instructionRequest.inputType,
+                                "TextInput",
+                                If(
+                                    IsBlank(mdInputText.Text),
+                                    DisplayMode.Disabled,
+                                    DisplayMode.Edit
+                                ),
+                                "TextArray",
+                                If(
+                                    IsBlank(First(mdInputArrayText.SelectedItems).Value),
+                                    DisplayMode.Disabled,
+                                    DisplayMode.Edit
+                                ),
+                                "Office365Users",
+                                If(
+                                    IsBlank(First(mdInput365Users.SelectedItems)),
+                                    DisplayMode.Disabled,
+                                    DisplayMode.Edit
+                                ),
+                                "PenInput",
+                                If(
+                                    !varMdPenInputVerification,
+                                    DisplayMode.Disabled,
+                                    DisplayMode.Edit
+                                )
+                        
+                            ),
+                            DisplayMode.Edit
+                        )
+                    Fill: =ThisItem.fill
+                    FocusedBorderColor: =mdButton.BorderColor
+                    FocusedBorderThickness: =1
+                    Font: =cmpModalDialog.Theme.fontType
+                    Height: =Parent.TemplateHeight
+                    HoverBorderColor: =ColorFade(mdButton.BorderColor, 20%)
+                    HoverColor: =RGBA(255, 255, 255, 1)
+                    HoverFill: =ColorFade(mdButton.Fill, 15%)
+                    OnSelect: =Select(Parent)
+                    PressedBorderColor: =mdButton.Fill
+                    PressedColor: =ColorFade(mdButton.Color,20%)
+                    PressedFill: =ColorFade(mdButton.Fill,-20%)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =cmpModalDialog.Theme.fontSize + 10%
+                    Text: =ThisItem.displayName
+                    Width: =Parent.TemplateWidth
+                    ZIndex: =6
+
+            mdInputPen As inkControl:
+                BorderColor: =RGBA(32, 54, 71, 1)
+                BorderThickness: =1
+                Color: =cmpModalDialog.Theme.fontColor
+                Fill: =cmpModalDialog.Theme.modalBackground
+                Height: |-
+                    =If(
+                        ThisItem.type = "Input" && ThisItem.inputType = "PenInput",
+                        230,
+                        0
+                    )
+                OnSelect: =Set(varMdPenInputVerification,true)
+                ShowControls: =ThisItem.configPenInput.showControls
+                Size: =ThisItem.configPenInput.size
+                Tooltip: =ThisItem.configPenInput.tooltip
+                Visible: =ThisItem.type="Input" && ThisItem.inputType="PenInput"
+                Width: =Parent.Width - 40
+                X: =(Parent.TemplateWidth - mdInput365Users.Width)/2
+                Y: =mdLblMessage.Y + mdLblMessage.Height + If(ThisItem.type="Input" , (Parent.TemplateHeight * 2.5%) , 0)
+                ZIndex: =3
+
+            mdInput365Users As combobox:
+                BorderColor: =RGBA(32, 54, 71, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(100, 118, 132, 1)
+                ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+                ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+                ChevronFill: =RGBA(255, 255, 255, 1)
+                ChevronHoverBackground: =ColorFade(RGBA(100, 118, 132, 1), -20%)
+                ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                Color: =cmpModalDialog.Theme.fontColor
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                DisplayFields: =["DisplayName","Mail","Image"]
+                FocusedBorderColor: =cmpModalDialog.Theme.primaryColor
+                FocusedBorderThickness: =1
+                Font: =cmpModalDialog.Theme.fontType
+                Height: =If(ThisItem.type="Input" , Parent.TemplateHeight * 10% , 0)
+                HoverBorderColor: =ColorFade(mdInput365Users.BorderColor, 15%)
+                HoverColor: =RGBA(0, 0, 0, 1)
+                HoverFill: =RGBA(205, 209, 213, 1)
+                Items: |-
+                    =Filter(
+                        Office365Users.SearchUser(
+                            {
+                                searchTerm: mdInput365Users.SearchText,
+                                top: 500
+                            }
+                        ),
+                        AccountEnabled,
+                        !IsBlank(Mail)
+                    )
+                MoreItemsButtonColor: =mdInput365Users.ChevronBackground
+                OnSelect: =
+                PressedBorderColor: =mdInput365Users.HoverBorderColor
+                PressedColor: =RGBA(255, 255, 255, 1)
+                PressedFill: =RGBA(32, 54, 71, 1)
+                Reset: =
+                SearchFields: =["DisplayName","UserPrincipalName"]
+                SearchItems: |-
+                    =Search(Filter(
+                        Office365Users.SearchUser(
+                            {
+                                searchTerm: mdInput365Users.SearchText,
+                                top: 500
+                            }
+                        ),
+                        AccountEnabled,
+                        !IsBlank(Mail)
+                    ),mdInput365Users.SearchText,"DisplayName","UserPrincipalName")
+                SelectionColor: =RGBA(255, 255, 255, 1)
+                SelectionFill: =RGBA(100, 118, 132, 1)
+                SelectionTagColor: =mdInput365Users.HoverColor
+                SelectionTagFill: =mdInput365Users.HoverFill
+                SelectMultiple: =ThisItem.configOffice365Users.allowMultipleSelect
+                Size: =cmpModalDialog.Theme.fontSize
+                Template: =ListItemTemplate.Double
+                Tooltip: =ThisItem.configOffice365Users.tooltip
+                Visible: =ThisItem.type="Input" && ThisItem.inputType="Office365Users"
+                Width: =Parent.Width - 40
+                X: =(Parent.TemplateWidth - mdInput365Users.Width)/2
+                Y: =mdLblMessage.Y + mdLblMessage.Height + If(ThisItem.type="Input" , (Parent.TemplateHeight * 2.5%) , 0)
+                ZIndex: =4
+
+            mdInputArrayText As combobox:
+                BorderColor: =RGBA(32, 54, 71, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(100, 118, 132, 1)
+                ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+                ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+                ChevronFill: =RGBA(255, 255, 255, 1)
+                ChevronHoverBackground: =ColorFade(RGBA(100, 118, 132, 1), -20%)
+                ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                Color: =cmpModalDialog.Theme.fontColor
+                Default: =ThisItem.configRating
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                DisplayFields: =["Value"]
+                FocusedBorderColor: =cmpModalDialog.Theme.primaryColor
+                FocusedBorderThickness: =1
+                Font: =cmpModalDialog.Theme.fontType
+                Height: =If(ThisItem.type="Input" , Parent.TemplateHeight * 10% , 0)
+                HoverBorderColor: =ColorFade(mdInputArrayText.BorderColor, 15%)
+                HoverColor: =RGBA(0, 0, 0, 1)
+                HoverFill: =RGBA(205, 209, 213, 1)
+                IsSearchable: =false
+                Items: =ThisItem.configTextArray.arrayList
+                MoreItemsButtonColor: =mdInputArrayText.ChevronBackground
+                OnSelect: =
+                PressedBorderColor: =mdInputArrayText.HoverBorderColor
+                PressedColor: =RGBA(255, 255, 255, 1)
+                PressedFill: =RGBA(32, 54, 71, 1)
+                Reset: =
+                SearchFields: =["Value"]
+                SearchItems: =[]
+                SelectionColor: =RGBA(255, 255, 255, 1)
+                SelectionFill: =RGBA(100, 118, 132, 1)
+                SelectionTagColor: =mdInputArrayText.HoverColor
+                SelectionTagFill: =mdInputArrayText.HoverFill
+                SelectMultiple: =ThisItem.configTextArray.allowMultipleSelect
+                Size: =cmpModalDialog.Theme.fontSize
+                Tooltip: =ThisItem.configTextArray.tooltip
+                Visible: =ThisItem.type="Input" && ThisItem.inputType="TextArray"
+                Width: =Parent.Width - 40
+                X: =(Parent.TemplateWidth - mdInputArrayText.Width)/2
+                Y: =mdLblMessage.Y + mdLblMessage.Height + If(ThisItem.type="Input" , (Parent.TemplateHeight * 2.5%) , 0)
+                ZIndex: =5
+
+            mdInputSlider As slider:
+                BorderColor: =RGBA(0, 18, 107, 1)
+                BorderStyle: =BorderStyle.None
+                Default: =ThisItem.configSlider.default
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderColor: =mdInputSlider.BorderColor
+                HandleActiveFill: =cmpModalDialog.Theme.fontColor
+                HandleFill: =cmpModalDialog.Theme.fontColor
+                HandleHoverFill: =cmpModalDialog.Theme.primaryColor
+                HandleSize: =mdInputSlider.Height / 1.5
+                Height: =If(ThisItem.type="Input" , 32 , 0)
+                HoverBorderColor: =ColorFade(mdInputSlider.BorderColor, 30%)
+                Max: =ThisItem.configSlider.max
+                Min: =ThisItem.configSlider.min
+                OnSelect: =Select(Parent)
+                PressedBorderColor: =ColorFade(mdInputSlider.BorderColor, -30%)
+                RailFill: =cmpModalDialog.Theme.fontColor
+                RailHoverFill: =cmpModalDialog.Theme.primaryColor
+                RailThickness: =2
+                ShowValue: =ThisItem.configSlider.showValue
+                Tooltip: =ThisItem.configSlider.tooltip
+                ValueFill: =cmpModalDialog.Theme.primaryColor
+                ValueHoverFill: =cmpModalDialog.Theme.primaryColor
+                Visible: =ThisItem.type="Input" && ThisItem.inputType="Slider"
+                Width: =Parent.Width - 40
+                X: =(Parent.TemplateWidth - mdInputText.Width)/2
+                Y: =mdLblMessage.Y + mdLblMessage.Height + If(ThisItem.type="Input", (Parent.TemplateHeight * 2.5%) , 0)
+                ZIndex: =6
+
+            mdInputRating As rating:
+                BorderColor: =RGBA(0, 18, 107, 1)
+                BorderStyle: =BorderStyle.None
+                Default: =ThisItem.configRating.default
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =mdInputRating.Fill
+                FocusedBorderColor: =mdInputRating.BorderColor
+                Height: =If(ThisItem.type="Input" , 32 , 0)
+                HoverFill: =mdInputRating.Fill
+                Max: =ThisItem.configRating.max
+                OnSelect: =Select(Parent)
+                PressedFill: =mdInputRating.Fill
+                RatingFill: =cmpModalDialog.Theme.primaryColor
+                ShowValue: =ThisItem.configRating.showValue
+                Tooltip: =ThisItem.configRating.tooltip
+                Visible: =ThisItem.type="Input" && ThisItem.inputType="Rating"
+                Width: =Parent.Width - 40
+                X: =(Parent.TemplateWidth - mdInputText.Width)/2
+                Y: =mdLblMessage.Y + mdLblMessage.Height + If(ThisItem.type="Input", (Parent.TemplateHeight * 2.5%) , 0)
+                ZIndex: =7
+
+            mdInputText As text:
+                BorderColor: =RGBA(32, 54, 71, 1)
+                BorderThickness: =1
+                Color: =cmpModalDialog.Theme.fontColor
+                Default: =ThisItem.configTextInput.default
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                FocusedBorderColor: =cmpModalDialog.Theme.primaryColor
+                FocusedBorderThickness: =1
+                Font: =cmpModalDialog.Theme.fontType
+                Height: =If(ThisItem.type="Input" , Parent.TemplateHeight * 10% , 0)
+                HintText: =ThisItem.configTextInput.hintText
+                HoverBorderColor: =RGBA(32, 54, 71, 1)
+                HoverColor: =RGBA(0, 0, 0, 1)
+                HoverFill: =RGBA(205, 209, 213, 1)
+                OnSelect: =Select(Parent)
+                PressedBorderColor: =mdInputText.HoverBorderColor
+                PressedColor: =mdInputText.Color
+                PressedFill: =mdInputText.Fill
+                Size: =cmpModalDialog.Theme.fontSize
+                Tooltip: =ThisItem.configTextInput.tooltip
+                Visible: =ThisItem.type="Input" && ThisItem.inputType="TextInput"
+                Width: =Parent.Width - 40
+                X: =(Parent.TemplateWidth - mdInputText.Width)/2
+                Y: =mdLblMessage.Y + mdLblMessage.Height + If(ThisItem.type="Input", (Parent.TemplateHeight * 2.5%) , 0)
+                ZIndex: =8
+
+            mdLblMessage As label:
+                Align: =LayoutAlignItems.Center
+                BorderColor: =RGBA(32, 54, 71, 1)
+                Color: =cmpModalDialog.Theme.fontColor
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderColor: =mdLblMessage.BorderColor
+                Font: =cmpModalDialog.Theme.fontType
+                Height: |-
+                    =Min(
+                        Max(
+                            cmpModalDialog.Theme.fontSize * 4,
+                            (Len(ThisItem.message) / 50//Est Chars per line
+                             ) * cmpModalDialog.Theme.fontSize * 4
+                        ),
+                        120// Don't go bigger than 120 and start scrolling instead
+                    )
+                HoverBorderColor: =mdLblMessage.BorderColor
+                HoverColor: =mdLblMessage.Color
+                HoverFill: =mdLblMessage.Fill
+                OnSelect: =Select(Parent)
+                Overflow: =Overflow.Scroll
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =mdLblMessage.BorderColor
+                PressedColor: =mdLblMessage.Color
+                PressedFill: =mdLblMessage.Fill
+                Size: =cmpModalDialog.Theme.fontSize * 1.1 //The size of the message will be 10% larger for more emphasis
+                Text: =ThisItem.message
+                Tooltip: =ThisItem.message
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.Width - 20
+                X: =(Parent.TemplateWidth - mdLblMessage.Width)/2
+                Y: =mdIcon.Y + mdIcon.Height + (Parent.TemplateHeight * 5%)
+                ZIndex: =9
+
+            mdIcon As icon.Message:
+                BorderColor: =RGBA(32, 54, 71, 1)
+                Color: =If(IsBlank(ThisItem.iconColor),cmpModalDialog.Theme.fontColor,ThisItem.iconColor)
+                DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                DisabledColor: =RGBA(244, 244, 244, 1)
+                DisabledFill: =mdIcon.Fill
+                DisplayMode: =DisplayMode.View
+                FocusedBorderColor: =mdIcon.BorderColor
+                Height: =If(!IsBlank(ThisItem.iconType),cmpModalDialog.Theme.fontSize*2.5,0)
+                HoverBorderColor: =mdIcon.BorderColor
+                HoverColor: =mdIcon.Color
+                HoverFill: =mdIcon.Fill
+                Icon: =If(IsBlank(ThisItem.iconType),Icon.Information , ThisItem.iconType)
+                OnSelect: =Select(Parent)
+                PressedBorderColor: =ColorFade(mdIcon.BorderColor, -20%)
+                PressedColor: =ColorFade(mdIcon.Color, -20%)
+                PressedFill: =mdIcon.Fill
+                Width: =48+0
+                X: =(Parent.Width / 2) - (mdIcon.Width / 2)
+                Y: =Parent.TemplateHeight * 7.5%
+                ZIndex: =10
+
+    lblVersion As label:
+        BorderColor: =RGBA(0, 18, 107, 1)
+        Color: =RGBA(0, 0, 0, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderColor: =lblVersion.BorderColor
+        HoverBorderColor: =lblVersion.BorderColor
+        HoverColor: =lblVersion.Color
+        HoverFill: =lblVersion.Fill
+        PressedBorderColor: =lblVersion.BorderColor
+        PressedColor: =lblVersion.Color
+        PressedFill: =lblVersion.Fill
+        Text: ="V14-20200525"
+        X: =cmpModalDialogSupport.X + cmpModalDialogSupport.Width - lblVersion.Width
+        Y: =cmpModalDialogSupport.Y + cmpModalDialogSupport.Height - lblVersion.Height
+        ZIndex: =10
+
+    grpDocs As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =10
+
+        cmpModalDialogSupport As htmlViewer:
+            BorderColor: =ColorFade(RGBA(114,43,114,1),99%)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =2
+            Color: =RGBA(34, 34, 34, 1)
+            Fill: =ColorFade(cmpModalDialogSupport.BorderColor,99%)
+            Height: =Parent.Height / 2
+            HoverBorderColor: =cmpModalDialogSupport.BorderColor
+            HtmlText: |-
+                ="<html>
+                <p><span style='color: #333333;'>Please follow us on the social streams for updates and news, and just great content in general&nbsp;<img src='https://html-online.com/editor/tinymce4_6_5/plugins/emoticons/img/smiley-cool.gif' alt='cool' /></span></p>
+                <table>
+                <tbody>
+                <tr>
+                <td><strong>&nbsp;Contributor</strong></td>
+                <td><strong>Twitter</strong></td>
+                <td><strong>YouTube</strong></td>
+                </tr>
+                <tr>
+                <td>Dawid van Heerden</td>
+                <td>@DavesTechTips</td>
+                <td><a href='https://www.youtube.com/DavesTechTips'>https://youtube.com/DavesTechTips</a></td>
+                </tr>
+                <tr>
+                <td>Sancho Harker</td>
+                <td>@iAm_ManCat</td>
+                <td><a href='https://bit.ly/ManCatYT'>https://bit.ly/ManCatYT</a></td>
+                </tr>
+                <tr>
+                <td>Todd Baginski</td>
+                <td>
+                <div class='css-901oao css-bfa6kz r-1re7ezh r-18u37iz r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-qvutc0' dir='ltr'><span class='css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0'>@toddbaginski</span></div>
+                </td>
+                <td><a href='https://www.youtube.com/ToddBaginski'>https:/youtube.com/ToddBaginski</a></td>
+                </tr>
+                </tbody>
+                </table></html>"
+            PressedBorderColor: =cmpModalDialogSupport.BorderColor
+            Size: =20
+            Width: =cmpModalDialogWelcome.Width
+            X: =0 - cmpModalDialogInstructions.Width - 10 //To move the instructions off the screen with some margin
+            Y: =Parent.Height + 10
+            ZIndex: =6
+
+        cmpModalDialogUpdates As htmlViewer:
+            BorderColor: =ColorFade(RGBA(114,43,114,1),99%)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =2
+            Color: =RGBA(34, 34, 34, 1)
+            Fill: =ColorFade(cmpModalDialogUpdates.BorderColor,99%)
+            Height: =Parent.Height
+            HoverBorderColor: =cmpModalDialogUpdates.BorderColor
+            HtmlText: |-
+                ="<html><p style='text-align: center;'><strong><span style='color: #993366;'>Updates</span></strong></p>
+                <p><span style='color: #333333;'>Please regularly check for updates at <a href='http://aka.ms/powerapps-popup'>http://aka.ms/powerapps-popup</a> and by following the contributors on social streams:</span></p>
+                </html>"
+            PressedBorderColor: =cmpModalDialogUpdates.BorderColor
+            Size: =20
+            Width: =Parent.Width / 2
+            X: =Parent.Width + 10 //To move the instructions off the screen with some margin
+            ZIndex: =7
+
+        cmpModalDialogInstructions As htmlViewer:
+            BorderColor: =ColorFade(RGBA(114,43,114,1),99%)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =2
+            Color: =RGBA(34, 34, 34, 1)
+            Fill: =ColorFade(cmpModalDialogInstructions.BorderColor,99%)
+            Height: =Parent.Height
+            HoverBorderColor: =cmpModalDialogInstructions.BorderColor
+            HtmlText: |-
+                ="<html><p style='text-align: center;'><strong><span style='color: #993366;'>PLEASE READ: Customizing the component</span></strong></p>
+                <p style='text-align: left;'>Keep customizations of this component to a minimum as it would become difficult to upgrade to new releases in future. </p>
+                <p style='text-align: left;'>If you have any suggestions for the component, please let one of the contributors know so that we can add it to the list of ideas to make it better for everyone in the community.</p>
+                
+                </html>"
+            PressedBorderColor: =cmpModalDialogInstructions.BorderColor
+            Size: =20
+            Width: =Parent.Width / 2
+            X: =0 - cmpModalDialogInstructions.Width - 10 //To move the instructions off the screen with some margin
+            ZIndex: =8
+
+        cmpModalDialogWelcome As htmlViewer:
+            BorderColor: =ColorFade(RGBA(114,43,114,1),99%)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =2
+            Color: =RGBA(34, 34, 34, 1)
+            Fill: =ColorFade(cmpModalDialogWelcome.BorderColor,99%)
+            Height: =Parent.Height / 2
+            HoverBorderColor: =cmpModalDialogWelcome.BorderColor
+            HtmlText: |-
+                ="<html><p style='text-align: center;'><strong><span style='color: #993366;'>Welcome to the Canvas Power App Modal Dialog Component</span></strong></p>
+                <p style='text-align: left;'>One of the very frequent use cases in any application environment, is the ability to present the user with a dialog or popup to either display information or collect information.</p>
+                <p style='text-align: left;'>Previously this was done by placing various controls onto the screen and spending a significant amount of time styling these and adding functionality to try and simulate a popup. This unfortunately present a many challenges. Rapid hair loss being one of them.</p>
+                <p style='text-align: left;'>Originally developed by Ukuvuma Solutions and donated to the Power Apps community, this new modal dialog component can be used to create a popup function in your Power Apps, without recreating all the logic from scratch for every popup and every app.</p>
+                <p><span style='color: #333333;'>This application was designed to ship with the component to make it easy to test, reference and demonstrate the functionality that has to offer.</span></p>
+                </html>"
+            PressedBorderColor: =cmpModalDialogWelcome.BorderColor
+            Size: =20
+            Width: |-
+                =Parent.Width + // Size of the component
+                cmpModalDialogInstructions.Width + // PLUS width of the Instruction section
+                cmpModalDialogUpdates.Width + // PLUS width of the Resources section
+                20 // PLUS width margin * 2
+            X: =0 - cmpModalDialogInstructions.Width - 10 //To move the instructions off the screen with some margin
+            Y: =0 - cmpModalDialogWelcome.Height - 10
+            ZIndex: =9
+

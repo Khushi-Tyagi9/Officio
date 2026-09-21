@@ -1,0 +1,598 @@
+Screen1 As screen:
+
+    CircleHeaderCreateNew_1 As circle:
+        DisabledFill: =CircleHeaderCreateNew_1.Fill
+        Fill: =varGlobals.BlueRobot.Fill
+        FocusedBorderColor: =CircleHeaderCreateNew_1.BorderColor
+        Height: =80
+        HoverFill: =CircleHeaderCreateNew_1.Fill
+        PressedFill: =CircleHeaderCreateNew_1.Fill
+        Width: =80
+        X: =Parent.Width - Self.Width - 120
+        Y: =Parent.Height - Self.Height - 120
+        ZIndex: =1
+
+    IconHeaderCreateNew_1 As icon.Add:
+        AccessibleLabel: ="Create new leave request"
+        Color: =Color.White
+        DisabledFill: =IconHeaderCreateNew_1.Fill
+        FocusedBorderColor: =IconHeaderCreateNew_1.BorderColor
+        Height: =80
+        HoverBorderColor: =ColorFade(IconHeaderCreateNew_1.BorderColor, 20%)
+        HoverColor: =ColorFade(IconHeaderCreateNew_1.Color, 20%)
+        HoverFill: =IconHeaderCreateNew_1.Fill
+        Icon: =Icon.Add
+        OnSelect: |
+            =//used to know what text to show on controls if new request vs existing request
+            Set(_requestType, "New");
+            //used to know if reason you got to a screen was because editing existing request vs part of wizard
+            Set(_sourceScreen,"Step");
+            
+            //reinitialise all variables set during wizard
+            Set(_requestedDays,0);
+            ClearCollect(ColTmpLeaveRequest,{ID:GUID(""),PersalNumber:"",Details:"",ApprovalStatus:ApprovalStatus.Draft,LeaveType:_defaultLeaveType,StartDate:_leaveStart,EndDate:_leaveEnd,Duration:0,ApproverEmail:"",ApproverID:"",SingleDayDuration:Blank()});
+            
+            Reset(LeaveEndDatePicker);
+            Reset(LeaveStartDatePicker);
+            Reset(txtPersalNumber);
+            Reset(txtLeaveDetails);
+            Reset(drpDayPeriod);
+            Reset(GalleryLeaveRequestType);
+            Reset(attachDocument);
+            Navigate(LeaveTypeScreen, BorderStyle.None)
+        PaddingBottom: =5
+        PaddingLeft: =5
+        PaddingRight: =5
+        PaddingTop: =5
+        PressedBorderColor: =ColorFade(IconHeaderCreateNew_1.BorderColor, -20%)
+        PressedColor: =ColorFade(IconHeaderCreateNew_1.Color, -20%)
+        PressedFill: =IconHeaderCreateNew_1.Fill
+        TabIndex: =
+        Width: =80
+        X: =Parent.Width - Self.Width - 120
+        Y: =Parent.Height - Self.Height - 120
+        ZIndex: =2
+
+    Label2 As label:
+        Align: =Align.Center
+        Color: =varGlobals.BlueRobot.Fill
+        Font: =Font.Lato
+        FontWeight: =FontWeight.Bold
+        Size: =20
+        Text: ="New Request"
+        Width: =180
+        X: =CircleHeaderCreateNew_1.X - (CircleHeaderCreateNew_1.Width/2)
+        Y: =CircleHeaderCreateNew_1.Y + CircleHeaderCreateNew_1.Height + 10
+        ZIndex: =3
+
+    attachDocument_1 As attachments:
+        AddAttachmentText: ="Upload file"
+        BorderColor: =varGlobals.BlueRobot.Fill
+        BorderThickness: =1
+        DisplayMode: =DisplayMode.View
+        Font: =varGlobals.Body.Font
+        Height: =124
+        IsInDataCard: =true
+        Items: |-
+            =//LookUp('Leave Requests','Leave Request' = First(ColTmpLeaveRequest).ID).'Supporting Document'
+            Table({Name: First(ColTmpLeaveRequest).SupportingDocument.FileName, Value: First(ColTmpLeaveRequest).SupportingDocument.Value})
+        MaxAttachments: =1
+        MaxAttachmentsText: =""
+        NoAttachmentsText: ="There is no file."
+        PaddingBottom: =5
+        PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+        PaddingRight: =5
+        PaddingTop: =5
+        Size: =varGlobals.Body.FontSize
+        Tooltip: ="Upload supporting documentation"
+        Visible: =First(ColTmpLeaveRequest).LeaveType.'Require Supporting Document'
+        Width: =300
+        X: =540
+        Y: =433
+        ZIndex: =4
+
+    FormViewer1 As formViewer:
+        DataSource: ='Leave Requests'
+        Height: =353
+        Item: =LookUp('Leave Requests','Leave Request' = First(ColTmpLeaveRequest).ID)
+        Width: =543
+        X: =40
+        Y: =40
+        ZIndex: =5
+
+        "'Supporting Document_DataCard1' As typedDataCard.fileViewCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_supportingdocument"
+            Default: |-
+                =If(!IsBlank(ThisItem.'Supporting Document'.FileName), Table({DisplayName: ThisItem.'Supporting Document'.FileName, Value: ThisItem.'Supporting Document'.Value}), Blank())
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Leave Requests'],DataSourceInfo.DisplayName,"contoso_supportingdocument")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Width: =181
+            X: =1
+            Y: =2
+            ZIndex: =1
+
+            DataCardKey8 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue8 As attachments:
+                AddAttachmentText: ="Upload file"
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                DisplayMode: =Parent.DisplayMode
+                Height: =100
+                IsInDataCard: =true
+                Items: =Parent.Default
+                MaxAttachments: =1
+                MaxAttachmentsText: =""
+                NoAttachmentsText: ="There is no file."
+                PaddingBottom: =5
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                PaddingRight: =5
+                PaddingTop: =5
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey8.Y + DataCardKey8.Height + 5
+                ZIndex: =2
+
+            ErrorMessage1 As label:
+                AutoHeight: =true
+                Height: =10
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue8.Y + DataCardValue8.Height
+                ZIndex: =3
+
+            StarVisible1 As label:
+                Align: =Align.Center
+                Height: =DataCardKey8.Height
+                PaddingBottom: =DataCardKey8.PaddingBottom
+                PaddingLeft: =DataCardKey8.PaddingLeft
+                PaddingRight: =DataCardKey8.PaddingRight
+                PaddingTop: =DataCardKey8.PaddingTop
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey8.Y
+                ZIndex: =4
+
+        Name_DataCard1 As typedDataCard.textualViewCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_name"
+            Default: =ThisItem.Name
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Leave Requests'],DataSourceInfo.DisplayName,"contoso_name")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =false
+            Width: =181
+            X: =0
+            Y: =0
+            ZIndex: =6
+
+            DataCardKey1 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue1 As label:
+                AutoHeight: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =27
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Default
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey1.Y + DataCardKey1.Height + 5
+                ZIndex: =2
+
+        "'Persal Number_DataCard1' As typedDataCard.textualViewCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_persalnumber"
+            Default: =ThisItem.'Persal Number'
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Leave Requests'],DataSourceInfo.DisplayName,"contoso_persalnumber")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =true
+            Width: =181
+            X: =1
+            Y: =0
+            ZIndex: =6
+
+            DataCardKey2 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue2 As label:
+                AutoHeight: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =27
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Default
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey2.Y + DataCardKey2.Height + 5
+                ZIndex: =2
+
+        "'Start Date_DataCard1' As typedDataCard.textualViewCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_startdate"
+            Default: =ThisItem.'Start Date'
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Leave Requests'],DataSourceInfo.DisplayName,"contoso_startdate")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =true
+            Width: =181
+            X: =2
+            Y: =0
+            ZIndex: =6
+
+            DataCardKey3 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue3 As label:
+                AutoHeight: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =27
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Default
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey3.Y + DataCardKey3.Height + 5
+                ZIndex: =2
+
+        Duration_DataCard1 As typedDataCard.textualViewCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_duration"
+            Default: =ThisItem.Duration
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Leave Requests'],DataSourceInfo.DisplayName,"contoso_duration")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =true
+            Width: =181
+            X: =0
+            Y: =1
+            ZIndex: =6
+
+            DataCardKey4 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue4 As label:
+                AutoHeight: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =27
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Default
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey4.Y + DataCardKey4.Height + 5
+                ZIndex: =2
+
+        "'Approval Status_DataCard1' As typedDataCard.textualViewCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_approvalstatus"
+            Default: =ThisItem.'Approval Status'
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Leave Requests'],DataSourceInfo.DisplayName,"contoso_approvalstatus")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =false
+            Width: =181
+            X: =1
+            Y: =1
+            ZIndex: =6
+
+            DataCardKey5 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue5 As label:
+                AutoHeight: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =27
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Default
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey5.Y + DataCardKey5.Height + 5
+                ZIndex: =2
+
+        "'Approver Email_DataCard1' As typedDataCard.textualViewCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_approveremail"
+            Default: =ThisItem.'Approver Email'
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Leave Requests'],DataSourceInfo.DisplayName,"contoso_approveremail")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =false
+            Width: =181
+            X: =2
+            Y: =1
+            ZIndex: =6
+
+            DataCardKey6 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue6 As label:
+                AutoHeight: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =27
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Default
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey6.Y + DataCardKey6.Height + 5
+                ZIndex: =2
+
+        "'Created On_DataCard1' As typedDataCard.textualViewCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="createdon"
+            Default: =ThisItem.'Created On'
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Leave Requests'],DataSourceInfo.DisplayName,"createdon")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =false
+            Width: =181
+            X: =0
+            Y: =2
+            ZIndex: =6
+
+            DataCardKey7 As label:
+                AutoHeight: =true
+                Height: =34
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue7 As label:
+                AutoHeight: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =27
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Default
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey7.Y + DataCardKey7.Height + 5
+                ZIndex: =2
+
+    DataCardValue8_1 As attachments:
+        AddAttachmentText: ="Upload file"
+        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+        DisplayMode: =Parent.DisplayMode
+        Height: =100
+        IsInDataCard: =true
+        Items: =Parent.Default
+        MaxAttachments: =1
+        MaxAttachmentsText: =""
+        NoAttachmentsText: ="There is no file."
+        PaddingBottom: =5
+        PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+        PaddingRight: =5
+        PaddingTop: =5
+        Width: =Parent.Width - 60
+        X: =60
+        Y: =628
+        ZIndex: =6
+
+    "Gallery2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+        DelayItemLoading: =true
+        Height: =490
+        Items: =LookUp('Leave Requests','Leave Request' = First(ColTmpLeaveRequest).ID)
+        Layout: =Layout.Vertical
+        LoadingSpinner: =LoadingSpinner.Data
+        TemplatePadding: =0
+        TemplateSize: =104
+        Width: =442
+        X: =924
+        Y: =112
+        ZIndex: =7
+
+        Image1 As image:
+            Height: =72
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Width: =72
+            X: =16
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =1
+
+        Title1 As label:
+            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.Name
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 173
+            X: =103
+            Y: =(Parent.TemplateHeight - (Self.Size * 1.8 + Subtitle1.Size * 1.8)) / 2
+            ZIndex: =2
+
+        Subtitle1 As label:
+            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.'Persal Number'
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Title1.Width
+            X: =Title1.X
+            Y: =Title1.Y + Title1.Height
+            ZIndex: =3
+
+        NextArrow1 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Color: =RGBA(166, 166, 166, 1)
+            Height: =50
+            Icon: =Icon.ChevronRight
+            OnSelect: =Select(Parent)
+            PaddingBottom: =16
+            PaddingLeft: =16
+            PaddingRight: =16
+            PaddingTop: =16
+            Tooltip: ="View item details"
+            Width: =50
+            X: =Parent.TemplateWidth - Self.Width - 12
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =4
+
+        Separator1 As rectangle:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =8
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - Self.Height
+            ZIndex: =5
+
+        Rectangle7 As rectangle:
+            Height: =Parent.TemplateHeight - Separator1.Height
+            OnSelect: =Select(Parent)
+            Visible: =ThisItem.IsSelected
+            Width: =4
+            ZIndex: =6
+
+        attachDocument_2 As attachments:
+            AddAttachmentText: ="Upload file"
+            BorderColor: =varGlobals.BlueRobot.Fill
+            BorderThickness: =1
+            Default: |-
+                ={DisplayName: ThisItem.'Supporting Document'.FileName, Value: ThisItem.'Supporting Document'.Value}
+            DisplayMode: =DisplayMode.View
+            Font: =varGlobals.Body.Font
+            Height: =104
+            IsInDataCard: =true
+            Items: |-
+                =//LookUp('Leave Requests','Leave Request' = First(ColTmpLeaveRequest).ID).'Supporting Document'
+                Table({DisplayName:ThisItem.'Supporting Document'.FileName,Value:ThisItem.'Supporting Document'.Value})
+            MaxAttachments: =1
+            MaxAttachmentsText: =""
+            NoAttachmentsText: ="There is no file."
+            PaddingBottom: =5
+            PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+            PaddingRight: =5
+            PaddingTop: =5
+            Size: =varGlobals.Body.FontSize
+            Tooltip: ="Upload supporting documentation"
+            Visible: =First(ColTmpLeaveRequest).LeaveType.'Require Supporting Document'
+            Width: =300
+            X: =40
+            ZIndex: =7
+

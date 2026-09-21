@@ -1,0 +1,574 @@
+LeaveDatesScreen As screen:
+    Fill: |-
+        =ColorValue("#FAF9F8")
+    LoadingSpinner: =LoadingSpinner.Controls
+    OnHidden: =
+    OnVisible: |
+        =UpdateContext({leaveTypeGUID: First(ColTmpLeaveRequest).LeaveType.'Leave Type'});
+        Select(LeaveStartDatePicker);
+    Orientation: =If(LeaveDatesScreen.Width < LeaveDatesScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= LeaveDatesScreen.Width)
+
+    ContainerMainH_5 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =48
+
+        ContainerHeaderH_5 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =varGlobals.MainThemeColor.Fill
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Icon1_1 As icon.BackArrow:
+                AlignInContainer: =AlignInContainer.Stretch
+                Color: =Color.White
+                Icon: =Icon.BackArrow
+                OnSelect: =Back();
+                PaddingLeft: =10
+                Width: =60
+                X: =18
+                Y: =6
+                ZIndex: =1
+
+            Label8_1 As label:
+                Align: =LayoutAlignItems.Center
+                AlignInContainer: =AlignInContainer.Center
+                Color: =RGBA(255, 255, 255, 1)
+                FillPortions: =1
+                FocusedBorderColor: =Label8_1.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverBorderColor: =Label8_1.BorderColor
+                HoverColor: =Label8_1.Color
+                HoverFill: =Label8_1.Fill
+                PressedBorderColor: =Label8_1.BorderColor
+                PressedColor: =Label8_1.Color
+                PressedFill: =Label8_1.Fill
+                Size: =If(LeaveDatesScreen.Size = 1,varGlobals.Header.FontSize-4,varGlobals.Header.FontSize)
+                Text: ="Choose date(s)"
+                Width: =1366
+                ZIndex: =2
+
+        ContainerBody5 As groupContainer.verticalAutoLayoutContainer:
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =15
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            LayoutOverflowY: =LayoutOverflow.Scroll
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            ZIndex: =2
+
+            "GalLeaveBalance As gallery.'BrowseLayout_Flexible_SocialFeed_ver5.0'":
+                DelayItemLoading: =true
+                FillPortions: =0
+                Height: =GalLeaveBalance.AllItemsCount * 42
+                Items: |-
+                    =With(LookUp('Leave Balances', Employee.aaduserid = GUID(_myProfile.Id) && 'Leave Type'.'Leave Type' = leaveTypeGUID && Year = Text(Year(Today()))),
+                    Filter(Table(
+                        {
+                            ID: 0,
+                            Label: "Leave Type",
+                            Value: First(ColTmpLeaveRequest).LeaveType.Name,
+                            Visible: "Yes"
+                        },   
+                        {
+                            ID: 2,
+                            Label: "Requested Days",
+                            Value: Text(_requestedDays),
+                            Visible: "Yes"
+                        },
+                         {
+                            ID: 3,
+                            Label: "Current Balance",
+                            Value: Text('Current Balance'),
+                            Visible: Text(First(ColTmpLeaveRequest).LeaveType.'Has Balance')
+                        },
+                        {
+                            ID: 4,
+                            Label: "New Leave Balance",
+                            Value: Text('Current Balance' - _requestedDays),
+                            Visible: Text(First(ColTmpLeaveRequest).LeaveType.'Has Balance')
+                        }
+                    ),Visible = "Yes"))
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =80
+                LayoutMinWidth: =320
+                LoadingSpinner: =LoadingSpinner.Data
+                ShowScrollbar: =false
+                TemplatePadding: =10
+                TemplateSize: =Min(32, Self.Height - 60)
+                ZIndex: =1
+
+                lblBalanceLabel As label:
+                    FocusedBorderColor: =lblBalanceLabel.BorderColor
+                    Font: =varGlobals.Body.Font
+                    Height: =30
+                    HoverBorderColor: =lblBalanceLabel.BorderColor
+                    HoverColor: =lblBalanceLabel.Color
+                    HoverFill: =lblBalanceLabel.Fill
+                    PressedBorderColor: =lblBalanceLabel.BorderColor
+                    PressedColor: =lblBalanceLabel.Color
+                    PressedFill: =lblBalanceLabel.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: |-
+                        =ThisItem.Label & ":"
+                    Width: =180
+                    ZIndex: =1
+
+                lblBalanceValue As label:
+                    FocusedBorderColor: =lblBalanceValue.BorderColor
+                    Font: =varGlobals.Body.Font
+                    FontWeight: =FontWeight.Semibold
+                    Height: =30
+                    HoverBorderColor: =lblBalanceValue.BorderColor
+                    HoverColor: =lblBalanceValue.Color
+                    HoverFill: =lblBalanceValue.Fill
+                    PressedBorderColor: =lblBalanceValue.BorderColor
+                    PressedColor: =lblBalanceValue.Color
+                    PressedFill: =lblBalanceValue.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: =ThisItem.Value
+                    Width: =380
+                    X: =170
+                    ZIndex: =2
+
+            Label1_15 As label:
+                FocusedBorderColor: =Label1_15.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Bold
+                Height: =30
+                HoverBorderColor: =Label1_15.BorderColor
+                HoverColor: =Label1_15.Color
+                HoverFill: =Label1_15.Fill
+                PressedBorderColor: =Label1_15.BorderColor
+                PressedColor: =Label1_15.Color
+                PressedFill: =Label1_15.Fill
+                Size: =varGlobals.Body.FontSize
+                Text: |-
+                    ="Select dates:"
+                Width: =560
+                X: =36
+                Y: =188
+                ZIndex: =3
+
+            Container12 As groupContainer.horizontalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                FillPortions: =0
+                Height: =60
+                LayoutGap: =15
+                LayoutMinHeight: =70
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                LayoutWrap: =true
+                PaddingLeft: =10
+                PaddingTop: =5
+                Width: =Parent.Width
+                ZIndex: =4
+
+                FromContainer As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Start
+                    FillPortions: =0
+                    Height: =50
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =400
+                    ZIndex: =1
+
+                    Label1_17 As label:
+                        FocusedBorderColor: =Label1_17.BorderColor
+                        Font: =varGlobals.Body.Font
+                        FontWeight: =FontWeight.Bold
+                        HoverBorderColor: =Label1_17.BorderColor
+                        HoverColor: =Label1_17.Color
+                        HoverFill: =Label1_17.Fill
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedBorderColor: =Label1_17.BorderColor
+                        PressedColor: =Label1_17.Color
+                        PressedFill: =Label1_17.Fill
+                        Size: =varGlobals.Body.FontSize
+                        Text: |-
+                            ="*From:"
+                        Width: =70
+                        Y: =5
+                        ZIndex: =1
+
+                    LeaveStartDatePicker As datepicker:
+                        AccessibleLabel: ="Leave start date. Required field."
+                        BorderColor: =If(And(LeaveStartDatePicker.SelectedDate < Today()) || LeaveStartDatePicker.SelectedDate > LeaveEndDatePicker.SelectedDate, Color.Red, varGlobals.BlueRobot.Fill)
+                        BorderThickness: =1
+                        DefaultDate: =First(ColTmpLeaveRequest).StartDate
+                        Fill: =Color.White
+                        FocusedBorderColor: =LeaveStartDatePicker.BorderColor
+                        Font: =varGlobals.Body.Font
+                        HoverBorderColor: =LeaveStartDatePicker.BorderColor
+                        HoverFill: =LeaveStartDatePicker.Fill
+                        IconBackground: =Color.White
+                        IconFill: =varGlobals.BlueRobot.Fill
+                        InputTextPlaceholder: =Text(Date(2001,12,31), LeaveStartDatePicker.Format, LeaveStartDatePicker.Language)
+                        OnChange: =Select(LeaveStartDatePicker)
+                        OnSelect: |-
+                            =//**** CALCULATION USED TO DETERMINE TOTAL WORK DAYS REQUESTED ****
+                            
+                            Set(_inclusiveTotalDaysRequested, DateDiff(LeaveStartDatePicker.SelectedDate, LeaveEndDatePicker.SelectedDate, TimeUnit.Days) + 1);
+                                Set(_numFullWeeks, RoundDown(_inclusiveTotalDaysRequested / 7, 0));
+                                Set(_numFullDaysPartialWeek, _inclusiveTotalDaysRequested - _numFullWeeks * 7);
+                                Concurrent(Set(_startWeekday, Weekday(LeaveStartDatePicker.SelectedDate)), Set(_endWeekday, Weekday(LeaveEndDatePicker.SelectedDate)));
+                                //calculates the number of business days in the partial week left over after whole weeks are subtracted out of total days requested
+                                If(_numFullDaysPartialWeek = 6, 
+                                    If(_startWeekday <= 2, Set(_numPartialWeekdays, 5), Set(_numPartialWeekdays, 4)
+                                    ),
+                                  _numFullDaysPartialWeek = 5,
+                                    If(_startWeekday = 2, Set(_numPartialWeekdays, 5), _startWeekday = 1 || _startWeekday = 3 || _startWeekday = 4, Set(_numPartialWeekdays, 4), Set(_numPartialWeekdays, 3)
+                                    ),
+                                  _numFullDaysPartialWeek = 4,
+                                    If(_startWeekday = 2 || _startWeekday = 3, Set(_numPartialWeekdays, 4), _startWeekday = 1 || _startWeekday = 4, Set(_numPartialWeekdays, 3), Set(_numPartialWeekdays, 2)
+                                    ),
+                                  _numFullDaysPartialWeek = 3,
+                                    If(_startWeekday = 6 || _startWeekday = 7, Set(_numPartialWeekdays, 1), _startWeekday = 1 || _startWeekday = 5, Set(_numPartialWeekdays, 2), Set(_numPartialWeekdays, 3)
+                                    ),
+                                  _numFullDaysPartialWeek = 2,
+                                    If(_startWeekday = 7, Set(_numPartialWeekdays, 0), _startWeekday = 1 || _startWeekday = 6, Set(_numPartialWeekdays, 1), Set(_numPartialWeekdays, 2)),
+                                  _numFullDaysPartialWeek = 1,
+                                    If(_startWeekday = 1 || _startWeekday = 7, Set(_numPartialWeekdays, 0), Set(_numPartialWeekdays, 1)
+                                    ),
+                                  _numFullDaysPartialWeek = 0, Set(_numPartialWeekdays, 0)
+                                );
+                                  Set(_workDaysInRequest, _numFullWeeks * 5 + _numPartialWeekdays);  
+                                  Set(_holidaysInRequest, CountIf(HolidaysCollection, 'Holiday Date' >= LeaveStartDatePicker.SelectedDate, 'Holiday Date' <= LeaveEndDatePicker.SelectedDate));
+                                  Set(_requestedDays, _workDaysInRequest - _holidaysInRequest);
+                                  If(_requestedDays = 1 && drpDayPeriod.Visible,Select(drpDayPeriod))
+                        PaddingBottom: =10
+                        PaddingLeft: =10
+                        PaddingRight: =10
+                        PaddingTop: =10
+                        PressedBorderColor: =LeaveStartDatePicker.BorderColor
+                        PressedFill: =LeaveStartDatePicker.Fill
+                        Size: =varGlobals.Body.FontSize
+                        Width: =267
+                        X: =70
+                        Y: =5
+                        ZIndex: =2
+
+                ToContainer As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Start
+                    FillPortions: =0
+                    Height: =50
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =400
+                    ZIndex: =2
+
+                    Label1_16 As label:
+                        FocusedBorderColor: =Label1_16.BorderColor
+                        Font: =varGlobals.Body.Font
+                        FontWeight: =FontWeight.Bold
+                        HoverBorderColor: =Label1_16.BorderColor
+                        HoverColor: =Label1_16.Color
+                        HoverFill: =Label1_16.Fill
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedBorderColor: =Label1_16.BorderColor
+                        PressedColor: =Label1_16.Color
+                        PressedFill: =Label1_16.Fill
+                        Size: =varGlobals.Body.FontSize
+                        Text: |-
+                            ="*To:"
+                        Width: =50
+                        Y: =5
+                        ZIndex: =1
+
+                    LeaveEndDatePicker As datepicker:
+                        AccessibleLabel: ="Leave end date. Required field."
+                        BorderColor: =If(LeaveStartDatePicker.SelectedDate > LeaveEndDatePicker.SelectedDate, Color.Red, varGlobals.BlueRobot.Fill)
+                        BorderThickness: =1
+                        DefaultDate: =First(ColTmpLeaveRequest).EndDate
+                        FocusedBorderColor: =LeaveEndDatePicker.BorderColor
+                        Font: =varGlobals.Body.Font
+                        HoverBorderColor: =LeaveEndDatePicker.BorderColor
+                        HoverFill: =LeaveEndDatePicker.Fill
+                        IconBackground: =Color.White
+                        IconFill: =varGlobals.BlueRobot.Fill
+                        InputTextPlaceholder: =Text(Date(2001,12,31), LeaveEndDatePicker.Format, LeaveEndDatePicker.Language)
+                        OnChange: =Select(LeaveStartDatePicker)
+                        OnSelect: =Select(LeaveStartDatePicker)
+                        PaddingBottom: =10
+                        PaddingLeft: =10
+                        PaddingRight: =10
+                        PaddingTop: =10
+                        PressedBorderColor: =LeaveEndDatePicker.BorderColor
+                        PressedFill: =LeaveEndDatePicker.Fill
+                        Size: =varGlobals.Body.FontSize
+                        Width: =267
+                        X: =70
+                        Y: =5
+                        ZIndex: =2
+
+                ToContainer_1 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Start
+                    FillPortions: =0
+                    Height: =50
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =400
+                    ZIndex: =3
+
+                    drpDayPeriod As dropdown:
+                        BorderColor: =varGlobals.BlueRobot.Fill
+                        BorderThickness: =1
+                        ChevronBackground: =Color.White
+                        ChevronFill: =varGlobals.BlueRobot.Fill
+                        Default: =
+                        Font: =varGlobals.Body.Font
+                        Items: |-
+                            =//["All Day","1 Hour","2 Hours","3 Hours","4 Hours","5 Hours","6 Hours","7 Hours"]
+                            [{Title:"All Day",ID:0},{Title:"1 Hour",ID:1},{Title:"2 Hours",ID:2},{Title:"3 Hours",ID:3},{Title:"4 Hours",ID:4},{Title:"5 Hours",ID:5},{Title:"6 Hours",ID:6},{Title:"7 Hours",ID:7}]
+                        OnChange: |-
+                            =//this was used when we just had morning or afternoon
+                            //Set(_requestedDays,If(StartsWith(drpDayPeriod.SelectedText.Value,"Half"),0.5,1))
+                            //now requirements is to have hourly period
+                            //take number of hours and divide by 8 to get fraction
+                            If(   
+                                drpDayPeriod.Selected.ID <> 0
+                                ,
+                                Set(
+                                    _requestedDays,
+                                    Value(drpDayPeriod.Selected.ID)/8
+                                )
+                                ,
+                                 Set(
+                                    _requestedDays,
+                                    1
+                                )
+                            )
+                        OnSelect: |-
+                            =If(   
+                                drpDayPeriod.Selected.ID <> 0
+                                ,
+                                Set(
+                                    _requestedDays,
+                                    Value(drpDayPeriod.Selected.ID)/8
+                                )
+                                ,
+                                 Set(
+                                    _requestedDays,
+                                    1
+                                )
+                            )
+                        Size: =varGlobals.Body.FontSize
+                        Visible: =LeaveEndDatePicker.SelectedDate = LeaveStartDatePicker.SelectedDate && First(ColTmpLeaveRequest).LeaveType.'Allow Hourly Request'
+                        Width: =228
+                        X: =5
+                        Y: =5
+                        ZIndex: =2
+
+            lblTooManyDays As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                AutoHeight: =true
+                Color: =RGBA(255, 0, 0, 1)
+                FocusedBorderColor: =lblTooManyDays.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =100
+                HoverBorderColor: =lblTooManyDays.BorderColor
+                HoverColor: =lblTooManyDays.Color
+                HoverFill: =lblTooManyDays.Fill
+                Live: =Live.Assertive
+                PressedBorderColor: =lblTooManyDays.BorderColor
+                PressedColor: =lblTooManyDays.Color
+                PressedFill: =lblTooManyDays.Fill
+                Size: =varGlobals.Body.FontSize
+                Text: ="You have exceeded the maximum amount of consecutive days allowed"
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =_requestedDays > varSettings.'Max Consecutive Days'
+                Width: =Parent.Width
+                X: =36
+                Y: =351
+                ZIndex: =5
+
+            lblDateError As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                AutoHeight: =true
+                Color: =RGBA(255, 0, 0, 1)
+                FocusedBorderColor: =lblDateError.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =100
+                HoverBorderColor: =lblDateError.BorderColor
+                HoverColor: =lblDateError.Color
+                HoverFill: =lblDateError.Fill
+                Live: =Live.Assertive
+                PressedBorderColor: =lblDateError.BorderColor
+                PressedColor: =lblDateError.Color
+                PressedFill: =lblDateError.Fill
+                Size: =varGlobals.Body.FontSize
+                Text: =If(LeaveStartDatePicker.SelectedDate > LeaveEndDatePicker.SelectedDate || If(!First(ColTmpLeaveRequest).LeaveType.'Allow Start Date in Past' , LeaveStartDatePicker.SelectedDate < Today()), "Start date must occur on or " & If(LeaveStartDatePicker.SelectedDate > LeaveEndDatePicker.SelectedDate,"before end date", "after today"))
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.Width
+                X: =36
+                Y: =351
+                ZIndex: =6
+
+            lblConflictingLeave As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                AutoHeight: =true
+                Color: =RGBA(255, 0, 0, 1)
+                FocusedBorderColor: =lblConflictingLeave.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =100
+                HoverBorderColor: =lblConflictingLeave.BorderColor
+                HoverColor: =lblConflictingLeave.Color
+                HoverFill: =lblConflictingLeave.Fill
+                Live: =Live.Assertive
+                PressedBorderColor: =lblConflictingLeave.BorderColor
+                PressedColor: =lblConflictingLeave.Color
+                PressedFill: =lblConflictingLeave.Fill
+                Size: =varGlobals.Body.FontSize
+                Text: ="You have existing leave which overlaps with requested leave"
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =ConflictingLeaveGallery.AllItemsCount > 0
+                Width: =Parent.Width
+                X: =36
+                Y: =351
+                ZIndex: =7
+
+            "ConflictingLeaveGallery As gallery.'BrowseLayout_Vertical_OneTextVariant_ver5.0'":
+                DelayItemLoading: =true
+                FillPortions: =4
+                Items: |-
+                    =/*Filter('Leave Requests',  Employee.'AAD user id' = GUID(_myProfile.Id) && 
+                      ((LeaveStartDatePicker.SelectedDate<'End Date' && LeaveStartDatePicker.SelectedDate>='Start Date') ||
+                      (LeaveEndDatePicker.SelectedDate<='End Date' && LeaveEndDatePicker.SelectedDate>'Start Date') || 
+                      (LeaveEndDatePicker.SelectedDate>='End Date' && LeaveStartDatePicker.SelectedDate<='Start Date'))
+                    )*/
+                    // ('End Date' > LeaveStartDatePicker.SelectedDate &&  'Start Date' <= LeaveStartDatePicker.SelectedDate)
+                    //'End Date' >= LeaveEndDatePicker.SelectedDate  && 'Start Date' < LeaveEndDatePicker.SelectedDate)
+                    /*Filter('Leave Requests',  (('End Date' > LeaveStartDatePicker.SelectedDate &&  'Start Date' <= LeaveStartDatePicker.SelectedDate || 'End Date' >= LeaveEndDatePicker.SelectedDate  && 'Start Date' < LeaveEndDatePicker.SelectedDate) || 'End Date' <= LeaveEndDatePicker.SelectedDate && 'Start Date' >= LeaveStartDatePicker.SelectedDate) && ('Approval Status' <> "Declined" || 'Approval Status' <> "Cancelled") && Employee.'AAD user id' = GUID(_myProfile.Id))*/
+                    With({selectedStartDate:LeaveStartDatePicker.SelectedDate+Time(0,TimeZoneOffset(),0),selectedEndDate:LeaveEndDatePicker.SelectedDate+Time(0,TimeZoneOffset(),0)},Filter('Leave Requests',(('End Date'>selectedStartDate&&'Start Date'<=selectedStartDate)||('End Date'>=selectedEndDate&&'Start Date'<selectedEndDate)||('End Date'<=selectedEndDate&&'Start Date'>=selectedStartDate)&&('Approval Status'<>"Declined"||'Approval Status'<>"Cancelled")&&Employee.aaduserid=GUID(_myProfile.Id))))
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =287
+                LayoutMinWidth: =320
+                LoadingSpinner: =LoadingSpinner.Data
+                TemplatePadding: =0
+                TemplateSize: =32
+                Visible: =lblConflictingLeave.Visible
+                ZIndex: =8
+
+                Title7 As label:
+                    Color: =varGlobals.Body.FontColor
+                    Font: =varGlobals.Body.Font
+                    Height: =Self.Size * 1.8
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =10
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =varGlobals.Body.FontSize
+                    Text: =Text(ThisItem.'Start Date',DateTimeFormat.ShortDate) & " -> " & Text(ThisItem.'End Date',DateTimeFormat.ShortDate) & " (" & ThisItem.'Approval Status' & ")"
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.TemplateWidth - 86
+                    Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                    ZIndex: =1
+
+        ContainerFooter5 As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =80
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =5
+            PaddingLeft: =20
+            PaddingRight: =20
+            PaddingTop: =5
+            ZIndex: =3
+
+            btnSubmitRequest_1 As button:
+                Align: =LayoutAlignItems.Center
+                AlignInContainer: =AlignInContainer.Stretch
+                BorderColor: =varGlobals.BlueRobot.Fill
+                BorderThickness: =1
+                Color: =Color.White
+                DisabledBorderColor: =ColorFade(btnSubmitRequest_1.BorderColor, 70%)
+                DisplayMode: =If(lblConflictingLeave.Visible || IsBlank(LeaveStartDatePicker.SelectedDate) || IsBlank(LeaveEndDatePicker.SelectedDate) || LeaveEndDatePicker.SelectedDate < LeaveStartDatePicker.SelectedDate || If(!First(ColTmpLeaveRequest).LeaveType.'Allow Start Date in Past' , LeaveStartDatePicker.SelectedDate < Today()) || _requestedDays <= 0 || CountRows(GalLeaveBalance.AllItems) = 0 || _requestedDays > varSettings.'Max Consecutive Days', DisplayMode.Disabled, DisplayMode.Edit)
+                Fill: =varGlobals.BlueRobot.Fill
+                FillPortions: =1
+                FocusedBorderColor: =btnSubmitRequest_1.BorderColor
+                Font: =varGlobals.Body.Font
+                Height: =80
+                HoverBorderColor: =ColorFade(btnSubmitRequest_1.BorderColor, 20%)
+                HoverColor: =Self.Fill
+                HoverFill: =Self.Color
+                OnSelect: |-
+                    =//change start and end time based on single day duration field (halfday/full day)
+                    /*
+                    If(!drpDayPeriod.Visible ||  drpDayPeriod.Selected.Value = 'Single Day Duration (Leave Requests)'.'All Day',
+                        Set(
+                            tmpStartDate,LeaveStartDatePicker.SelectedDate);
+                        Set(
+                            tmpEndDate,LeaveEndDatePicker.SelectedDate + Time(23,59,59)),
+                        Switch(
+                            drpDayPeriod.Selected.Value,
+                            'Single Day Duration (Leave Requests)'.'Half Day - Morning',
+                            Set(
+                                tmpStartDate,LeaveStartDatePicker.SelectedDate + Time(8,0,0));
+                            Set(
+                                tmpEndDate,LeaveEndDatePicker.SelectedDate + Time(12,0,0)),
+                            'Single Day Duration (Leave Requests)'.'Half Day - Afternoon',
+                            Set(
+                                tmpStartDate,LeaveStartDatePicker.SelectedDate + Time(13,0,0));
+                            Set(
+                                tmpEndDate,LeaveEndDatePicker.SelectedDate + Time(17,0,0)))
+                    );
+                    */
+                    
+                    Patch(
+                        ColTmpLeaveRequest,
+                        First(ColTmpLeaveRequest),
+                        {
+                            StartDate: LeaveStartDatePicker.SelectedDate,
+                            EndDate: LeaveEndDatePicker.SelectedDate + Time(23,59,59),
+                            Duration: _requestedDays,
+                            SingleDayDuration: If(drpDayPeriod.Visible && drpDayPeriod.SelectedText.Value <> "All Day",
+                                'Single Day Duration (Leave Requests)'.Hours,
+                                'Single Day Duration (Leave Requests)'.'All Day'
+                            )
+                        }
+                    );
+                    If(
+                        _sourceScreen = "Review",
+                        Navigate(LeaveReviewScreen),
+                        Set(
+                            _sourceScreen,
+                            "Step"
+                        );
+                        Navigate(
+                            LeaveJustificationScreen,
+                            ScreenTransition.None
+                        )
+                    )
+                PressedBorderColor: =btnSubmitRequest_1.Fill
+                PressedColor: =btnSubmitRequest_1.Fill
+                PressedFill: =btnSubmitRequest_1.Color
+                Size: =varGlobals.Navigation.FontSize
+                Text: =If(_sourceScreen = "Review","Save","Next")
+                Width: =Parent.Width
+                Y: =584
+                ZIndex: =1
+

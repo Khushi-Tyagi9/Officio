@@ -1,0 +1,127 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "contoso_leavebalances",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "contoso_leavebalance",
+    "MaxGetRowsCount": 500,
+    "Name": "Leave Balances",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "contoso_balancepreviousyear": "Balance from Previous Year",
+      "contoso_currentbalance": "Current Balance",
+      "contoso_Employee": "Employee",
+      "contoso_leavebalance_AsyncOperations": "System Jobs",
+      "contoso_leavebalance_BulkDeleteFailures": "Bulk Delete Failures",
+      "contoso_leavebalance_DuplicateBaseRecord": "Duplicate Records (contoso_leavebalance_DuplicateBaseRecord)",
+      "contoso_leavebalance_DuplicateMatchingRecord": "Duplicate Records (contoso_leavebalance_DuplicateMatchingRecord)",
+      "contoso_leavebalance_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "contoso_leavebalance_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "contoso_leavebalance_ProcessSession": "Process Sessions",
+      "contoso_leavebalance_SyncErrors": "Sync Errors",
+      "contoso_leavebalanceid": "Leave Balance",
+      "contoso_leavetaken": "Leave Taken",
+      "contoso_LeaveType": "Leave Type",
+      "contoso_name": "Name",
+      "contoso_persalnumber": "Persal Number",
+      "contoso_startingallowance": "Starting Allowance",
+      "contoso_visibletoemployee": "Visible To Employee",
+      "contoso_year": "Year",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Leave Balances",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Leave Balances (Views)",
+    "Name": "_contoso_leavebalance_views",
+    "RelatedEntityName": "Leave Balances",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "086da3f8-dc5b-49e2-889c-a642b562c887": "Active Leave Balances This Year",
+      "29d1eb18-f0ca-472e-b859-9f9bbe870c9c": "Leave Balance Associated View",
+      "540b0b04-3d87-460f-8d0b-606ed9e1606a": "Inactive Leave Balances",
+      "92a48bd6-e390-ed11-aad1-000d3a25b1bb": "Active Leave Balances Previous Years",
+      "dd55b9dc-867f-4fd8-b4e6-41ed4ffdad41": "Leave Balance Advanced Find View",
+      "fc1d7f1c-d242-4092-b274-e20cc05b3c40": "Leave Balance Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Visible To Employee (Leave Balances)",
+    "Name": "contoso_leavebalance_contoso_visibletoemployee",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_visibletoemployee",
+        "OptionSetReferenceEntityName": "Leave Balances"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "contoso_visibletoemployee",
+    "RelatedEntityName": "Leave Balances",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Leave Balances)",
+    "Name": "contoso_leavebalance_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Leave Balances"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Leave Balances",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Leave Balances)",
+    "Name": "contoso_leavebalance_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Leave Balances"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Leave Balances",
+    "Type": "OptionSetInfo"
+  }
+]

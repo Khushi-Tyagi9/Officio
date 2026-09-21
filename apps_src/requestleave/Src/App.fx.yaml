@@ -1,0 +1,212 @@
+App As appinfo:
+    BackEnabled: =false
+    OnError: =
+    OnStart: |
+        =Set(
+            varGlobals,
+            {
+                Header: {FontSize: 22},
+                Body: {
+                    FontSize: 14,
+                    Font: Font.Lato,
+                    FontColor: ColorValue("#505254")
+                },
+                Navigation: {FontSize: 14},
+                MainThemeColor: {Fill: ColorValue("#006430")},
+                SecondaryThemeColor: {Fill: ColorValue("#001489")},
+                BlueRobot: {Fill: ColorValue("#1a73e8")},
+                SilverRobot: {Fill: ColorValue("#BCC6CC")},
+                GoldRobot: {Fill: ColorValue("#EAC117")},
+                OrangeRobot: {Fill: ColorValue("#ff8c00")},
+                GreenRobot: {Fill: ColorValue("#008000")},
+                RedRobot: {Fill: ColorValue("#FF5050")},
+                YellowRobot: {Fill: ColorValue("#ffcb05")}
+            }
+        );
+        //get direct reports from Azure AD (Entra), i.e. uses manager field in AD to decide who direct reports are
+        Concurrent(
+            Set(
+                colDirectReports,
+                Office365Users.DirectReportsV2(User().Email).value
+            ),
+            Set(
+                _myProfile,
+                Office365Users.MyProfile()
+            )
+            
+        );
+        //if there is no persal number for employee, then much of the UI doesnt show. You cannot take leave if you dont have a persal number
+        Concurrent(
+            Set(_persalNumber,LookUp('Employee Info',Employee.Id = GUID(_myProfile.Id)).'Persal Number'),
+        
+            Set(
+                _employeeRecord,
+                LookUp(
+                    'Microsoft Entra IDs',
+                    Id = GUID(_myProfile.Id)
+                )
+            ),
+            Set(varSettings,LookUp('Leave Manager Settings',Name = "Default"))
+            /*,Set(
+                varUserDVRoles,
+                LookUp(
+                    Users,
+                    'Azure AD Object ID' = GUID(_myProfile.Id)
+                ).'Security Roles (systemuserroles_association)'
+            )*/
+        );
+        //determine if user is manager if they have direct reports in Azure AD. Could change logic to rather look in Dataverse users table, or external system. IsManager flag used to show/hide manager navigation screens
+        Set(
+            IsManager,
+            CountRows(colDirectReports) > 0
+        );
+        /*Set(
+            IsHRApprover,
+            !IsBlank(
+                LookUp(
+                    varUserDVRoles,
+                    Name = "HR Leave Approvers"
+                )
+            )
+        );*/
+        Concurrent(
+            Set(
+                ApprovalStatus,
+                {
+                    Approved: "Approved",
+                    Declined: "Declined",
+                    Draft: "Draft",
+                    FirstLevel: "Pending Manager Approval",
+                    SecondLevel: "Pending HR Approval",
+                    ThirdLevel: "Pending HR Capture"
+                }
+            ),
+            //collection used in the left nav menu
+            ClearCollect(
+                EmployeeNavigation,
+                {
+                    Title: "Requests",
+                    Icon: Icon.DetailList,
+                    Screen: HomeScreen,
+                    VisibleOnMobile:true
+                },
+                {
+                    Title: "Balance",
+                    Icon: Icon.Trending,
+                    Screen: LeaveBalanceScreen,
+                    VisibleOnMobile:true
+                },
+                {
+                    Title: "Holidays",
+                    Icon: Icon.CalendarBlank,
+                    Screen: HolidaysScreen
+                    ,VisibleOnMobile:true
+                },
+                {
+                    Title: "Info",
+                    Icon: Icon.Information,
+                    Screen: AboutScreen,
+                    VisibleOnMobile:true
+                }
+            );
+            If(
+                IsManager,
+                Collect(
+                    EmployeeNavigation,
+                    {
+                        Title: "My Approvals",
+                        Icon: Icon.Check,
+                        Screen: ApprovalsScreen,
+                        VisibleOnMobile:true
+                    },
+                    {
+                        Title: "My Team",
+                        Icon: Icon.DetailList,
+                        Screen: TeamScreen,
+                        VisibleOnMobile:false
+                    }
+                )
+            ),
+            Set(
+                varYear,
+                Year(Today())
+            ),
+            Set(
+                varBalanceYear,
+                Year(Today())
+            ),
+            Set(
+                varUserProfileYear,
+                Year(Today())
+            ),
+            ClearCollect(
+                HolidaysCollection,
+                Filter(
+                    Holidays,
+                    'Working Day?' = 'Working Day? (Holidays)'.No
+                )
+            ),
+            ClearCollect(
+                LeaveTypesCollection,
+                Filter(
+                    'Leave Types',
+                    'Employee Selectable' = 'Employee Selectable (Leave Types)'.Yes
+                )
+            ),
+                //set default leave type to one which will never exist, which creates a "blank/null" record, which is usable later
+            Set(
+                _defaultLeaveType,
+                LookUp(
+                    'Leave Types',
+                    'Leave Type' = GUID("123")
+                )
+            ),
+            //defines leave start and end for requests. Default set to Now since most users will be creating new requests. Changes to reflect leave times for requests which are being edited
+            Set(
+                _leaveStart,
+                Now()
+            ),
+            Set(
+                _leaveEnd,
+                Now()
+            ),
+            Set(
+                _defaultApprover,
+                IfError(
+                    Office365Users.Manager(_myProfile.Id),
+                    Blank()
+                )
+            );
+            Set(
+                _defaultApproverPhoto,
+                If(
+                    !IsBlank(_defaultApprover),
+                    If(
+                        Office365Users.UserPhotoMetadata(_defaultApprover.Id).HasPhoto,
+                        Office365Users.UserPhoto(_defaultApprover.Id)
+                    ),
+                    Blank()
+                )
+            )
+        );
+        /*If(
+            IsHRApprover,
+            Collect(
+                EmployeeNavigation,
+                {
+                    Title: "HR Approvals",
+                    Icon: Icon.Check,
+                    Screen: ApprovalsScreen
+                }
+            )
+        );*/
+    StartScreen: =If(IsBlank(Param("approvals")),HomeScreen,ApprovalsScreen)
+    Theme: =PowerAppsTheme
+
+    Host As hostControl.DefaultHostControlVariant:
+        OnCancel: =false
+        OnEdit: =false
+        OnNew: =false
+        OnSave: =false
+        OnView: =false
+

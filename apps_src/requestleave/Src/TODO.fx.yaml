@@ -1,0 +1,31 @@
+TODO As screen:
+
+    TextInput1 As text:
+        Default: |-
+            ="4 - cache leave balance?
+            5 - When do you exit / cancel a leave request wizard ?
+            6! - When you click back it breaks....
+            7 - Title on wizard screens
+            10 - 3 step approval, where is it, in graphical view?
+            12 - Welcome screen which loads app
+            14 - manager needs to see conflicting leave of their team
+            15 - Calendar view of teams leave
+            23 - Show where request is in the process, what is still to come...
+            24 - More icons on buttons e.g. approve / reject etc.
+            27 - Calendar views
+            29! - Manager My Team view
+            18 - Hourly leave, in the model app, hide hourly leave requests / view for hourly leave requests so they only get captured once 8 hours are collected
+            30 - Feedback form
+            31 - Cannot choose someone who is not a manager
+            32! - only can choose a manager, and how to share with new manager?
+            34 - HR Capture Form
+            35 - ask for signature on employee submission and manager approval
+            38 - Use generative AI to help manager e.g. who hasnt taken leave for a while, and additional isnights
+            36 - on holiay screen, add year scroll option to see holidays for previous/next year"
+        Height: =646
+        Mode: =TextMode.MultiLine
+        Width: =1260
+        X: =48
+        Y: =52
+        ZIndex: =1
+

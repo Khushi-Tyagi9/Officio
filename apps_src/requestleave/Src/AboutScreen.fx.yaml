@@ -1,0 +1,266 @@
+AboutScreen As screen:
+    Fill: |-
+        =ColorValue("#FAF9F8")
+    OnHidden: =Set(_showDetails, false)
+    OnVisible: =
+    Orientation: =If(AboutScreen.Width < AboutScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= AboutScreen.Width)
+
+    ContainerMainH_8 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =21
+
+        ContainerHeaderH_8 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =varGlobals.MainThemeColor.Fill
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Label8_9 As label:
+                Align: =LayoutAlignItems.Center
+                AlignInContainer: =AlignInContainer.Stretch
+                Color: =RGBA(255, 255, 255, 1)
+                FillPortions: =1
+                FocusedBorderColor: =Label8_9.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverBorderColor: =Label8_9.BorderColor
+                HoverColor: =Label8_9.Color
+                HoverFill: =Label8_9.Fill
+                PressedBorderColor: =Label8_9.BorderColor
+                PressedColor: =Label8_9.Color
+                PressedFill: =Label8_9.Fill
+                Size: =If(AboutScreen.Size = 1,varGlobals.Header.FontSize-4,varGlobals.Header.FontSize)
+                Text: ="Types of leave"
+                Width: =1134
+                X: =232
+                ZIndex: =1
+
+        Container16_3 As groupContainer.horizontalAutoLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Y: =70
+            ZIndex: =2
+
+            Container16_4 As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =0
+                Height: =Parent.Height
+                LayoutAlignItems: =LayoutAlignItems.Stretch
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                Visible: =AboutScreen.Size > 2
+                Width: =232
+                ZIndex: =1
+
+                cmpLeftNavigation_7 As cmpLeftNavigation:
+                    AlignInContainer: =AlignInContainer.Start
+                    Background: |-
+                        =ColorValue("#EFEFEF")
+                    Color: =varGlobals.Body.FontColor
+                    Height: =Parent.Height
+                    MenuItems: =EmployeeNavigation
+                    SelectedBarColor: =varGlobals.MainThemeColor.Fill
+                    Visible: =true
+                    Width: =232
+                    Y: =70
+
+            Container16_5 As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =7
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutGap: =15
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                LayoutOverflowY: =LayoutOverflow.Scroll
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                ZIndex: =2
+
+                LeavePolicyLink As label:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    AutoHeight: =true
+                    Color: =RGBA(74, 74, 74, 1)
+                    FocusedBorderColor: =LeavePolicyLink.BorderColor
+                    Font: =varGlobals.Body.Font
+                    Height: =44
+                    HoverBorderColor: =LeavePolicyLink.BorderColor
+                    HoverColor: =LeavePolicyLink.Color
+                    HoverFill: =LeavePolicyLink.Fill
+                    LineHeight: =1.5
+                    OnSelect: =Launch(varSettings.'Leave Policy',{},LaunchTarget.New)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0.00
+                    PaddingTop: =0.00
+                    PressedBorderColor: =LeavePolicyLink.BorderColor
+                    PressedColor: =LeavePolicyLink.Color
+                    PressedFill: =LeavePolicyLink.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: |-
+                        ="Leave policy: (click here to open leave policy)"
+                    Visible: =!IsBlank(varSettings.'Leave Policy')
+                    Width: =Parent.Width
+                    X: =264
+                    Y: =112
+                    ZIndex: =1
+
+                AboutDescription As label:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    AutoHeight: =true
+                    Color: =RGBA(74, 74, 74, 1)
+                    FocusedBorderColor: =AboutDescription.BorderColor
+                    Font: =varGlobals.Body.Font
+                    Height: =44
+                    HoverBorderColor: =AboutDescription.BorderColor
+                    HoverColor: =AboutDescription.Color
+                    HoverFill: =AboutDescription.Fill
+                    LineHeight: =1.5
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0.00
+                    PaddingTop: =0.00
+                    PressedBorderColor: =AboutDescription.BorderColor
+                    PressedColor: =AboutDescription.Color
+                    PressedFill: =AboutDescription.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: ="Manage your personal leave requests and team leave requests in one place. When a request is completed, managers are notified via email and can quickly approve or decline based on the situation."
+                    Width: =Parent.Width
+                    X: =264
+                    Y: =112
+                    ZIndex: =2
+
+                AboutTitle As label:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    AutoHeight: =true
+                    Color: =RGBA(74, 74, 74, 1)
+                    ContentLanguage: =Parent.Width
+                    FocusedBorderColor: =AboutTitle.BorderColor
+                    Font: =varGlobals.Body.Font
+                    FontWeight: =FontWeight.Bold
+                    Height: =44
+                    HoverBorderColor: =AboutTitle.BorderColor
+                    HoverColor: =AboutTitle.Color
+                    HoverFill: =AboutTitle.Fill
+                    LineHeight: =1
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0.00
+                    PaddingTop: =0.00
+                    PressedBorderColor: =AboutTitle.BorderColor
+                    PressedColor: =AboutTitle.Color
+                    PressedFill: =AboutTitle.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: |-
+                        ="Select to learn about each type of leave:"
+                    Width: =Parent.Width
+                    X: =AboutDescription.X
+                    Y: =AboutDescription.Y+AboutDescription.Height+37
+                    ZIndex: =3
+
+                AboutLeaveTypeGallery As gallery.galleryVertical:
+                    Default: =If(!IsBlank(_aboutSelectedLeaveType),LookUp(LeaveTypesCollection, Name =_aboutSelectedLeaveType))
+                    DisabledBorderColor: =AboutLeaveTypeGallery.BorderColor
+                    DisabledFill: =AboutLeaveTypeGallery.Fill
+                    FillPortions: =0
+                    Height: =RoundUp(CountRows(AboutLeaveTypeGallery.AllItems) / (AboutScreen.Size+1),0)*70
+                    HoverBorderColor: =AboutLeaveTypeGallery.BorderColor
+                    HoverFill: =AboutLeaveTypeGallery.Fill
+                    Items: =LeaveTypesCollection
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    LoadingSpinnerColor: =AboutLeaveTypeGallery.BorderColor
+                    OnSelect: =Set(_aboutSelectedLeaveType,ThisItem.Name)
+                    PressedBorderColor: =AboutLeaveTypeGallery.BorderColor
+                    PressedFill: =AboutLeaveTypeGallery.Fill
+                    ShowScrollbar: =false
+                    TemplatePadding: =15
+                    TemplateSize: =52
+                    Width: =779
+                    WrapCount: =AboutScreen.Size + 1
+                    X: =AboutTitle.X-20
+                    Y: =AboutTitle.Y+AboutTitle.Height+5
+                    ZIndex: =4
+
+                    AboutLeaveTypeButton As button:
+                        BorderColor: =If(ThisItem.IsSelected,varGlobals.MainThemeColor.Fill,varGlobals.BlueRobot.Fill)
+                        Color: =If(ThisItem.IsSelected,RGBA(255, 255, 255, 1),varGlobals.BlueRobot.Fill)
+                        DisabledBorderColor: =ColorFade(AboutLeaveTypeButton.BorderColor, 70%)
+                        Fill: =If(ThisItem.IsSelected,varGlobals.MainThemeColor.Fill,RGBA(255, 255, 255, 1))
+                        FocusedBorderColor: =AboutLeaveTypeButton.BorderColor
+                        FocusedBorderThickness: =0
+                        Font: =varGlobals.Body.Font
+                        Height: =Parent.TemplateHeight
+                        HoverBorderColor: =ColorFade(AboutLeaveTypeButton.BorderColor, 20%)
+                        HoverColor: =AboutLeaveTypeButton.Color
+                        HoverFill: =ColorFade(AboutLeaveTypeButton.Fill, 20%)
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedBorderColor: =AboutLeaveTypeButton.Fill
+                        PressedColor: =AboutLeaveTypeButton.Fill
+                        PressedFill: =AboutLeaveTypeButton.Color
+                        RadiusBottomLeft: =15
+                        RadiusBottomRight: =15
+                        RadiusTopLeft: =15
+                        RadiusTopRight: =15
+                        Text: =ThisItem.Name
+                        Width: =Parent.TemplateWidth
+                        ZIndex: =2
+
+                AboutLeaveTypeDescription As label:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    AutoHeight: =true
+                    FocusedBorderColor: =AboutLeaveTypeDescription.BorderColor
+                    Font: =varGlobals.Body.Font
+                    Height: =200
+                    HoverBorderColor: =AboutLeaveTypeDescription.BorderColor
+                    HoverColor: =AboutLeaveTypeDescription.Color
+                    HoverFill: =AboutLeaveTypeDescription.Fill
+                    LineHeight: =1.5
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =AboutLeaveTypeDescription.BorderColor
+                    PressedColor: =AboutLeaveTypeDescription.Color
+                    PressedFill: =AboutLeaveTypeDescription.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: =If(IsBlank(AboutLeaveTypeGallery.Selected), "", AboutLeaveTypeGallery.Selected.'Leave Description')
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =830
+                    Y: =396
+                    ZIndex: =5
+
+                Rectangle1 As rectangle:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =60
+                    ZIndex: =6
+
+    cmpBottomNavigation_4 As cmpBottomNavigation:
+        Background: |-
+            =ColorValue("#EFEFEF")
+        Color: =varGlobals.Body.FontColor
+        Fill: =Color.White
+        MenuItems: =Filter(EmployeeNavigation,VisibleOnMobile = true)
+        SelectedBarColor: =varGlobals.MainThemeColor.Fill
+        Visible: =AboutScreen.Size = 1
+        Width: =Parent.Width
+        Y: =Parent.Height - Self.Height
+        ZIndex: =22
+

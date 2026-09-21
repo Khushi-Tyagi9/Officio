@@ -1,0 +1,95 @@
+cmpLeftNavigation As CanvasComponent:
+    Background: =Color.White
+    Color: =RGBA(0, 0, 0, 1)
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =640
+    MenuItems: |-
+        =Table(
+            {
+                Title: "SampleText",
+                Screen: App.ActiveScreen,
+                Icon: Icon.Alarm
+            }, {
+                Title: "SampleText",
+                Screen: App.ActiveScreen,
+                Icon: Icon.Alarm
+            }, {
+                Title: "SampleText",
+                Screen: App.ActiveScreen,
+                Icon: Icon.Alarm
+            }
+        )
+    SelectedBarColor: =RGBA(0, 0, 0, 1)
+    Width: =640
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    GalNav As gallery.galleryVertical:
+        Fill: =cmpLeftNavigation.Background
+        Height: =Parent.Height
+        Items: =cmpLeftNavigation.MenuItems
+        Layout: =Layout.Vertical
+        TemplateFill: =If(shapeBar.Visible,Color.White,cmpLeftNavigation.Background)
+        TemplateSize: =50
+        ZIndex: =1
+
+        Label6 As label:
+            Color: =cmpLeftNavigation.Color
+            Font: =Font.Lato
+            FontWeight: =If(shapeBar.Visible,FontWeight.Semibold,FontWeight.Normal)
+            Height: =Parent.TemplateHeight
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: =ThisItem.Title
+            Width: =300
+            X: =44
+            ZIndex: =1
+
+        Icon2 As icon.Add:
+            Color: =cmpLeftNavigation.Color
+            Height: =25
+            Icon: =ThisItem.Icon
+            OnSelect: =Select(Parent)
+            PaddingBottom: =5
+            PaddingLeft: =5
+            PaddingRight: =5
+            PaddingTop: =5
+            Width: =30
+            X: =18
+            Y: =13
+            ZIndex: =2
+
+        shapeBar As rectangle:
+            Fill: =cmpLeftNavigation.SelectedBarColor
+            Height: =20
+            OnSelect: =Select(Parent)
+            Visible: =ThisItem.Screen = App.ActiveScreen
+            Width: =3
+            X: =9
+            Y: =15
+            ZIndex: =3
+
+        btnNavSelect As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 0, 0, 0)
+            OnSelect: =Navigate(ThisItem.Screen)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =Parent.TemplateWidth
+            ZIndex: =4
+
+    RectNavSep_3 As rectangle:
+        DisabledFill: =RectNavSep_3.Fill
+        Fill: =RGBA(204, 204, 204, 1)
+        FocusedBorderColor: =RectNavSep_3.BorderColor
+        Height: =cmpLeftNavigation.Height
+        HoverFill: =RectNavSep_3.Fill
+        PressedFill: =RectNavSep_3.Fill
+        Width: =2
+        X: =cmpLeftNavigation.Width -2
+        ZIndex: =2
+

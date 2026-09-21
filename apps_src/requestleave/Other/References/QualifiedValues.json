@@ -1,0 +1,104 @@
+{
+  "QualifiedValues": [
+    {
+      "Kind": "default.cds_contoso_leavetype_forms",
+      "Namespace": "Leave Types (Forms)",
+      "Values": {
+        "Information": "d8e6b498-0c3b-4fd8-88b1-81c17f3cc4d7"
+      }
+    },
+    {
+      "Kind": "default.cds_contoso_leaverequest_forms",
+      "Namespace": "Leave Requests (Forms)",
+      "Values": {
+        "Information": "7b92ed60-9534-4cd6-a862-f803a688a539"
+      }
+    },
+    {
+      "Kind": "default.cds_aaduser_forms",
+      "Namespace": "Microsoft Entra IDs (Forms)",
+      "Values": {
+        "Employee Info": "0221d7ff-4f7c-ed11-81ad-000d3a25b1bb",
+        "Information": "dd5ded01-9aad-4e25-8d0e-e9acdaecbe4e",
+        "Personal Details Quick View": "e499cfb4-7887-ee11-8179-000d3a25b1bb"
+      }
+    },
+    {
+      "Kind": "default.cds_contoso_holiday_forms",
+      "Namespace": "Holidays (Forms)",
+      "Values": {
+        "Information": "2bd7ffe1-08ac-4f69-877f-ef3406f24be2"
+      }
+    },
+    {
+      "Kind": "default.cds_contoso_leavebalance_forms",
+      "Namespace": "Leave Balances (Forms)",
+      "Values": {
+        "Information": "327b49f1-b828-4dcd-985a-c31a7d72ec41",
+        "Information - Editable": "77e4e489-0990-ed11-aad1-000d3a25b1bb"
+      }
+    },
+    {
+      "Kind": "default.cds_role_forms",
+      "Namespace": "Security Roles (Forms)",
+      "Values": {
+        "Information": "d830b05c-0c90-4dcf-be8b-5d22a856f510"
+      }
+    },
+    {
+      "Kind": "default.cds_systemuser_forms",
+      "Namespace": "Users (Forms)",
+      "Values": {
+        "Application User": "d26924ef-4d80-46f7-ab1d-e6ae80a54ce8",
+        "Information": "094fb08a-77bb-49e0-b7ea-8dbddfd01294",
+        "User": "c2cd9e55-d4b4-4b55-9951-16ead79643e5",
+        "User form – Business": "c2413504-7eb2-4c59-a087-95d819866114",
+        "User Hierarchy Tile Form": "c68d6c09-d7a7-4959-8d0f-44b8cff9b452"
+      }
+    },
+    {
+      "Kind": "default.cds_contoso_leaverequesthistory_forms",
+      "Namespace": "Leave Request History (Forms)",
+      "Values": {
+        "Information": "442a0688-d265-4b06-ba1a-f85f2fa27414"
+      }
+    },
+    {
+      "Kind": "default.cds_contoso_leavemanagersetting_forms",
+      "Namespace": "Leave Manager Settings (Forms)",
+      "Values": {
+        "Information": "59e7928c-2818-490d-9141-f69e36e22dfe"
+      }
+    },
+    {
+      "Kind": "default.cds_contoso_employeeinfo_forms",
+      "Namespace": "Employee Info (Forms)",
+      "Values": {
+        "Information": "a90d7bea-b7b2-4bec-9c4f-f1a0e9895aa7"
+      }
+    },
+    {
+      "Kind": "default.cds_aaduser_forms",
+      "Namespace": "AAD Users (Forms)",
+      "Values": {
+        "Employee Info": "0221d7ff-4f7c-ed11-81ad-000d3a25b1bb",
+        "Information": "dd5ded01-9aad-4e25-8d0e-e9acdaecbe4e",
+        "Personal Details Quick View": "e499cfb4-7887-ee11-8179-000d3a25b1bb"
+      }
+    },
+    {
+      "Kind": "default.cds_contoso_holiday_forms",
+      "Namespace": "Holidays_1 (Forms)",
+      "Values": {
+        "Information": "2bd7ffe1-08ac-4f69-877f-ef3406f24be2"
+      }
+    },
+    {
+      "Kind": "default.cds_applicationuser_forms",
+      "Namespace": "ApplicationUsers (Forms)",
+      "Values": {
+        "Information": "1d78dcae-e94e-4318-9adc-bd484aeb4c7a"
+      }
+    }
+  ]
+}

@@ -1,0 +1,759 @@
+HomeScreen As screen:
+    Fill: |-
+        =ColorValue("#FAF9F8")
+    OnHidden: =Set(_showDetails, false)
+    OnVisible: |-
+        =/*
+        
+        Concurrent(
+            Set(_navMenuSelect, "My Leave Requests"),
+            //if not manager view, refresh my balance collection when on this screen
+            If(!_managerView, Set(_requesterBalanceRecord, LookUp(Balance, Year = Text(Year(Now())) && EmployeeEmail = _myProfile.UserPrincipalName));
+                ClearCollect(RequesterBalanceCollection, 
+                { type: "Vacation", balance: Value(_requesterBalanceRecord.Vacation) - Value(_requesterBalanceRecord.VacationUsed)},
+                {type:"Sick Leave", balance:Value(_requesterBalanceRecord.Sick)-Value(_requesterBalanceRecord.SickUsed)},
+                {type:"Floating Holiday", balance:Value(_requesterBalanceRecord.Floating)-Value(_requesterBalanceRecord.FloatingUsed)},
+                {type:"Jury Duty", balance:Value(_requesterBalanceRecord.JuryDuty)-Value(_requesterBalanceRecord.JuryDutyUsed)},
+                {type:"Bereavement", balance:Value(_requesterBalanceRecord.Bereavement)-Value(_requesterBalanceRecord.BereavementUsed)})
+            ),
+            Set(_showDetails, false)
+        );*/
+    Orientation: =If(HomeScreen.Width < HomeScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= HomeScreen.Width)
+
+    ContainerMainH As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =6
+
+        ContainerHeaderH As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =varGlobals.MainThemeColor.Fill
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingRight: =10
+            ZIndex: =1
+
+            Label8_7 As label:
+                Align: =LayoutAlignItems.Center
+                AlignInContainer: =AlignInContainer.Center
+                Color: =RGBA(255, 255, 255, 1)
+                FillPortions: =1
+                FocusedBorderColor: =Label8_7.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverBorderColor: =Label8_7.BorderColor
+                HoverColor: =Label8_7.Color
+                HoverFill: =Label8_7.Fill
+                PressedBorderColor: =Label8_7.BorderColor
+                PressedColor: =Label8_7.Color
+                PressedFill: =Label8_7.Fill
+                Size: =If(HomeScreen.Size = 1,varGlobals.Header.FontSize-4,varGlobals.Header.FontSize)
+                Text: ="Leave Manager"
+                Width: =1366
+                ZIndex: =1
+
+            Container4 As groupContainer.manualLayoutContainer:
+                AlignInContainer: =AlignInContainer.Center
+                FillPortions: =0
+                Height: =50
+                LayoutMinHeight: =60
+                LayoutMinWidth: =250
+                Width: =50
+                ZIndex: =4
+
+                CircleHeaderCreateNew As circle:
+                    DisabledFill: =CircleHeaderCreateNew.Fill
+                    Fill: =Color.White
+                    FocusedBorderColor: =CircleHeaderCreateNew.BorderColor
+                    Height: =Parent.Height
+                    HoverFill: =CircleHeaderCreateNew.Fill
+                    PressedFill: =CircleHeaderCreateNew.Fill
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                IconHeaderCreateNew As icon.Add:
+                    AccessibleLabel: ="Create new leave request"
+                    Color: =varGlobals.MainThemeColor.Fill
+                    DisabledFill: =IconHeaderCreateNew.Fill
+                    DisplayMode: =If(IsBlank(_persalNumber),DisplayMode.Disabled,DisplayMode.Edit)
+                    FocusedBorderColor: =IconHeaderCreateNew.BorderColor
+                    Height: =Parent.Height
+                    HoverBorderColor: =ColorFade(IconHeaderCreateNew.BorderColor, 20%)
+                    HoverColor: =ColorFade(IconHeaderCreateNew.Color, 20%)
+                    HoverFill: =IconHeaderCreateNew.Fill
+                    Icon: =Icon.Add
+                    OnSelect: |
+                        =//used to know what text to show on controls if new request vs existing request
+                        Set(_requestType, "New");
+                        //used to know if reason you got to a screen was because editing existing request vs part of wizard
+                        Set(_sourceScreen,"Step");
+                        
+                        //reinitialise all variables set during wizard
+                        Set(_requestedDays,0);
+                        ClearCollect(ColTmpLeaveRequest,{ID:GUID(""),PersalNumber:_persalNumber,Details:"",ApprovalStatus:ApprovalStatus.Draft,LeaveType:_defaultLeaveType,StartDate:_leaveStart,EndDate:_leaveEnd,Duration:0,ApproverEmail:"",ApproverID:"",SingleDayDuration:Blank()});
+                        
+                        Reset(LeaveEndDatePicker);
+                        Reset(LeaveStartDatePicker);
+                        Reset(txtPersalNumber);
+                        Reset(txtLeaveDetails);
+                        Reset(drpDayPeriod);
+                        Reset(GalleryLeaveRequestType);
+                        Reset(attachDocument);
+                        Navigate(LeaveTypeScreen, BorderStyle.None)
+                    PaddingBottom: =5
+                    PaddingLeft: =5
+                    PaddingRight: =5
+                    PaddingTop: =5
+                    PressedBorderColor: =ColorFade(IconHeaderCreateNew.BorderColor, -20%)
+                    PressedColor: =ColorFade(IconHeaderCreateNew.Color, -20%)
+                    PressedFill: =IconHeaderCreateNew.Fill
+                    TabIndex: =
+                    Width: =Parent.Width
+                    ZIndex: =2
+
+        Container16_15 As groupContainer.horizontalAutoLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Y: =70
+            ZIndex: =2
+
+            Container16_16 As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =0
+                Height: =Parent.Height
+                LayoutAlignItems: =LayoutAlignItems.Stretch
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                Visible: =HomeScreen.Size > 2
+                Width: =232
+                ZIndex: =1
+
+                cmpLeftNavigation_11 As cmpLeftNavigation:
+                    AlignInContainer: =AlignInContainer.Start
+                    Background: |-
+                        =ColorValue("#EFEFEF")
+                    Color: =varGlobals.Body.FontColor
+                    Height: =Parent.Height
+                    MenuItems: =EmployeeNavigation
+                    SelectedBarColor: =varGlobals.MainThemeColor.Fill
+                    Visible: =true
+                    Width: =232
+                    Y: =70
+
+            Container16_17 As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =7
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutGap: =15
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                ZIndex: =2
+
+                ContainerFilter As groupContainer.horizontalAutoLayoutContainer:
+                    FillPortions: =0
+                    Height: =If(ContainerYearFilter.X  <200,100,50)
+                    LayoutAlignItems: =LayoutAlignItems.Center
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    LayoutWrap: =true
+                    PaddingLeft: =10
+                    ZIndex: =1
+
+                    "FilterGallery As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver4.0'":
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        Default: |-
+                            ={Filter: "Pending"}
+                        DisabledBorderColor: =FilterGallery.BorderColor
+                        DisabledFill: =FilterGallery.Fill
+                        Height: =50
+                        HoverBorderColor: =FilterGallery.BorderColor
+                        HoverFill: =FilterGallery.Fill
+                        Items: |-
+                            =Table({Filter: "Pending"}, {Filter: "Approved"}, {Filter: "Declined"},{Filter: "All"})
+                        LayoutMinHeight: =50
+                        LayoutMinWidth: =550
+                        LoadingSpinnerColor: =FilterGallery.BorderColor
+                        PressedBorderColor: =FilterGallery.BorderColor
+                        PressedFill: =FilterGallery.Fill
+                        ShowScrollbar: =false
+                        TemplatePadding: =0
+                        TemplateSize: =If(HomeScreen.Size = 1,100,140)
+                        Width: =564
+                        X: =22
+                        Y: =90
+                        ZIndex: =1
+
+                        FilterButton As button:
+                            BorderColor: =If(ThisItem.IsSelected,varGlobals.MainThemeColor.Fill,varGlobals.BlueRobot.Fill)
+                            BorderThickness: =1
+                            Color: =If(ThisItem.IsSelected,RGBA(255, 255, 255, 1),varGlobals.BlueRobot.Fill)
+                            DisabledBorderColor: =ColorFade(FilterButton.BorderColor, 70%)
+                            Fill: =If(ThisItem.IsSelected,varGlobals.MainThemeColor.Fill,RGBA(255, 255, 255, 1))
+                            FocusedBorderColor: =FilterButton.BorderColor
+                            FocusedBorderThickness: =2
+                            Font: =varGlobals.Body.Font
+                            Height: =36
+                            HoverBorderColor: =ColorFade(FilterButton.BorderColor, 20%)
+                            HoverColor: =FilterButton.Color
+                            HoverFill: =ColorFade(FilterButton.Fill, 20%)
+                            OnSelect: |-
+                                =If(ThisItem.Filter <> _requestTypeFilter,
+                                Set(_requestTypeFilter, ThisItem.Filter))
+                            PressedBorderColor: =FilterButton.Fill
+                            PressedColor: =If(_requestTypeFilter=ThisItem.Filter,RGBA(255, 255, 255, 1),RGBA(10, 106, 204, 1))
+                            PressedFill: =FilterButton.Color
+                            Size: =varGlobals.Navigation.FontSize
+                            Text: =ThisItem.Filter
+                            Width: =If(HomeScreen.Size =1 ,95,120)
+                            X: =5
+                            Y: =5
+                            ZIndex: =1
+
+                    ContainerYearFilter As groupContainer.manualLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        FillPortions: =0
+                        Height: =50
+                        LayoutMinHeight: =50
+                        LayoutMinWidth: =250
+                        Width: =200
+                        ZIndex: =2
+
+                        grpYear As group:
+                            Height: =5
+                            Width: =5
+                            X: =-1141
+                            Y: =-47
+                            ZIndex: =4
+
+                            lblYear As label:
+                                Align: =Align.Center
+                                Font: =varGlobals.Body.Font
+                                FontWeight: =FontWeight.Semibold
+                                Height: =Parent.Height
+                                Size: =varGlobals.Navigation.FontSize
+                                Text: =varYear
+                                Width: =60
+                                X: =60
+                                ZIndex: =1
+
+                            icoPrevious As icon.ArrowLeft:
+                                Color: =varGlobals.BlueRobot.Fill
+                                Height: =Parent.Height
+                                Icon: =Icon.ArrowLeft
+                                OnSelect: =Set(varYear,varYear -1)
+                                Width: =Parent.Height
+                                ZIndex: =2
+
+                            icoNext As icon.ArrowLeft:
+                                Color: =varGlobals.BlueRobot.Fill
+                                Height: =Parent.Height
+                                Icon: =Icon.ArrowRight
+                                OnSelect: =Set(varYear,varYear +1)
+                                Width: =Parent.Height
+                                X: =130
+                                ZIndex: =3
+
+                LblEmptyRequests As label:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    FocusedBorderColor: =LblEmptyRequests.BorderColor
+                    Font: =Font.Lato
+                    FontWeight: =FontWeight.Semibold
+                    Height: =80
+                    HoverBorderColor: =LblEmptyRequests.BorderColor
+                    HoverColor: =LblEmptyRequests.Color
+                    HoverFill: =LblEmptyRequests.Fill
+                    PressedBorderColor: =LblEmptyRequests.BorderColor
+                    PressedColor: =LblEmptyRequests.Color
+                    PressedFill: =LblEmptyRequests.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: =If(IsBlank(_persalNumber),"No persal number found, check with your administrator if you have been provisioned into the leave system. You cannot take leave until this is resolved.","No " & If(_requestTypeFilter <> "All", Lower(_requestTypeFilter)) & " requests")
+                    Visible: =!GalleryRequests.Visible
+                    Width: =384
+                    X: =265
+                    ZIndex: =5
+
+                "GalleryRequests As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                    AccessibleLabel: ="Leave request gallery"
+                    Default: =Blank()
+                    DisabledBorderColor: =GalleryRequests.BorderColor
+                    DisabledFill: =GalleryRequests.Fill
+                    Fill: =RGBA(249, 249, 249, 1)
+                    Height: =620
+                    HoverBorderColor: =GalleryRequests.BorderColor
+                    HoverFill: =GalleryRequests.Fill
+                    Items: |-
+                        =//Filter values based on current user, status and year. Sort by StartDate, descending.
+                        //If permissions setup correctly, employee will only see their own records anyway, but adding into the filter anyway
+                        //todo: make switch statement more friendly, rather put switch inside filter statement after initial where clause
+                        Switch(
+                            FilterGallery.Selected.Filter,
+                            "Pending",
+                            Sort(
+                                Filter(
+                                    'Leave Requests',
+                                    Employee.Id = GUID(_myProfile.Id) && 'Start Date' >= Date(
+                                        varYear,
+                                        1,
+                                        1
+                                    ) && 'Start Date' <= Date(
+                                        varYear,
+                                        12,
+                                        31
+                                    ) && (StartsWith('Approval Status',"Pending") || StartsWith('Approval Status',"Draft"))
+                                ),
+                                'Created On',
+                                SortOrder.Descending
+                            ),
+                            "All",
+                            Sort(
+                                Filter(
+                                    'Leave Requests',
+                                    Employee.Id = GUID(_myProfile.Id) && 'Start Date' >= Date(
+                                        varYear,
+                                        1,
+                                        1
+                                    ) && 'Start Date' <= Date(
+                                        varYear,
+                                        12,
+                                        31
+                                    )
+                                ),
+                                'Created On',
+                                SortOrder.Descending
+                            ),
+                            Sort(
+                                Filter(
+                                    'Leave Requests',
+                                    Employee.Id = GUID(_myProfile.Id) && 'Start Date' >= Date(
+                                        varYear,
+                                        1,
+                                        1
+                                    ) && 'Start Date' <= Date(
+                                        varYear,
+                                        12,
+                                        31
+                                    ) && 'Approval Status' = FilterGallery.Selected.Filter
+                                ),
+                                'Created On',
+                                SortOrder.Descending
+                            )
+                        )
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    LoadingSpinnerColor: =GalleryRequests.BorderColor
+                    OnSelect: |-
+                        =Set(_requestType,If(ThisItem.'Approval Status' = "Draft","Edit","View"));
+                        
+                        ClearCollect(ColTmpLeaveRequest,{ID:ThisItem.'Leave Request',PersalNumber:ThisItem.'Persal Number',Details:ThisItem.'Leave Detail',ApprovalStatus:ThisItem.'Approval Status',LeaveType:ThisItem.'Leave Type',StartDate:ThisItem.'Start Date',EndDate:ThisItem.'End Date',Duration:ThisItem.Duration,ApproverEmail:ThisItem.'Approver Email',ApproverID:ThisItem.'Approver ID',SingleDayDuration:ThisItem.'Single Day Duration',SupportingDocument:ThisItem.'Supporting Document'});
+                        
+                        Navigate(LeaveReviewScreen);
+                        //Set(_showDetails,true);
+                        /*
+                        If(_managerView, 
+                            //If manager view, get user's leave balance record and determine any overlaps this request has from other people I manage
+                            Set(_requesterBalanceRecord, LookUp(Balance, Year = Text(Year(Now())) && EmployeeEmail = ThisItem.Requester));
+                            ClearCollect(RequestOverlaps, Filter(Leave, EndDate >= _selectedLeaveItem.StartDate && StartDate <= _selectedLeaveItem.EndDate 
+                            && Requester <>_selectedLeaveItem.Requester));
+                            
+                            If(CountRows(RequestOverlaps) > 0, Set(_requestOverlapMessage, Concat(Distinct(RequestOverlaps, Requester), Result, ", ")))
+                        );
+                        
+                        Concurrent(
+                            //gather requester or approver info depending on view
+                            If(_managerView, 
+                                Set(_requester, Office365Users.UserProfile(ThisItem.Requester)), 
+                                Set(_selectedApprover, Office365Users.UserProfile(ThisItem.Approver)); If(Office365Users.UserPhotoMetadata(_selectedApprover.Id).HasPhoto, Set(_selectedApproverPhoto, Office365Users.UserPhoto(_selectedApprover.Id)))),
+                            //**** CALCULATION USED TO DETERMINE TOTAL WORK DAYS REQUESTED ****
+                             Set(_inclusiveTotalDaysRequested, DateDiff(ThisItem.StartDate, ThisItem.EndDate, Days) + 1);
+                                Set(_numFullWeeks, RoundDown(_inclusiveTotalDaysRequested / 7, 0));
+                                Set(_numFullDaysPartialWeek, _inclusiveTotalDaysRequested - _numFullWeeks * 7);
+                                Set(_startWeekday, Weekday(ThisItem.StartDate)); 
+                                Set(_endWeekday, Weekday(ThisItem.EndDate));
+                        
+                        
+                               //calculates the number of business days in the partial week left over after whole weeks are subtracted out of total days requested
+                            If(_numFullDaysPartialWeek = 6, 
+                                If(_startWeekday <= 2, Set(_numPartialWeekdays, 5), Set(_numPartialWeekdays, 4)
+                                ),
+                              _numFullDaysPartialWeek = 5,
+                                If(_startWeekday = 2, Set(_numPartialWeekdays, 5), _startWeekday = 1 || _startWeekday = 3 || _startWeekday = 4, Set(_numPartialWeekdays, 4), Set(_numPartialWeekdays, 3)
+                                ),
+                              _numFullDaysPartialWeek = 4,
+                                If(_startWeekday = 2 || _startWeekday = 3, Set(_numPartialWeekdays, 4), _startWeekday = 1 || _startWeekday = 4, Set(_numPartialWeekdays, 3), Set(_numPartialWeekdays, 2)
+                                ),
+                              _numFullDaysPartialWeek = 3,
+                                If(_startWeekday = 6 || _startWeekday = 7, Set(_numPartialWeekdays, 1), _startWeekday = 1 || _startWeekday = 5, Set(_numPartialWeekdays, 2), Set(_numPartialWeekdays, 3)
+                                ),
+                              _numFullDaysPartialWeek = 2,
+                                If(_startWeekday = 7, Set(_numPartialWeekdays, 0), _startWeekday = 1 || _startWeekday = 6, Set(_numPartialWeekdays, 1), Set(_numPartialWeekdays, 2)),
+                              _numFullDaysPartialWeek = 1,
+                                If(_startWeekday = 1 || _startWeekday = 7, Set(_numPartialWeekdays, 0), Set(_numPartialWeekdays, 1)
+                                ),
+                              _numFullDaysPartialWeek = 0, Set(_numPartialWeekdays, 0)
+                            );
+                              Set(_workDaysInRequest, _numFullWeeks * 5 + _numPartialWeekdays),
+                              Set(_holidaysInRequest, CountIf(Holidays, StartDate >= ThisItem.StartDate, StartDate <= ThisItem.EndDate))
+                        );
+                        Set(_requestedDays, _workDaysInRequest - _holidaysInRequest);
+                        //**** END CALCULATION ****
+                        Set(_showDetails, true);*/
+                    PressedBorderColor: =GalleryRequests.BorderColor
+                    PressedFill: =GalleryRequests.Fill
+                    ShowScrollbar: =false
+                    TemplateFill: =Color.White
+                    TemplatePadding: =15
+                    TemplateSize: =90
+                    Transition: =Transition.Pop
+                    Visible: =CountRows(GalleryRequests.AllItems) > 0 && !IsBlank(_persalNumber)
+                    Width: =1134
+                    X: =232
+                    Y: =58
+                    ZIndex: =6
+
+                    Label3 As label:
+                        Color: =varGlobals.MainThemeColor.Fill
+                        FocusedBorderColor: =Label3.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =varGlobals.Body.Font
+                        FontWeight: =FontWeight.Bold
+                        Height: =30
+                        HoverBorderColor: =Label3.BorderColor
+                        HoverColor: =Label3.Color
+                        HoverFill: =Label3.Fill
+                        OnSelect: =Select(Parent)
+                        PaddingRight: =0
+                        PressedBorderColor: =Label3.BorderColor
+                        PressedColor: =Label3.Color
+                        PressedFill: =Label3.Fill
+                        Size: =varGlobals.Navigation.FontSize
+                        Text: =Text(ThisItem.'Start Date',"[$-en-US]mmm dd, yyyy") & If(DateDiff(ThisItem.'Start Date', ThisItem.'End Date', TimeUnit.Days) <> 0, " - " & Text(ThisItem.'End Date',"[$-en-US]mmm dd, yyyy")) & " (" & ThisItem.'Leave Type'.Name & ") - " & ThisItem.Duration & " day(s)"
+                        Width: =Parent.TemplateWidth
+                        Wrap: =false
+                        X: =If(HomeScreen.Size = 1,20,80)
+                        Y: =4
+                        ZIndex: =1
+
+                    Rectangle2 As rectangle:
+                        AccessibleLabel: =ThisItem.Name
+                        DisabledFill: =Rectangle2.Fill
+                        Fill: =ColorFade(varGlobals.Body.FontColor,80%)
+                        FocusedBorderColor: =Rectangle2.BorderColor
+                        Height: =1
+                        HoverFill: =Rectangle2.Fill
+                        OnSelect: =Select(Parent)
+                        PressedFill: =Rectangle2.Fill
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - Rectangle2.Height
+                        ZIndex: =2
+
+                    rctStatus As rectangle:
+                        Fill: |-
+                            =Switch(
+                                ThisItem.'Approval Status',
+                                "Draft",
+                                ColorFade(varGlobals.Body.FontColor,70%),
+                                "Approved",
+                                varGlobals.GreenRobot.Fill,
+                                "Declined",
+                                varGlobals.RedRobot.Fill,
+                                varGlobals.OrangeRobot.Fill
+                            )
+                        Height: =Parent.TemplateHeight
+                        OnSelect: =Select(Parent)
+                        Width: =5
+                        ZIndex: =3
+
+                    Label5_3 As label:
+                        Color: =varGlobals.Body.FontColor
+                        FocusedBorderColor: =Label5_3.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =varGlobals.Body.Font
+                        Height: =Label5_3.Size * 1.8
+                        HoverBorderColor: =Label5_3.BorderColor
+                        HoverColor: =Label5_3.Color
+                        HoverFill: =Label5_3.Fill
+                        OnSelect: =Select(Parent)
+                        PaddingRight: =0
+                        PressedBorderColor: =Label5_3.BorderColor
+                        PressedColor: =Label5_3.Color
+                        PressedFill: =Label5_3.Fill
+                        Size: =10
+                        Text: ="Initial request submitted on " & ThisItem.'Created On'
+                        Width: =Parent.TemplateWidth
+                        Wrap: =false
+                        X: =If(HomeScreen.Size = 1,20,80)
+                        Y: =57
+                        ZIndex: =4
+
+                    Circle2 As circle:
+                        Fill: =rctStatus.Fill
+                        Height: =50
+                        OnSelect: =Select(Parent)
+                        Visible: =HomeScreen.Size<>1
+                        Width: =50
+                        X: =20
+                        Y: =9
+                        ZIndex: =5
+
+                    Label7 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(255, 255, 255, 1)
+                        FontWeight: =FontWeight.Semibold
+                        Height: =50
+                        OnSelect: =Select(Parent)
+                        Size: =14
+                        Text: =Left(ThisItem.'Approval Status',1)
+                        Visible: =HomeScreen.Size<>1
+                        Width: =50
+                        X: =20
+                        Y: =9
+                        ZIndex: =6
+
+                    Label5_4 As label:
+                        Color: =varGlobals.Body.FontColor
+                        FocusedBorderColor: =Label5_4.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =varGlobals.Body.Font
+                        Height: =Label5_4.Size * 1.8
+                        HoverBorderColor: =Label5_4.BorderColor
+                        HoverColor: =Label5_4.Color
+                        HoverFill: =Label5_4.Fill
+                        OnSelect: =Select(Parent)
+                        PaddingRight: =0
+                        PressedBorderColor: =Label5_4.BorderColor
+                        PressedColor: =Label5_4.Color
+                        PressedFill: =Label5_4.Fill
+                        Size: =varGlobals.Body.FontSize
+                        Text: =ThisItem.'Approval Status'
+                        Width: =Parent.TemplateWidth
+                        Wrap: =false
+                        X: =If(HomeScreen.Size = 1,20,80)
+                        Y: =32
+                        ZIndex: =7
+
+                    btnSelectLeaveItem As button:
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =Parent.TemplateHeight
+                        OnSelect: =Select(Parent)
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Text: =""
+                        Width: =Parent.TemplateWidth
+                        ZIndex: =8
+
+    Label1 As label:
+        Height: =95
+        Text: |-
+            ="v0.72
+            Width:1366
+            Height:768"
+        Visible: =false
+        X: =38
+        Y: =453
+        ZIndex: =7
+
+    Toggle1 As toggleSwitch:
+        Default: =!IsEmpty(colDialogResponses)
+        OnCheck: |-
+            =//////////////////////////////////////////////////////////////////////////////////////////////////////
+            //                                                                                                  //
+            //  This toggle control triggers on the colDialogResponses collection and is used to                //
+            //  action responses from the model dialog. As part of the object that is 'sent' to the             //
+            //  modal dialog, we include a responseAction property which identifies the action to take place    //
+            //  if the user selects an option or selects an item from the drop down. This responseAction can    //
+            //  then be tracked by this toggle to initiate certain code or functions. If the responseAction     //
+            //  doesn't contain a value, then we don't have to do anything.                                     //
+            //                                                                                                  //
+            //  For more information about the popup, please go to aka.ms/powerapps-popup                       //
+            //                                                                                                  //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  START: Function Initiation (NO modification required)                                           //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Get a handle on the response object that caused this toggle to trigger
+            Set(
+                varDialogResponse,
+                Last(colDialogResponses)
+            );
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  Send trace information of debug is enabled                                                      //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            /*--Dawid van Heerden-V14-2020/05/24: Workaround to remove the image from the pen input from the response before sending it to the trace because images are not supported in trace*/
+            If(
+                varPopupDebugTrace,
+                Trace(
+                    "cmpPopup Response received",
+                    TraceSeverity.Information,
+                    First(
+                        DropColumns(
+                            Table(varDialogResponse.responseData),
+                            "penInput"
+                        )
+                    )
+                )
+            );
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  END: Function Initiation (NO modification required)                                             //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  START: Actions (Modify as per business requirement)                                             //
+            //      -Here we use a switch statement to determine which responseAction was 'sent' to the dialog, //
+            //      and what should happen when then user clicks on Yes or selects an option from the drop down //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            If(
+                !IsBlank(varDialogResponse.responseAction),
+                //The trigger will only action something if a responseAction value was sent to the dialog
+                //The below examples are added to show the different ways that data is retrieved based on the type of       input that was specified in the popup instruction
+                Switch(
+                    varDialogResponse.responseAction,
+                    "SetVarOffice365Users",
+                    Set(
+                        _defaultApprover,
+                        First(varDialogResponse.responseData.office365Users)
+                    );
+                    Set(
+                        _defaultApproverPhoto,
+                        If(
+                            Office365Users.UserPhotoMetadata(_defaultApprover.Id).HasPhoto,
+                            Office365Users.UserPhoto(_defaultApprover.Id),
+                            Blank()
+                        )
+                    );
+                    If(
+                        CountRows(Office365Users.DirectReportsV2(_defaultApprover.Id).value) = 0,
+                        Set(
+                            varApproverErrorMsg,
+                            "Selected user is not a manager"
+                        ),
+                        If(
+                            _defaultApprover.Id = _myProfile.Id,
+                            Set(
+                                varApproverErrorMsg,
+                                "Approver cannot be yourself"
+                            ),
+                            Set(
+                                varApproverErrorMsg,
+                                ""
+                            )
+                        )
+                    ),
+                    "RecallAction",
+                    If(
+                        varDialogResponse.dialogButtonPressed = "Yes",
+                        Set(
+                            varTmpLeaveRequest,
+                            First(ColTmpLeaveRequest)
+                        );
+                        Patch(
+                            'Leave Requests',
+                            LookUp(
+                                'Leave Requests',
+                                'Leave Request' = varTmpLeaveRequest.ID
+                            ),
+                            {
+                                'Approval Status': "Draft",
+                                'Last Actor': _myProfile.DisplayName,
+                                'Last Actor Action': "Recalled",
+                                'Last Actor Comments': "",
+                                'Last Actor Timestamp': Now()
+                            }
+                        );
+                        Patch(
+                            ColTmpLeaveRequest,
+                            First(ColTmpLeaveRequest),
+                            {ApprovalStatus: ApprovalStatus.Draft}
+                        );
+                        Set(
+                            _requestType,
+                            "Edit"
+                        );
+                        Set(
+                            varTmpLeaveRequest,
+                            Blank()
+                        )
+                    ),
+                    "DeleteAction",
+                    If(
+                        varDialogResponse.dialogButtonPressed = "Yes",
+                        RemoveIf(
+                            'Leave Requests',
+                            'Leave Request' = First(ColTmpLeaveRequest).ID
+                        );
+                        
+            //            Set(varTmpLeaveRequest, First(ColTmpLeaveRequest));
+            Clear(ColTmpLeaveRequest);
+                        Navigate(HomeScreen)
+                    )
+                )
+            );
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  END: Actions (Modify as per ber business requirement)                                           //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  Send trace information of debug is enabled                                                      //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            /*--Dawid van Heerden-V14-2020/05/24: Workaround to remove the image from the pen input from the response before sending it to the trace because images are not supported in trace*/
+            If(
+                varPopupDebugTrace,
+                Trace(
+                    "cmpPopup Response actioned",
+                    TraceSeverity.Information,
+                    First(
+                        DropColumns(
+                            Table(varDialogResponse.responseData),
+                            "penInput"
+                        )
+                    )
+                )
+            );
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  Remove the response that was received from the dialog                                           //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            Remove(
+                colDialogResponses,
+                varDialogResponse
+            );
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //  This section can be ignore, but not deleted. It is required to set variables in the app         //
+            //  that the component might need.                                                                  //
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            If(
+                false,//This will obviously never set the variable and just sets the variable schema
+                Set(
+                    varPopupDebugTrace,
+                    false
+                )
+            )
+        Visible: =false
+        X: =27
+        Y: =668
+        ZIndex: =8
+
+    cmpBottomNavigation_5 As cmpBottomNavigation:
+        Background: |-
+            =ColorValue("#EFEFEF")
+        Color: =varGlobals.Body.FontColor
+        Fill: =Color.Black
+        MenuItems: =Filter(EmployeeNavigation,VisibleOnMobile = true)
+        SelectedBarColor: =varGlobals.MainThemeColor.Fill
+        Visible: =HomeScreen.Size = 1
+        Width: =Parent.Width
+        Y: =Parent.Height - Self.Height
+        ZIndex: =9
+

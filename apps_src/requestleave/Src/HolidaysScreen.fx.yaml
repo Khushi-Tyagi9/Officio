@@ -1,0 +1,210 @@
+HolidaysScreen As screen:
+    Fill: |-
+        =ColorValue("#FAF9F8")
+    OnHidden: =Set(_showDetails, false)
+    OnVisible: =
+    Orientation: =If(HolidaysScreen.Width < HolidaysScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= HolidaysScreen.Width)
+
+    ContainerMainH_7 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =15
+
+        ContainerHeaderH_7 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =varGlobals.MainThemeColor.Fill
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Label8_8 As label:
+                Align: =LayoutAlignItems.Center
+                AlignInContainer: =AlignInContainer.Stretch
+                Color: =RGBA(255, 255, 255, 1)
+                FillPortions: =1
+                FocusedBorderColor: =Label8_8.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverBorderColor: =Label8_8.BorderColor
+                HoverColor: =Label8_8.Color
+                HoverFill: =Label8_8.Fill
+                PressedBorderColor: =Label8_8.BorderColor
+                PressedColor: =Label8_8.Color
+                PressedFill: =Label8_8.Fill
+                Size: =If(HolidaysScreen.Size = 1,varGlobals.Header.FontSize-4,varGlobals.Header.FontSize)
+                Text: ="Holidays"
+                Width: =1134
+                X: =232
+                ZIndex: =2
+
+        Container16 As groupContainer.horizontalAutoLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =2
+
+            Container16_1 As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =0
+                Height: =Parent.Height
+                LayoutAlignItems: =LayoutAlignItems.Stretch
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                Visible: =HolidaysScreen.Size > 2
+                Width: =232
+                ZIndex: =1
+
+                cmpLeftNavigation_4 As cmpLeftNavigation:
+                    AlignInContainer: =AlignInContainer.Start
+                    Background: |-
+                        =ColorValue("#EFEFEF")
+                    Color: =varGlobals.Body.FontColor
+                    Height: =Parent.Height
+                    MenuItems: =EmployeeNavigation
+                    SelectedBarColor: =varGlobals.MainThemeColor.Fill
+                    Visible: =true
+                    Width: =232
+                    Y: =70
+
+            Container16_2 As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =7
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutGap: =15
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                ZIndex: =2
+
+                LblHolidaysHeader As label:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    AutoHeight: =true
+                    FocusedBorderColor: =LblHolidaysHeader.BorderColor
+                    Font: =varGlobals.Body.Font
+                    Height: =25
+                    HoverBorderColor: =LblHolidaysHeader.BorderColor
+                    HoverColor: =LblHolidaysHeader.Color
+                    HoverFill: =LblHolidaysHeader.Fill
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PressedBorderColor: =LblHolidaysHeader.BorderColor
+                    PressedColor: =LblHolidaysHeader.Color
+                    PressedFill: =LblHolidaysHeader.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: ="Below is a list of our department's paid holidays for " & Year(Today()) & ". Our offices will be closed on these days."
+                    Width: =904
+                    X: =256
+                    Y: =112
+                    ZIndex: =1
+
+                GalleryHolidays As gallery.galleryVertical:
+                    AccessibleLabel: ="Company holidays"
+                    DisabledBorderColor: =GalleryHolidays.BorderColor
+                    DisabledFill: =GalleryHolidays.Fill
+                    Height: =603
+                    HoverBorderColor: =GalleryHolidays.BorderColor
+                    HoverFill: =GalleryHolidays.Fill
+                    Items: |-
+                        =Sort(
+                            Filter(HolidaysCollection,
+                            'Holiday Date' >= Date(
+                                Year(Today()),
+                                1,
+                                1
+                            ) && 'Holiday Date' <= Date(
+                                Year(Today()),
+                                12,
+                                31
+                            )),
+                            'Holiday Date',SortOrder.Ascending
+                        )
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    LoadingSpinnerColor: =GalleryHolidays.BorderColor
+                    PressedBorderColor: =GalleryHolidays.BorderColor
+                    PressedFill: =GalleryHolidays.Fill
+                    ShowScrollbar: =false
+                    TemplateSize: =49
+                    Width: =857
+                    X: =256
+                    Y: =165
+                    ZIndex: =2
+
+                    Label12 As label:
+                        FocusedBorderColor: =Label12.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =varGlobals.Body.Font
+                        FontWeight: =FontWeight.Semibold
+                        Height: =49
+                        HoverBorderColor: =Label12.BorderColor
+                        HoverColor: =Label12.Color
+                        HoverFill: =Label12.Fill
+                        OnSelect: =Select(Parent)
+                        PressedBorderColor: =Label12.BorderColor
+                        PressedColor: =Label12.Color
+                        PressedFill: =Label12.Fill
+                        Size: =varGlobals.Body.FontSize
+                        Text: =ThisItem.Name
+                        Width: =300
+                        X: =If(HolidaysScreen.Size =1,220,400)
+                        ZIndex: =1
+
+                    Label13 As label:
+                        FocusedBorderColor: =Label13.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =varGlobals.Body.Font
+                        Height: =49
+                        HoverBorderColor: =Label13.BorderColor
+                        HoverColor: =Label13.Color
+                        HoverFill: =Label13.Fill
+                        OnSelect: =Select(Parent)
+                        PressedBorderColor: =Label13.BorderColor
+                        PressedColor: =Label13.Color
+                        PressedFill: =Label13.Fill
+                        Size: =varGlobals.Body.FontSize
+                        Text: =Text(ThisItem.'Holiday Date', "[$-en-US]dddd, mmmm dd")
+                        Width: =250
+                        ZIndex: =2
+
+                    Rectangle5 As rectangle:
+                        AccessibleLabel: =ThisItem.Name
+                        DisabledFill: =Rectangle5.Fill
+                        Fill: =RGBA(202, 202, 202, 1)
+                        FocusedBorderColor: =Rectangle5.BorderColor
+                        Height: =1
+                        HoverFill: =Rectangle5.Fill
+                        OnSelect: =Select(Parent)
+                        PressedFill: =Rectangle5.Fill
+                        Width: =Parent.TemplateWidth
+                        Y: =48
+                        ZIndex: =3
+
+                Rectangle1_3 As rectangle:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =60
+                    ZIndex: =3
+
+    cmpBottomNavigation_6 As cmpBottomNavigation:
+        Background: |-
+            =ColorValue("#EFEFEF")
+        Color: =varGlobals.Body.FontColor
+        Fill: =Color.White
+        MenuItems: =Filter(EmployeeNavigation,VisibleOnMobile = true)
+        SelectedBarColor: =varGlobals.MainThemeColor.Fill
+        Visible: =HolidaysScreen.Size = 1
+        Width: =Parent.Width
+        Y: =Parent.Height - Self.Height
+        ZIndex: =16
+

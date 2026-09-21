@@ -1,0 +1,321 @@
+LeaveApproverScreen As screen:
+    Fill: |-
+        =ColorValue("#FAF9F8")
+    OnHidden: =
+    OnVisible: |-
+        =If(IsBlank(varApproverErrorMsg),Set(varApproverErrorMsg,""));
+        If(
+            !IsBlank(First(ColTmpLeaveRequest).ApproverEmail),
+            Set(
+                _defaultApprover,
+                Office365Users.UserProfile(First(ColTmpLeaveRequest).ApproverID)
+            );
+            Set(
+                _defaultApproverPhoto,
+                If(
+                    Office365Users.UserPhotoMetadata(_defaultApprover.Id).HasPhoto,
+                    Office365Users.UserPhoto(_defaultApprover.Id),Blank()
+                )
+            )
+        )
+    Orientation: =If(LeaveApproverScreen.Width < LeaveApproverScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= LeaveApproverScreen.Width)
+
+    ContainerMainH_6 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =1
+
+        ContainerHeaderH_6 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =varGlobals.MainThemeColor.Fill
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Icon1_3 As icon.BackArrow:
+                AlignInContainer: =AlignInContainer.Stretch
+                Color: =Color.White
+                Icon: =Icon.BackArrow
+                OnSelect: =Back();
+                PaddingLeft: =10
+                Width: =60
+                X: =18
+                Y: =6
+                ZIndex: =1
+
+            Label8_3 As label:
+                Align: =LayoutAlignItems.Center
+                Color: =RGBA(255, 255, 255, 1)
+                FillPortions: =1
+                FocusedBorderColor: =Label8_3.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverBorderColor: =Label8_3.BorderColor
+                HoverColor: =Label8_3.Color
+                HoverFill: =Label8_3.Fill
+                PressedBorderColor: =Label8_3.BorderColor
+                PressedColor: =Label8_3.Color
+                PressedFill: =Label8_3.Fill
+                Size: =If(LeaveApproverScreen.Size = 1,varGlobals.Header.FontSize-4,varGlobals.Header.FontSize)
+                Text: ="Select approver"
+                Width: =1366
+                ZIndex: =2
+
+        ContainerBody6 As groupContainer.verticalAutoLayoutContainer:
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =15
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            ZIndex: =2
+
+            Label1_8 As label:
+                FocusedBorderColor: =Label1_8.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Bold
+                Height: =21
+                HoverBorderColor: =Label1_8.BorderColor
+                HoverColor: =Label1_8.Color
+                HoverFill: =Label1_8.Fill
+                PressedBorderColor: =Label1_8.BorderColor
+                PressedColor: =Label1_8.Color
+                PressedFill: =Label1_8.Fill
+                Size: =varGlobals.Body.FontSize
+                Text: |-
+                    ="Submit request to:"
+                Width: =300
+                X: =36
+                Y: =104
+                ZIndex: =1
+
+            Container15 As groupContainer.manualLayoutContainer:
+                AlignInContainer: =AlignInContainer.Start
+                FillPortions: =0
+                Height: =320
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                ZIndex: =2
+
+                Rectangle6_1 As rectangle:
+                    AccessibleLabel: =
+                    BorderColor: =varGlobals.MainThemeColor.Fill
+                    BorderThickness: =1
+                    DisabledFill: =Rectangle6_1.Fill
+                    Fill: =Color.White
+                    FocusedBorderColor: =Rectangle6_1.BorderColor
+                    Height: =283
+                    HoverFill: =Rectangle6_1.Fill
+                    OnSelect: =
+                    PressedFill: =Rectangle6_1.Fill
+                    Width: =264
+                    X: =40
+                    Y: =20
+                    ZIndex: =1
+
+                Image2_1 As image:
+                    FocusedBorderColor: =Image2_1.BorderColor
+                    Height: =160
+                    HoverBorderColor: =ColorFade(Image2_1.BorderColor, 20%)
+                    HoverFill: =ColorFade(Image2_1.Fill, 20%)
+                    Image: =If(!IsBlank(_defaultApproverPhoto),_defaultApproverPhoto,SampleImage)
+                    PressedBorderColor: =ColorFade(Image2_1.BorderColor, -20%)
+                    PressedFill: =ColorFade(Image2_1.Fill, -20%)
+                    RadiusBottomLeft: =80
+                    RadiusBottomRight: =80
+                    RadiusTopLeft: =80
+                    RadiusTopRight: =80
+                    Width: =160
+                    X: =92
+                    Y: =70
+                    ZIndex: =2
+
+                lblApproverName As label:
+                    Align: =Align.Center
+                    FocusedBorderColor: =lblApproverName.BorderColor
+                    Font: =varGlobals.Body.Font
+                    FontWeight: =FontWeight.Bold
+                    Height: =200
+                    HoverBorderColor: =lblApproverName.BorderColor
+                    HoverColor: =lblApproverName.Color
+                    HoverFill: =lblApproverName.Fill
+                    PressedBorderColor: =lblApproverName.BorderColor
+                    PressedColor: =lblApproverName.Color
+                    PressedFill: =lblApproverName.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: =If(!IsBlank(_defaultApprover.DisplayName),_defaultApprover.DisplayName,"Select an approver by clicking ""Select""")
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =264
+                    X: =40
+                    Y: =20
+                    ZIndex: =3
+
+                Button3_1 As button:
+                    BorderColor: =ColorFade(Button3_1.Fill, -15%)
+                    BorderThickness: =0
+                    Color: =RGBA(10, 106, 204, 1)
+                    DisabledBorderColor: =ColorFade(Button3_1.BorderColor, 70%)
+                    Fill: =Parent.Fill
+                    FocusedBorderColor: =Button3_1.BorderColor
+                    Font: =varGlobals.Body.Font
+                    Height: =61
+                    HoverBorderColor: =ColorFade(Button3_1.BorderColor, 20%)
+                    HoverColor: =Button3_1.Color
+                    HoverFill: =ColorFade(Button3_1.Fill, 20%)
+                    OnSelect: |-
+                        =//////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //                                                                                                  //
+                        //  For more information on how to structure the instruction to the popup as well as the response   //
+                        //  that it will be sending back please refer to:                                                   //
+                        //  https://aka.ms/powerapps-popup                                                                  //
+                        //                                                                                                  //
+                        //////////////////////////////////////////////////////////////////////////////////////////////////////
+                        Collect(
+                            colDialogInstructions,
+                            {
+                                // -- Generic Popup Info -- //
+                                type: "Input",
+                                inputType: "Office365Users",
+                                message: "Choose manager or supervisor who should approve the leave request",
+                                source: "ChangeApprover",
+                                iconType: Icon.Information,
+                                iconColor: varGlobals.Body.FontColor,              
+                                configOffice365Users: {
+                                    tooltip: "Please select one of the users in you address list",
+                                    allowMultipleSelect: false
+                                },
+                                // -- Response Section. (REQUIRED if you want to trigger an action) -- //
+                                responseAction: "SetVarOffice365Users",
+                                originalFunctionRequestID: Blank()
+                            }
+                        )
+                    PressedBorderColor: =Button3_1.Fill
+                    PressedColor: =Button3_1.Fill
+                    PressedFill: =Button3_1.Color
+                    Size: =varGlobals.Body.FontSize
+                    Text: =If(!IsBlank(_defaultApprover.DisplayName),"Change","Select")
+                    Tooltip: ="Change approving manager"
+                    Width: =251
+                    X: =48
+                    Y: =238
+                    ZIndex: =4
+
+            lblApproverError As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                AutoHeight: =true
+                Color: =varGlobals.RedRobot.Fill
+                FillPortions: =1
+                FocusedBorderColor: =lblApproverError.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Bold
+                Height: =21
+                HoverBorderColor: =lblApproverError.BorderColor
+                HoverColor: =lblApproverError.Color
+                HoverFill: =lblApproverError.Fill
+                LayoutMinHeight: =20
+                PaddingBottom: =0
+                PaddingTop: =0
+                PressedBorderColor: =lblApproverError.BorderColor
+                PressedColor: =lblApproverError.Color
+                PressedFill: =lblApproverError.Fill
+                Size: =varGlobals.Body.FontSize
+                Text: =varApproverErrorMsg
+                VerticalAlign: =VerticalAlign.Top
+                Width: =300
+                X: =36
+                Y: =104
+                ZIndex: =3
+
+        ContainerFooter6 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =80
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =5
+            PaddingLeft: =20
+            PaddingRight: =20
+            PaddingTop: =5
+            ZIndex: =3
+
+            btnSubmitRequest_3 As button:
+                Align: =LayoutAlignItems.Center
+                BorderColor: =RGBA(0,0,0,1)
+                BorderThickness: =0
+                Color: =Color.White
+                DisabledBorderColor: =ColorFade(btnSubmitRequest_3.BorderColor, 70%)
+                DisplayMode: |-
+                    =If(
+                        IsBlank(_defaultApprover),
+                        DisplayMode.Disabled,
+                        If(Len(varApproverErrorMsg)>0,DisplayMode.Disabled,DisplayMode.Edit)
+                    )
+                Fill: =varGlobals.BlueRobot.Fill
+                FillPortions: =1
+                FocusedBorderColor: =btnSubmitRequest_3.BorderColor
+                Font: =varGlobals.Body.Font
+                Height: =80
+                HoverBorderColor: =ColorFade(btnSubmitRequest_3.BorderColor, 20%)
+                HoverColor: =btnSubmitRequest_3.Color
+                HoverFill: =ColorFade(btnSubmitRequest_3.Fill, 20%)
+                OnSelect: |-
+                    =Patch(ColTmpLeaveRequest,First(ColTmpLeaveRequest),{ApproverEmail:_defaultApprover.UserPrincipalName,ApproverID:_defaultApprover.Id});
+                    Set(varApproverErrorMsg,"");
+                    Navigate(LeaveReviewScreen)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =btnSubmitRequest_3.Fill
+                PressedColor: =btnSubmitRequest_3.Fill
+                PressedFill: =btnSubmitRequest_3.Color
+                Size: =varGlobals.Navigation.FontSize
+                Text: =If(_sourceScreen = "Review","Save","Next")
+                Width: =Parent.Width
+                Y: =688
+                ZIndex: =1
+
+    cmpModalDialog_1 As cmpModalDialog:
+        Theme: |-
+            =//////////////////////////////////////////////////////////////////////
+            //                                                                  //
+            //  NB! Please only use RGBA colors for this theming section,       //
+            //      as using color names or Hex values will most likely break   //
+            //      the app. We are busy talking to Microsoft about this as     //
+            //      we suspect there is a problem with the way the colors       //
+            //      are evaluated in dynamically created properties.            //
+            //                                                                  //
+            //      If you are looking for an easy way to convert color names   //
+            //      to RGBA, please use https://htmlcolorcodes.com/color-names  //
+            //                                                                  //
+            //////////////////////////////////////////////////////////////////////
+            
+            {
+                modalBackground: RGBA(255, 255, 255, 1),        //Color for the background of the modal dialog
+                primaryColor: RGBA(26, 115, 232, 1),            //Color for the main controls
+                buttonOkFill: RGBA(26, 115, 232, 1),            //Color of the 'Ok' button
+                buttonOkFontColor: RGBA(255, 255, 255, 1),      //Color of the 'Ok' button font
+                buttonYesFill: RGBA(26, 115, 232, 1),           //Color of the 'Yes' button
+                buttonYesFontColor: RGBA(255, 255, 255, 1),     //Color of the 'Yes' button font
+                buttonNoFill: RGBA(26, 115, 232, 1),              //Color of the 'No' button
+                buttonNoFontColor: RGBA(255, 255, 255, 1),      //Color of the 'Yes' button font
+                buttonCancelFill: RGBA(26, 115, 232, 1),       //Color of the 'Cancel' button
+                buttonCancelFontColor: RGBA(255, 255, 255, 1),  //Color of the 'Yes' button font
+                fontType: varGlobals.Body.Font,                           //Type of font to be used in messages and buttons
+                fontColor: RGBA(80, 82, 84,1),                    //Font color
+                fontSize: 12                                    //Base size for fonts. The message will be 10% larger for focus
+            }
+        Visible: =!IsEmpty(colDialogInstructions) || !IsEmpty(colDialogResponses) || !IsBlank(Last(Filter(colFunctionQueue,functionActive)).action)
+        ZIndex: =2
+

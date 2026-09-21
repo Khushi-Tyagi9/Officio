@@ -1,0 +1,142 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "contoso_holidaies",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "contoso_holiday",
+    "MaxGetRowsCount": 500,
+    "Name": "Holidays",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "contoso_holiday_AsyncOperations": "System Jobs",
+      "contoso_holiday_BulkDeleteFailures": "Bulk Delete Failures",
+      "contoso_holiday_DuplicateBaseRecord": "Duplicate Records (contoso_holiday_DuplicateBaseRecord)",
+      "contoso_holiday_DuplicateMatchingRecord": "Duplicate Records (contoso_holiday_DuplicateMatchingRecord)",
+      "contoso_holiday_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "contoso_holiday_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "contoso_holiday_ProcessSession": "Process Sessions",
+      "contoso_holiday_SyncErrors": "Sync Errors",
+      "contoso_holidaydate": "Holiday Date",
+      "contoso_holidayid": "Holiday",
+      "contoso_holidaytype": "Holiday Type",
+      "contoso_name": "Name",
+      "contoso_workingday": "Working Day?",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Holidays",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Holidays (Views)",
+    "Name": "_contoso_holiday_views",
+    "RelatedEntityName": "Holidays",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "0c4564be-c5c8-4fab-acaf-80d3ee58151d": "Holiday Associated View",
+      "109399ae-628c-40d7-b7d8-99a764591ec2": "Active Holidays This Year",
+      "8b6404d5-38b1-4ade-bab6-ad2c3dfdc057": "Inactive Holidays",
+      "9e42153e-e390-ed11-aad1-000d3a25b1bb": "Active Holidays Previous Years",
+      "f106cc63-fd7f-4519-951c-b23d10014924": "Holiday Lookup View",
+      "f7e744df-9552-4264-bd11-57d100c57d4e": "Holiday Advanced Find View"
+    }
+  },
+  {
+    "DisplayName": "Holiday Type (Holidays)",
+    "Name": "contoso_holiday_contoso_holidaytype",
+    "OptionSetInfoNameMapping": {
+      "463270000": "National Public Holiday",
+      "463270001": "Organisation Closure",
+      "463270002": "Other"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_holidaytype",
+        "OptionSetReferenceEntityName": "Holidays"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "contoso_holidaytype",
+    "RelatedEntityName": "Holidays",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Working Day? (Holidays)",
+    "Name": "contoso_holiday_contoso_workingday",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_workingday",
+        "OptionSetReferenceEntityName": "Holidays"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "contoso_workingday",
+    "RelatedEntityName": "Holidays",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Holidays)",
+    "Name": "contoso_holiday_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Holidays"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Holidays",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Holidays)",
+    "Name": "contoso_holiday_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Holidays"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Holidays",
+    "Type": "OptionSetInfo"
+  }
+]

@@ -1,0 +1,295 @@
+TeamScreen As screen:
+    Fill: |-
+        =ColorValue("#FAF9F8")
+    OnHidden: =Set(_showDetails, false)
+    OnVisible: =
+    Orientation: =If(TeamScreen.Width < TeamScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= TeamScreen.Width)
+
+    Label8_14 As label:
+        Align: =LayoutAlignItems.Center
+        Color: =RGBA(255, 255, 255, 1)
+        FocusedBorderColor: =Label8_14.BorderColor
+        Font: =varGlobals.Body.Font
+        FontWeight: =FontWeight.Semibold
+        Height: =70
+        HoverBorderColor: =Label8_14.BorderColor
+        HoverColor: =Label8_14.Color
+        HoverFill: =Label8_14.Fill
+        PressedBorderColor: =Label8_14.BorderColor
+        PressedColor: =Label8_14.Color
+        PressedFill: =Label8_14.Fill
+        Size: =varGlobals.Header.FontSize
+        Text: ="My Team"
+        Width: =1366
+        ZIndex: =18
+
+    ContainerMainH_9 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =21
+
+        ContainerHeaderH_9 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =varGlobals.MainThemeColor.Fill
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Label8_16 As label:
+                Align: =LayoutAlignItems.Center
+                AlignInContainer: =AlignInContainer.Stretch
+                Color: =RGBA(255, 255, 255, 1)
+                FillPortions: =1
+                FocusedBorderColor: =Label8_16.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverBorderColor: =Label8_16.BorderColor
+                HoverColor: =Label8_16.Color
+                HoverFill: =Label8_16.Fill
+                PressedBorderColor: =Label8_16.BorderColor
+                PressedColor: =Label8_16.Color
+                PressedFill: =Label8_16.Fill
+                Size: =If(AboutScreen.Size = 1,varGlobals.Header.FontSize-4,varGlobals.Header.FontSize)
+                Text: ="Your team"
+                Width: =1134
+                X: =232
+                ZIndex: =1
+
+        Container16_6 As groupContainer.horizontalAutoLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Y: =70
+            ZIndex: =2
+
+            Container16_7 As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =0
+                Height: =Parent.Height
+                LayoutAlignItems: =LayoutAlignItems.Stretch
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                Visible: =TeamScreen.Size > 2
+                Width: =232
+                ZIndex: =1
+
+                cmpLeftNavigation_8 As cmpLeftNavigation:
+                    AlignInContainer: =AlignInContainer.Start
+                    Background: |-
+                        =ColorValue("#EFEFEF")
+                    Color: =varGlobals.Body.FontColor
+                    Height: =Parent.Height
+                    MenuItems: =EmployeeNavigation
+                    SelectedBarColor: =varGlobals.MainThemeColor.Fill
+                    Visible: =true
+                    Width: =232
+                    Y: =70
+
+            Container16_8 As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =7
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutGap: =15
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                ZIndex: =2
+
+                LblEmptyRequests_3 As label:
+                    FocusedBorderColor: =LblEmptyRequests_3.BorderColor
+                    Font: =varGlobals.Body.Font
+                    FontWeight: =FontWeight.Semibold
+                    Height: =45
+                    HoverBorderColor: =LblEmptyRequests_3.BorderColor
+                    HoverColor: =LblEmptyRequests_3.Color
+                    HoverFill: =LblEmptyRequests_3.Fill
+                    PressedBorderColor: =LblEmptyRequests_3.BorderColor
+                    PressedColor: =LblEmptyRequests_3.Color
+                    PressedFill: =LblEmptyRequests_3.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: ="You have no direct reports"
+                    Visible: =!GalleryTeam.Visible
+                    Width: =341
+                    X: =36
+                    Y: =32
+                    ZIndex: =1
+
+                "GalleryTeam As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                    AccessibleLabel: ="Leave request gallery"
+                    Default: =Blank()
+                    DisabledBorderColor: =GalleryTeam.BorderColor
+                    DisabledFill: =GalleryTeam.Fill
+                    Fill: =RGBA(249, 249, 249, 1)
+                    Height: =620
+                    HoverBorderColor: =GalleryTeam.BorderColor
+                    HoverFill: =GalleryTeam.Fill
+                    Items: =colDirectReports
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    LoadingSpinnerColor: =GalleryTeam.BorderColor
+                    OnSelect: =
+                    PressedBorderColor: =GalleryTeam.BorderColor
+                    PressedFill: =GalleryTeam.Fill
+                    ShowScrollbar: =false
+                    TemplateFill: =Color.White
+                    TemplatePadding: =15
+                    TemplateSize: =90
+                    Transition: =Transition.Pop
+                    Visible: =CountRows(GalleryTeam.AllItems) > 0
+                    Width: =1134
+                    X: =232
+                    Y: =148
+                    ZIndex: =2
+
+                    Label5_5 As label:
+                        Color: =varGlobals.Body.FontColor
+                        FocusedBorderColor: =Label5_5.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =varGlobals.Body.Font
+                        Height: =Label5_5.Size * 1.8
+                        HoverBorderColor: =Label5_5.BorderColor
+                        HoverColor: =Label5_5.Color
+                        HoverFill: =Label5_5.Fill
+                        OnSelect: =Select(Parent)
+                        PressedBorderColor: =Label5_5.BorderColor
+                        PressedColor: =Label5_5.Color
+                        PressedFill: =Label5_5.Fill
+                        Size: =varGlobals.Body.FontSize
+                        Text: =ThisItem.jobTitle
+                        Width: =Parent.Width
+                        X: =If(TeamScreen.Size = 1,20,80)
+                        Y: =32
+                        ZIndex: =1
+
+                    Rectangle2_2 As rectangle:
+                        AccessibleLabel: =ThisItem.displayName
+                        DisabledFill: =Rectangle2_2.Fill
+                        Fill: =ColorFade(varGlobals.Body.FontColor,80%)
+                        FocusedBorderColor: =Rectangle2_2.BorderColor
+                        Height: =1
+                        HoverFill: =Rectangle2_2.Fill
+                        OnSelect: =Select(Parent)
+                        PressedFill: =Rectangle2_2.Fill
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - Rectangle2_2.Height
+                        ZIndex: =2
+
+                    rctStatus_2 As rectangle:
+                        Fill: =varGlobals.GreenRobot.Fill
+                        Height: =Parent.TemplateHeight
+                        OnSelect: =Select(Parent)
+                        Width: =5
+                        ZIndex: =3
+
+                    Label3_4 As label:
+                        Color: =varGlobals.MainThemeColor.Fill
+                        FocusedBorderColor: =Label3_4.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =varGlobals.Body.Font
+                        FontWeight: =FontWeight.Bold
+                        Height: =30
+                        HoverBorderColor: =Label3_4.BorderColor
+                        HoverColor: =Label3_4.Color
+                        HoverFill: =Label3_4.Fill
+                        OnSelect: =Select(Parent)
+                        PaddingRight: =0
+                        PressedBorderColor: =Label3_4.BorderColor
+                        PressedColor: =Label3_4.Color
+                        PressedFill: =Label3_4.Fill
+                        Size: =varGlobals.Navigation.FontSize
+                        Text: =ThisItem.displayName
+                        Width: =Parent.TemplateWidth
+                        Wrap: =false
+                        X: =If(TeamScreen.Size = 1,20,80)
+                        Y: =4
+                        ZIndex: =4
+
+                    Circle2_2 As circle:
+                        Fill: =varGlobals.GreenRobot.Fill
+                        Height: =50
+                        OnSelect: =Select(Parent)
+                        Visible: =ApprovalsScreen.Size<>1
+                        Width: =50
+                        X: =20
+                        Y: =9
+                        ZIndex: =5
+
+                    Label7_2 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(255, 255, 255, 1)
+                        FontWeight: =FontWeight.Semibold
+                        Height: =50
+                        OnSelect: =Select(Parent)
+                        Size: =14
+                        Text: =Upper(Left(ThisItem.givenName,1) & Left(ThisItem.surname,1))
+                        Visible: =ApprovalsScreen.Size<>1
+                        Width: =50
+                        X: =20
+                        Y: =9
+                        ZIndex: =6
+
+                    Label5_9 As label:
+                        Color: =varGlobals.Body.FontColor
+                        FocusedBorderColor: =Label5_9.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =varGlobals.Body.Font
+                        Height: =Label5_9.Size * 1.8
+                        HoverBorderColor: =Label5_9.BorderColor
+                        HoverColor: =Label5_9.Color
+                        HoverFill: =Label5_9.Fill
+                        OnSelect: =Select(Parent)
+                        PaddingRight: =0
+                        PressedBorderColor: =Label5_9.BorderColor
+                        PressedColor: =Label5_9.Color
+                        PressedFill: =Label5_9.Fill
+                        Size: =varGlobals.Body.FontSize
+                        Text: =ThisItem.mail
+                        Width: =Parent.TemplateWidth
+                        Wrap: =false
+                        X: =If(TeamScreen.Size = 1,20,80)
+                        Y: =56
+                        ZIndex: =7
+
+                    btnSelectLeaveItem_2 As button:
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =Parent.TemplateHeight
+                        OnSelect: |-
+                            =Navigate(UserProfileScreen,Transition.None,{varUserProfileID:ThisItem.id});
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Text: =""
+                        Width: =Parent.TemplateWidth
+                        ZIndex: =8
+
+                Rectangle1_2 As rectangle:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =60
+                    Visible: =cmpBottomNavigation_7.Visible
+                    ZIndex: =4
+
+    cmpBottomNavigation_7 As cmpBottomNavigation:
+        Background: |-
+            =ColorValue("#EFEFEF")
+        Color: =varGlobals.Body.FontColor
+        Fill: =Color.White
+        MenuItems: =Filter(EmployeeNavigation,VisibleOnMobile = true)
+        SelectedBarColor: =varGlobals.MainThemeColor.Fill
+        Visible: =TeamScreen.Size = 1
+        Width: =Parent.Width
+        Y: =Parent.Height - Self.Height
+        ZIndex: =22
+

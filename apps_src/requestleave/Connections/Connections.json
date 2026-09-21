@@ -1,0 +1,28 @@
+{
+  "828dcb9f-e6ce-48f1-9af4-4129b110a4b8": {
+    "appActions": [
+      "DirectReports_V2",
+      "MyProfile",
+      "Manager",
+      "UserPhotoMetadata",
+      "UserPhoto",
+      "SearchUser",
+      "UserProfile"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Office 365 Users",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1664/1.0.1664.3477/office365users/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365users",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365Users"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "828dcb9f-e6ce-48f1-9af4-4129b110a4b8"
+  }
+}

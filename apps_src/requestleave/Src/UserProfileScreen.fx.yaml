@@ -1,0 +1,461 @@
+UserProfileScreen As screen:
+    Fill: |-
+        =ColorValue("#FAF9F8")
+    OnHidden: =
+    OnVisible: =Set(varUserProfile,LookUp('Microsoft Entra IDs',Id=GUID(varUserProfileID)))
+    Orientation: =If(UserProfileScreen.Width < UserProfileScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= UserProfileScreen.Width)
+
+    ContainerMainH_13 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =1
+
+        ContainerHeaderH_13 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =varGlobals.MainThemeColor.Fill
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Icon1_7 As icon.BackArrow:
+                AlignInContainer: =AlignInContainer.Stretch
+                Color: =Color.White
+                Icon: =Icon.BackArrow
+                OnSelect: =Back();
+                PaddingLeft: =10
+                Width: =60
+                X: =18
+                Y: =6
+                ZIndex: =1
+
+            Label8_17 As label:
+                Align: =LayoutAlignItems.Center
+                AlignInContainer: =AlignInContainer.Center
+                Color: =RGBA(255, 255, 255, 1)
+                FillPortions: =1
+                FocusedBorderColor: =Label8_17.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverBorderColor: =Label8_17.BorderColor
+                HoverColor: =Label8_17.Color
+                HoverFill: =Label8_17.Fill
+                PressedBorderColor: =Label8_17.BorderColor
+                PressedColor: =Label8_17.Color
+                PressedFill: =Label8_17.Fill
+                Size: =If(UserProfileScreen.Size = 1,varGlobals.Header.FontSize-4,varGlobals.Header.FontSize)
+                Text: =varUserProfile.'Display Name'
+                Width: =1366
+                ZIndex: =2
+
+        ContainerBody2_1 As groupContainer.verticalAutoLayoutContainer:
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =10
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            ZIndex: =2
+
+            ContainerFilter_1 As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =0
+                Height: =If(ContainerYearFilter_1.X  <200,100,50)
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                LayoutWrap: =true
+                ZIndex: =1
+
+                TypeRequestTitle_2 As label:
+                    AlignInContainer: =AlignInContainer.End
+                    AutoHeight: =true
+                    BorderColor: =RGBA(255, 37, 0, 0)
+                    Color: =varGlobals.Body.FontColor
+                    FillPortions: =1
+                    FocusedBorderColor: =TypeRequestTitle_2.BorderColor
+                    Font: =varGlobals.Body.Font
+                    FontWeight: =FontWeight.Bold
+                    Height: =19
+                    HoverBorderColor: =TypeRequestTitle_2.BorderColor
+                    HoverColor: =TypeRequestTitle_2.Color
+                    HoverFill: =TypeRequestTitle_2.Fill
+                    LineHeight: =1
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =TypeRequestTitle_2.BorderColor
+                    PressedColor: =TypeRequestTitle_2.Color
+                    PressedFill: =TypeRequestTitle_2.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: |-
+                        ="Leave Balances: " & varUserProfile.'Display Name'
+                    Width: =1085
+                    X: =20
+                    Y: =90
+                    ZIndex: =1
+
+                ContainerYearFilter_1 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    FillPortions: =0
+                    Height: =50
+                    LayoutMinHeight: =50
+                    LayoutMinWidth: =250
+                    Width: =200
+                    ZIndex: =2
+
+                    grpYear_1 As group:
+                        Height: =5
+                        Width: =5
+                        X: =-1141
+                        Y: =-47
+                        ZIndex: =4
+
+                        lblYear_1 As label:
+                            Align: =Align.Center
+                            Font: =varGlobals.Body.Font
+                            FontWeight: =FontWeight.Semibold
+                            Height: =Parent.Height
+                            Size: =varGlobals.Navigation.FontSize
+                            Text: =varUserProfileYear
+                            Width: =60
+                            X: =60
+                            ZIndex: =1
+
+                        icoPrevious_1 As icon.ArrowLeft:
+                            Color: =varGlobals.BlueRobot.Fill
+                            Height: =Parent.Height
+                            Icon: =Icon.ArrowLeft
+                            OnSelect: =Set(varUserProfileYear,varUserProfileYear -1)
+                            Width: =Parent.Height
+                            ZIndex: =2
+
+                        icoNext_1 As icon.ArrowLeft:
+                            Color: =varGlobals.BlueRobot.Fill
+                            Height: =Parent.Height
+                            Icon: =Icon.ArrowRight
+                            OnSelect: =Set(varUserProfileYear,varUserProfileYear +1)
+                            Width: =Parent.Height
+                            X: =130
+                            ZIndex: =3
+
+            GalleryUserLeaveBalance As gallery.galleryVertical:
+                AccessibleLabel: ="Leave balance gallery"
+                DisabledBorderColor: =GalleryUserLeaveBalance.BorderColor
+                DisabledFill: =GalleryUserLeaveBalance.Fill
+                FillPortions: =0
+                Height: =RoundUp(CountRows(GalleryUserLeaveBalance.AllItems) / UserProfileScreen.Size,0)*210
+                HoverBorderColor: =GalleryUserLeaveBalance.BorderColor
+                HoverFill: =GalleryUserLeaveBalance.Fill
+                Items: =Filter('Leave Balances', Employee.Id = GUID(varUserProfileID) && Year = Text(varUserProfileYear))
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =250
+                LayoutMinWidth: =320
+                LoadingSpinnerColor: =GalleryUserLeaveBalance.BorderColor
+                PressedBorderColor: =GalleryUserLeaveBalance.BorderColor
+                PressedFill: =GalleryUserLeaveBalance.Fill
+                ShowScrollbar: =false
+                TemplatePadding: =If(LeaveBalanceScreen.Size = 1,0,15)
+                TemplateSize: =180
+                Width: =1079
+                WrapCount: =UserProfileScreen.Size
+                X: =231
+                Y: =139
+                ZIndex: =3
+
+                Container14_1 As groupContainer.manualLayoutContainer:
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =Parent.TemplateHeight
+                    Width: =Parent.TemplateWidth
+                    ZIndex: =12
+
+                    Rectangle6_4 As rectangle:
+                        AccessibleLabel: =ThisItem.Name
+                        BorderColor: =varGlobals.MainThemeColor.Fill
+                        BorderThickness: =1
+                        DisabledFill: =Rectangle6_4.Fill
+                        Fill: =Color.White
+                        FocusedBorderColor: =Rectangle6_4.BorderColor
+                        Height: =Parent.Height
+                        HoverFill: =Rectangle6_4.Fill
+                        OnSelect: =
+                        PressedFill: =Rectangle6_4.Fill
+                        Width: =Parent.Width
+                        X: =0 
+                        ZIndex: =1
+
+                    Rectangle10_2 As rectangle:
+                        Fill: =varGlobals.MainThemeColor.Fill
+                        Height: =20
+                        OnSelect: =
+                        Width: =3
+                        X: =15
+                        Y: =15
+                        ZIndex: =2
+
+                    Label17_4 As label:
+                        Color: =varGlobals.Body.FontColor
+                        FocusedBorderColor: =Label17_4.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =Font.Lato
+                        FontWeight: =FontWeight.Bold
+                        Height: =30
+                        HoverBorderColor: =Label17_4.BorderColor
+                        HoverColor: =Label17_4.Color
+                        HoverFill: =Label17_4.Fill
+                        Live: =Live.Polite
+                        OnSelect: =
+                        PressedBorderColor: =Label17_4.BorderColor
+                        PressedColor: =Label17_4.Color
+                        PressedFill: =Label17_4.Fill
+                        Size: =varGlobals.Navigation.FontSize
+                        Text: =Text(ThisItem.'Leave Taken') & If(Abs(ThisItem.'Leave Taken')=1, " day", " days") & " taken"
+                        Width: =200
+                        X: =20
+                        Y: =55
+                        ZIndex: =3
+
+                    Label18_4 As label:
+                        Color: =varGlobals.Body.FontColor
+                        FocusedBorderColor: =Label18_4.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =Font.Lato
+                        Height: =51
+                        HoverBorderColor: =Label18_4.BorderColor
+                        HoverColor: =Label18_4.Color
+                        HoverFill: =Label18_4.Fill
+                        Live: =Live.Polite
+                        OnSelect: =
+                        PressedBorderColor: =Label18_4.BorderColor
+                        PressedColor: =Label18_4.Color
+                        PressedFill: =Label18_4.Fill
+                        Size: =varGlobals.Navigation.FontSize -2
+                        Text: ="total " & ThisItem.'Leave Type'.Name & " balance (including carry over), as of 1/2/2023"
+                        Visible: =ThisItem.'Leave Type'.'Has Balance'
+                        Width: =233
+                        X: =20
+                        Y: =125
+                        ZIndex: =4
+
+                    Label17_5 As label:
+                        Color: =varGlobals.Body.FontColor
+                        FocusedBorderColor: =Label17_5.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =Font.Lato
+                        FontWeight: =FontWeight.Bold
+                        Height: =30
+                        HoverBorderColor: =Label17_5.BorderColor
+                        HoverColor: =Label17_5.Color
+                        HoverFill: =Label17_5.Fill
+                        Live: =Live.Polite
+                        OnSelect: =
+                        PressedBorderColor: =Label17_5.BorderColor
+                        PressedColor: =Label17_5.Color
+                        PressedFill: =Label17_5.Fill
+                        Size: =varGlobals.Navigation.FontSize
+                        Text: =Text(ThisItem.'Current Balance') & If(Abs(ThisItem.'Current Balance')=1, " day", " days") & " available"
+                        Visible: =ThisItem.'Leave Type'.'Has Balance'
+                        Width: =200
+                        X: =20
+                        Y: =92
+                        ZIndex: =5
+
+                    Label16_3 As label:
+                        Color: =varGlobals.MainThemeColor.Fill
+                        FocusedBorderColor: =Label16_3.BorderColor
+                        FocusedBorderThickness: =2
+                        Font: =Font.Lato
+                        FontWeight: =FontWeight.Bold
+                        Height: =30
+                        HoverBorderColor: =Label16_3.BorderColor
+                        HoverColor: =Label16_3.Color
+                        HoverFill: =Label16_3.Fill
+                        Live: =Live.Polite
+                        OnSelect: =
+                        PressedBorderColor: =Label16_3.BorderColor
+                        PressedColor: =Label16_3.Color
+                        PressedFill: =Label16_3.Fill
+                        Size: =varGlobals.Navigation.FontSize
+                        Text: =ThisItem.'Leave Type'.Name
+                        Width: =Parent.Width - 60
+                        X: =20
+                        Y: =10
+                        ZIndex: =6
+
+            Label1_10 As label:
+                Color: =varGlobals.Body.FontColor
+                FocusedBorderColor: =Label1_10.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Bold
+                Height: =21
+                HoverBorderColor: =Label1_10.BorderColor
+                HoverColor: =Label1_10.Color
+                HoverFill: =Label1_10.Fill
+                PressedBorderColor: =Label1_10.BorderColor
+                PressedColor: =Label1_10.Color
+                PressedFill: =Label1_10.Fill
+                Size: =varGlobals.Body.FontSize
+                Text: ="Approved Leave Requests"
+                Width: =300
+                X: =13
+                Y: =310
+                ZIndex: =4
+
+            "GalleryUserApprovedRequests As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                AccessibleLabel: ="Leave request gallery"
+                Default: =Blank()
+                DisabledBorderColor: =GalleryUserApprovedRequests.BorderColor
+                DisabledFill: =GalleryUserApprovedRequests.Fill
+                Fill: =RGBA(249, 249, 249, 1)
+                Height: =620
+                HoverBorderColor: =GalleryUserApprovedRequests.BorderColor
+                HoverFill: =GalleryUserApprovedRequests.Fill
+                Items: |-
+                    =Sort(
+                        Filter(
+                            'Leave Requests',
+                            Employee.Id = varUserProfile.Id && 'Approval Status' = ApprovalStatus.Approved && 'Start Date' >= Date(
+                                    varUserProfileYear,
+                                    1,
+                                    1
+                                ) && 'Start Date' <= Date(
+                                    varUserProfileYear,
+                                    12,
+                                    31
+                                )
+                        ),
+                        'Start Date',
+                        SortOrder.Descending
+                    )
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =287
+                LayoutMinWidth: =320
+                LoadingSpinnerColor: =GalleryUserApprovedRequests.BorderColor
+                OnSelect: =
+                PressedBorderColor: =GalleryUserApprovedRequests.BorderColor
+                PressedFill: =GalleryUserApprovedRequests.Fill
+                ShowScrollbar: =false
+                TemplateFill: =Color.White
+                TemplatePadding: =15
+                TemplateSize: =90
+                Visible: =CountRows(GalleryUserApprovedRequests.AllItems) > 0
+                Width: =1134
+                X: =232
+                Y: =148
+                ZIndex: =5
+
+                Label5_6 As label:
+                    Color: =varGlobals.Body.FontColor
+                    FocusedBorderColor: =Label5_6.BorderColor
+                    FocusedBorderThickness: =2
+                    Font: =varGlobals.Body.Font
+                    Height: =Label5_6.Size * 1.8
+                    HoverBorderColor: =Label5_6.BorderColor
+                    HoverColor: =Label5_6.Color
+                    HoverFill: =Label5_6.Fill
+                    OnSelect: =Select(Parent)
+                    PressedBorderColor: =Label5_6.BorderColor
+                    PressedColor: =Label5_6.Color
+                    PressedFill: =Label5_6.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: =Text(ThisItem.'Start Date',"[$-en-US]mmm dd, yyyy") & If(DateDiff(ThisItem.'Start Date', ThisItem.'End Date', TimeUnit.Days) <> 0, " - " & Text(ThisItem.'End Date',"[$-en-US]mmm dd, yyyy"))
+                    Width: =Parent.TemplateWidth
+                    X: =10
+                    Y: =32
+                    ZIndex: =1
+
+                Rectangle2_3 As rectangle:
+                    AccessibleLabel: =ThisItem.Name
+                    DisabledFill: =Rectangle2_3.Fill
+                    Fill: =ColorFade(varGlobals.Body.FontColor,80%)
+                    FocusedBorderColor: =Rectangle2_3.BorderColor
+                    Height: =1
+                    HoverFill: =Rectangle2_3.Fill
+                    OnSelect: =Select(Parent)
+                    PressedFill: =Rectangle2_3.Fill
+                    Width: =Parent.TemplateWidth
+                    Y: =Parent.TemplateHeight - Rectangle2_3.Height
+                    ZIndex: =2
+
+                rctStatus_3 As rectangle:
+                    Fill: |-
+                        =Switch(
+                            ThisItem.'Approval Status',
+                            "Draft",
+                            ColorFade(varGlobals.Body.FontColor,70%),
+                            "Approved",
+                            varGlobals.GreenRobot.Fill,
+                            "Declined",
+                            varGlobals.RedRobot.Fill,
+                            varGlobals.OrangeRobot.Fill
+                        )
+                    Height: =Parent.TemplateHeight
+                    OnSelect: =Select(Parent)
+                    Width: =5
+                    ZIndex: =3
+
+                Label3_5 As label:
+                    Color: =varGlobals.MainThemeColor.Fill
+                    FocusedBorderColor: =Label3_5.BorderColor
+                    FocusedBorderThickness: =2
+                    Font: =varGlobals.Body.Font
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    HoverBorderColor: =Label3_5.BorderColor
+                    HoverColor: =Label3_5.Color
+                    HoverFill: =Label3_5.Fill
+                    OnSelect: =Select(Parent)
+                    PaddingRight: =0
+                    PressedBorderColor: =Label3_5.BorderColor
+                    PressedColor: =Label3_5.Color
+                    PressedFill: =Label3_5.Fill
+                    Size: =varGlobals.Navigation.FontSize
+                    Text: =ThisItem.'Leave Type'.Name &  "- " & ThisItem.Duration & " day(s)"
+                    Width: =Parent.TemplateWidth
+                    Wrap: =false
+                    X: =10
+                    Y: =4
+                    ZIndex: =4
+
+                Label5_10 As label:
+                    Color: =varGlobals.Body.FontColor
+                    FocusedBorderColor: =Label5_10.BorderColor
+                    FocusedBorderThickness: =2
+                    Font: =varGlobals.Body.Font
+                    Height: =Label5_10.Size * 1.8
+                    HoverBorderColor: =Label5_10.BorderColor
+                    HoverColor: =Label5_10.Color
+                    HoverFill: =Label5_10.Fill
+                    OnSelect: =Select(Parent)
+                    PaddingRight: =0
+                    PressedBorderColor: =Label5_10.BorderColor
+                    PressedColor: =Label5_10.Color
+                    PressedFill: =Label5_10.Fill
+                    Size: =varGlobals.Body.FontSize
+                    Text: =ThisItem.'Approval Status'
+                    Width: =Parent.TemplateWidth
+                    Wrap: =false
+                    X: =10
+                    Y: =56
+                    ZIndex: =7
+
+                btnSelectLeaveItem_3 As button:
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =Parent.TemplateHeight
+                    OnSelect: |-
+                        =false//todo:link to adudit screen
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Text: =""
+                    Width: =Parent.TemplateWidth
+                    ZIndex: =8
+

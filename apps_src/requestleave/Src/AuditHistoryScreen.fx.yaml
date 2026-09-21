@@ -1,0 +1,133 @@
+AuditHistoryScreen As screen:
+    Fill: |-
+        =ColorValue("#FAF9F8")
+    OnHidden: =
+    OnVisible: =
+    Orientation: =If(AuditHistoryScreen.Width < AuditHistoryScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= AuditHistoryScreen.Width)
+
+    ContainerMainH_4 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =6
+
+        ContainerHeaderH_4 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =varGlobals.MainThemeColor.Fill
+            FillPortions: =0
+            Height: =70
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Icon1_6 As icon.BackArrow:
+                AlignInContainer: =AlignInContainer.Stretch
+                Color: =Color.White
+                Icon: =Icon.BackArrow
+                OnSelect: =Back();
+                PaddingLeft: =10
+                Width: =60
+                X: =18
+                ZIndex: =1
+
+            Label8_15 As label:
+                Align: =LayoutAlignItems.Center
+                Color: =RGBA(255, 255, 255, 1)
+                FillPortions: =1
+                FocusedBorderColor: =Label8_15.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverBorderColor: =Label8_15.BorderColor
+                HoverColor: =Label8_15.Color
+                HoverFill: =Label8_15.Fill
+                PressedBorderColor: =Label8_15.BorderColor
+                PressedColor: =Label8_15.Color
+                PressedFill: =Label8_15.Fill
+                Size: =If(AuditHistoryScreen.Size = 1,varGlobals.Header.FontSize-4,varGlobals.Header.FontSize)
+                Text: ="Leave request history"
+                Width: =1366
+                ZIndex: =2
+
+        Container2 As groupContainer.verticalAutoLayoutContainer:
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =15
+            LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            LayoutWrap: =true
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            ZIndex: =2
+
+            "GalHistory As gallery.'BrowseLayout_Flexible_SocialFeed_ver4.0'":
+                AlignInContainer: =AlignInContainer.SetByContainer
+                Items: =Sort(Filter('Leave Request History','Leave Request History'[@'Leave Request'].'Leave Request' = varLeaveRequestGUID),'Created On',SortOrder.Descending)
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =50
+                LayoutMinWidth: =320
+                ShowScrollbar: =false
+                TemplateFill: =Color.White
+                TemplateSize: =65
+                ZIndex: =2
+
+                lblAuditComments As label:
+                    AutoHeight: =true
+                    Color: =varGlobals.Body.FontColor
+                    FocusedBorderColor: =lblAuditComments.BorderColor
+                    FocusedBorderThickness: =02
+                    Font: =varGlobals.Body.Font
+                    Height: =66
+                    HoverBorderColor: =lblAuditComments.BorderColor
+                    HoverColor: =lblAuditComments.Color
+                    HoverFill: =lblAuditComments.Fill
+                    OnSelect: =Select(Parent)
+                    PressedBorderColor: =lblAuditComments.BorderColor
+                    PressedColor: =lblAuditComments.Color
+                    PressedFill: =lblAuditComments.Fill
+                    Size: =varGlobals.Navigation.FontSize
+                    Text: |-
+                        ="Comment: " & ThisItem.'Actor Comments'
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.TemplateWidth
+                    Y: =lblAuditTitle.Y + lblAuditTitle.Height + 5
+                    ZIndex: =3
+
+                lblAuditTitle As label:
+                    AutoHeight: =true
+                    Color: =If("Decline" in ThisItem.Action, varGlobals.RedRobot.Fill ,varGlobals.MainThemeColor.Fill)
+                    FocusedBorderColor: =lblAuditTitle.BorderColor
+                    FocusedBorderThickness: =02
+                    Font: =varGlobals.Body.Font
+                    FontWeight: =FontWeight.Semibold
+                    Height: =32
+                    HoverBorderColor: =lblAuditTitle.BorderColor
+                    HoverColor: =lblAuditTitle.Color
+                    HoverFill: =lblAuditTitle.Fill
+                    OnSelect: =Select(Parent)
+                    PressedBorderColor: =lblAuditTitle.BorderColor
+                    PressedColor: =lblAuditTitle.Color
+                    PressedFill: =lblAuditTitle.Fill
+                    Size: =varGlobals.Navigation.FontSize
+                    Text: |-
+                        =Upper(ThisItem.Action) & Char(10) & "by " & ThisItem.Actor & " (" & Text(ThisItem.'Created On',"dd mmm yyyy HH:mmmm:ss") & ")"
+                    Width: =Parent.TemplateWidth
+                    ZIndex: =4
+
+                Rectangle9_18 As rectangle:
+                    DisabledFill: =Rectangle9_18.Fill
+                    Fill: =ColorFade(varGlobals.Body.FontColor,90%)
+                    FocusedBorderColor: =Rectangle9_18.BorderColor
+                    Height: =2
+                    HoverFill: =Rectangle9_18.Fill
+                    PressedFill: =Rectangle9_18.Fill
+                    Width: =Parent.TemplateWidth
+                    Y: =lblAuditComments.Y + lblAuditComments.Height + 5
+                    ZIndex: =5
+

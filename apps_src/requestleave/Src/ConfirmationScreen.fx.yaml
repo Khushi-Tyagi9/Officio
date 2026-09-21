@@ -1,0 +1,212 @@
+ConfirmationScreen As screen:
+    Fill: |-
+        =ColorValue("#FAF9F8")
+    OnHidden: =Set(_showDetails, false)
+    OnVisible: |-
+        =Set(
+            varSuccessIcon,
+            Icon.Check
+        );
+        If(
+            _submittingRequest,
+            Set(
+                varStatusText,
+                "Your request is being processed..."
+            );
+            Set(
+                varTmpLeaveRequest,
+                First(ColTmpLeaveRequest)
+            );
+                //if editing a request, revise the record that is being edited, otherwise create a new one 
+        
+                //check error session from Dawid to ensure we doing this in the best way
+        IfError(
+                Patch(
+                    'Leave Requests',
+                    If(
+                        _requestType = "Edit",
+                        LookUp(
+                            'Leave Requests',
+                            'Leave Request' = varTmpLeaveRequest.ID
+                        ),
+                        Defaults('Leave Requests')
+                    ),
+                    {
+                        //Title: txtLeaveTitle.Text,
+                        'Leave Detail': varTmpLeaveRequest.Details,
+                        'Start Date': varTmpLeaveRequest.StartDate,
+                        'End Date': varTmpLeaveRequest.EndDate,
+                        'Leave Type': varTmpLeaveRequest.LeaveType,
+                        Duration: varTmpLeaveRequest.Duration,
+                        'Approver Email': varTmpLeaveRequest.ApproverEmail,
+                        'Approver ID': varTmpLeaveRequest.ApproverID,
+                        'Approval Status': ApprovalStatus.FirstLevel,
+                        'Persal Number': varTmpLeaveRequest.PersalNumber,
+                        'Single Day Duration': varTmpLeaveRequest.SingleDayDuration,
+                        Employee: _employeeRecord,
+                          'Last Actor': _myProfile.DisplayName,
+                    'Last Actor Action': "Submitted",
+                    'Last Actor Comments': varTmpLeaveRequest.Details,
+                    'Supporting Document': varTmpLeaveRequest.SupportingDocument,
+                     'Last Actor Timestamp': Now()
+                    }
+                ),
+        Set(
+                    varSuccessIcon,
+                    Icon.Cancel
+                );
+                Set(
+                    varStatusText,
+                    "Error submitting request! Select Dismiss and try again." & Char(10) & FirstError.Message
+                ),
+                Set(
+                    varStatusText,
+                    "Your request has been submitted for approval!" & Char(10) &  Char(10) & "Select dismiss to continue."
+                )
+            );
+          
+            //todo:only do this if above success, check for success first
+        Set(
+                _submittingRequest,
+                false
+            );
+            Set(
+                varTmpLeaveRequest,
+                Blank()
+            );
+            ,//else for top if
+            Notify(
+                "Not in record sumitting mode to submit edit/new record",
+                NotificationType.Information
+            )
+        )
+    Orientation: =If(ConfirmationScreen.Width < ConfirmationScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= ConfirmationScreen.Width)
+
+    ContainerMainH_12 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =15
+
+        ContainerHeaderH_12 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =varGlobals.MainThemeColor.Fill
+            FillPortions: =0
+            Height: =250
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Label8_6 As label:
+                Align: =LayoutAlignItems.Center
+                Color: =RGBA(255, 255, 255, 1)
+                FocusedBorderColor: =Label8_6.BorderColor
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =70
+                HoverBorderColor: =Label8_6.BorderColor
+                HoverColor: =Label8_6.Color
+                HoverFill: =Label8_6.Fill
+                PressedBorderColor: =Label8_6.BorderColor
+                PressedColor: =Label8_6.Color
+                PressedFill: =Label8_6.Fill
+                Size: =varGlobals.Header.FontSize
+                Text: ="Done"
+                Visible: =!_submittingRequest
+                Width: =Parent.Width
+                ZIndex: =1
+
+        Container17 As groupContainer.verticalAutoLayoutContainer:
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingTop: =20
+            ZIndex: =2
+
+            icon4 As icon.Check:
+                AccessibleLabel: ="Success"
+                Color: =RGBA(0, 128, 0, 1)
+                DisabledFill: =icon4.Fill
+                FocusedBorderColor: =icon4.BorderColor
+                Height: =130
+                HoverBorderColor: =ColorFade(icon4.BorderColor, 20%)
+                HoverColor: =ColorFade(icon4.Color, 20%)
+                HoverFill: =icon4.Fill
+                Icon: =varSuccessIcon
+                OnSelect: =Navigate(HomeScreen, BorderStyle.None)
+                PressedBorderColor: =ColorFade(icon4.BorderColor, -20%)
+                PressedColor: =ColorFade(icon4.Color, -20%)
+                PressedFill: =icon4.Fill
+                Visible: =!_submittingRequest
+                Width: =130
+                X: =(Parent.Width /2) - (Self.Width/2)
+                Y: =105
+                ZIndex: =1
+
+            LblRequestSubmitted As label:
+                Align: =LayoutAlignItems.Center
+                FocusedBorderColor: =LblRequestSubmitted.BorderColor
+                FocusedBorderThickness: =2
+                Font: =varGlobals.Body.Font
+                FontWeight: =FontWeight.Semibold
+                Height: =108
+                HoverBorderColor: =LblRequestSubmitted.BorderColor
+                HoverColor: =LblRequestSubmitted.Color
+                HoverFill: =LblRequestSubmitted.Fill
+                Live: =Live.Polite
+                OnSelect: =Navigate(HomeScreen, BorderStyle.None)
+                PressedBorderColor: =LblRequestSubmitted.BorderColor
+                PressedColor: =LblRequestSubmitted.Color
+                PressedFill: =LblRequestSubmitted.Fill
+                Size: =varGlobals.Navigation.FontSize
+                Text: =varStatusText
+                Width: =Parent.Width
+                Y: =235
+                ZIndex: =2
+
+        Container17_1 As groupContainer.verticalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =80
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =5
+            PaddingLeft: =20
+            PaddingRight: =20
+            PaddingTop: =5
+            ZIndex: =3
+
+            btnSubmitRequest_4 As button:
+                Align: =LayoutAlignItems.Center
+                AlignInContainer: =AlignInContainer.Stretch
+                BorderColor: =RGBA(0,0,0,1)
+                BorderThickness: =0
+                Color: =Color.White
+                DisabledBorderColor: =ColorFade(btnSubmitRequest_4.BorderColor, 70%)
+                DisplayMode: =If( IsBlank(txtLeaveDetails.Text) , DisplayMode.Disabled, DisplayMode.Edit)
+                Fill: =varGlobals.BlueRobot.Fill
+                FillPortions: =1
+                FocusedBorderColor: =btnSubmitRequest_4.BorderColor
+                Font: =varGlobals.Body.Font
+                Height: =80
+                HoverBorderColor: =ColorFade(btnSubmitRequest_4.BorderColor, 20%)
+                HoverColor: =btnSubmitRequest_4.Color
+                HoverFill: =ColorFade(btnSubmitRequest_4.Fill, 20%)
+                OnSelect: =Navigate(HomeScreen)
+                PressedBorderColor: =btnSubmitRequest_4.Fill
+                PressedColor: =btnSubmitRequest_4.Fill
+                PressedFill: =btnSubmitRequest_4.Color
+                Size: =varGlobals.Navigation.FontSize
+                Text: ="Dismiss"
+                Visible: =!_submittingRequest
+                Width: =Parent.Width
+                Y: =688
+                ZIndex: =1
+

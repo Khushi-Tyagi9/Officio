@@ -1,0 +1,98 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "contoso_employeeinfos",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "contoso_employeeinfo",
+    "MaxGetRowsCount": 500,
+    "Name": "Employee Info",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "contoso_Employee": "Employee",
+      "contoso_employeeinfo_AsyncOperations": "System Jobs",
+      "contoso_employeeinfo_BulkDeleteFailures": "Bulk Delete Failures",
+      "contoso_employeeinfo_DuplicateBaseRecord": "Duplicate Records (contoso_employeeinfo_DuplicateBaseRecord)",
+      "contoso_employeeinfo_DuplicateMatchingRecord": "Duplicate Records (contoso_employeeinfo_DuplicateMatchingRecord)",
+      "contoso_employeeinfo_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "contoso_employeeinfo_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "contoso_employeeinfo_ProcessSession": "Process Sessions",
+      "contoso_employeeinfo_SyncErrors": "Sync Errors",
+      "contoso_employeeinfoid": "Employee Info",
+      "contoso_persalnumber": "Persal Number",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Employee Info",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Employee Info (Views)",
+    "Name": "_contoso_employeeinfo_views",
+    "RelatedEntityName": "Employee Info",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "9f00d664-8fac-47b1-9c75-50763d5fa932": "Employee Info Advanced Find View",
+      "b43890d5-5a60-449b-b8d6-f849dd584ce3": "Active Employee Info",
+      "e425aeb4-c222-4ce0-8559-69a1d50db69e": "Inactive Employee Info",
+      "ed2ef006-6b59-45a3-98d4-3c55f7bc938b": "Employee Info Associated View",
+      "fa531bcb-1217-42a6-bf32-506931f891f0": "Employee Info Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Status (Employee Info)",
+    "Name": "contoso_employeeinfo_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Employee Info"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Employee Info",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Employee Info)",
+    "Name": "contoso_employeeinfo_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Employee Info"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Employee Info",
+    "Type": "OptionSetInfo"
+  }
+]

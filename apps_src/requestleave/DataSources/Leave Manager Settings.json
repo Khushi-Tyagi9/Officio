@@ -1,0 +1,142 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "contoso_leavemanagersettings",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "contoso_leavemanagersetting",
+    "MaxGetRowsCount": 500,
+    "Name": "Leave Manager Settings",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "contoso_appurl": "App URL",
+      "contoso_enableappfeedback": "Enable App Feedback",
+      "contoso_leavemanagersetting_AsyncOperations": "System Jobs",
+      "contoso_leavemanagersetting_BulkDeleteFailures": "Bulk Delete Failures",
+      "contoso_leavemanagersetting_DuplicateBaseRecord": "Duplicate Records (contoso_leavemanagersetting_DuplicateBaseRecord)",
+      "contoso_leavemanagersetting_DuplicateMatchingRecord": "Duplicate Records (contoso_leavemanagersetting_DuplicateMatchingRecord)",
+      "contoso_leavemanagersetting_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "contoso_leavemanagersetting_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "contoso_leavemanagersetting_ProcessSession": "Process Sessions",
+      "contoso_leavemanagersetting_SyncErrors": "Sync Errors",
+      "contoso_leavemanagersettingid": "Leave Manager Setting",
+      "contoso_leavepolicyurl": "Leave Policy",
+      "contoso_maxconsecutivedays": "Max Consecutive Days",
+      "contoso_name": "Name",
+      "contoso_sendmeetingrequest": "Send Meeting Request",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Leave Manager Settings",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Leave Manager Settings (Views)",
+    "Name": "_contoso_leavemanagersetting_views",
+    "RelatedEntityName": "Leave Manager Settings",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "4702cd74-0147-451e-b0a3-53245399c59c": "Active Leave Manager Settings",
+      "4daa3f12-7c72-49a2-8e51-cfaac5a1d13c": "Leave Manager Setting Lookup View",
+      "626f63a3-bc94-4523-af28-d635b9bdfebd": "Inactive Leave Manager Settings",
+      "9678737c-2ab7-4134-9e91-c9dd997e9ac0": "Leave Manager Setting Advanced Find View",
+      "c489b0c7-4cee-4bc6-815c-f17aeb321dac": "Leave Manager Setting Associated View"
+    }
+  },
+  {
+    "DisplayName": "Enable App Feedback (Leave Manager Settings)",
+    "Name": "contoso_leavemanagersetting_contoso_enableappfeedback",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_enableappfeedback",
+        "OptionSetReferenceEntityName": "Leave Manager Settings"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "contoso_enableappfeedback",
+    "RelatedEntityName": "Leave Manager Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Send Meeting Request (Leave Manager Settings)",
+    "Name": "contoso_leavemanagersetting_contoso_sendmeetingrequest",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_sendmeetingrequest",
+        "OptionSetReferenceEntityName": "Leave Manager Settings"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "contoso_sendmeetingrequest",
+    "RelatedEntityName": "Leave Manager Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Leave Manager Settings)",
+    "Name": "contoso_leavemanagersetting_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Leave Manager Settings"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Leave Manager Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Leave Manager Settings)",
+    "Name": "contoso_leavemanagersetting_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Leave Manager Settings"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Leave Manager Settings",
+    "Type": "OptionSetInfo"
+  }
+]

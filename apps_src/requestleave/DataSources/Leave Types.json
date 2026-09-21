@@ -1,0 +1,249 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "contoso_leavetypes",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "contoso_leavetype",
+    "MaxGetRowsCount": 500,
+    "Name": "Leave Types",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "contoso_allowhourlyrequest": "Allow Hourly Request",
+      "contoso_allowstartdateinpast": "Allow Start Date in Past",
+      "contoso_contoso_leavebalance_LeaveType_contoso_le": "Leave Balances",
+      "contoso_contoso_leaverequest_LeaveType_contoso_le": "Leave Requests",
+      "contoso_default": "Default",
+      "contoso_employeeselectable": "Employee Selectable",
+      "contoso_hasbalance": "Has Balance",
+      "contoso_leavedescription": "Leave Description",
+      "contoso_leavetype_AsyncOperations": "System Jobs",
+      "contoso_leavetype_BulkDeleteFailures": "Bulk Delete Failures",
+      "contoso_leavetype_DuplicateBaseRecord": "Duplicate Records (contoso_leavetype_DuplicateBaseRecord)",
+      "contoso_leavetype_DuplicateMatchingRecord": "Duplicate Records (contoso_leavetype_DuplicateMatchingRecord)",
+      "contoso_leavetype_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "contoso_leavetype_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "contoso_leavetype_ProcessSession": "Process Sessions",
+      "contoso_leavetype_SyncErrors": "Sync Errors",
+      "contoso_leavetypeid": "Leave Type",
+      "contoso_name": "Name",
+      "contoso_requiresupportdocinpastdays": "Require Support Doc in Past Days",
+      "contoso_requiresupportingdocdays": "Require Supporting Doc Days",
+      "contoso_requiresupportingdocument": "Require Supporting Document",
+      "contoso_specialtype": "Special Type",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Leave Types",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Leave Types (Views)",
+    "Name": "_contoso_leavetype_views",
+    "RelatedEntityName": "Leave Types",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "273af1b2-f049-41da-9e10-f29526d27588": "Leave Type Lookup View",
+      "541533a2-c039-40de-9467-0ed249ff1e76": "Leave Type Associated View",
+      "5574f3ae-5d4e-4ae8-9be3-038d1186efcc": "Active Leave Types",
+      "9b0e8b03-9459-4f8e-910e-941aa09871e5": "Leave Type Advanced Find View",
+      "d24dbd39-c3b9-4495-8f59-84db01897421": "Inactive Leave Types"
+    }
+  },
+  {
+    "DisplayName": "Allow Hourly Request (Leave Types)",
+    "Name": "contoso_leavetype_contoso_allowhourlyrequest",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_allowhourlyrequest",
+        "OptionSetReferenceEntityName": "Leave Types"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "contoso_allowhourlyrequest",
+    "RelatedEntityName": "Leave Types",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Allow Start Date in Past (Leave Types)",
+    "Name": "contoso_leavetype_contoso_allowstartdateinpast",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_allowstartdateinpast",
+        "OptionSetReferenceEntityName": "Leave Types"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "contoso_allowstartdateinpast",
+    "RelatedEntityName": "Leave Types",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Default (Leave Types)",
+    "Name": "contoso_leavetype_contoso_default",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_default",
+        "OptionSetReferenceEntityName": "Leave Types"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "contoso_default",
+    "RelatedEntityName": "Leave Types",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Employee Selectable (Leave Types)",
+    "Name": "contoso_leavetype_contoso_employeeselectable",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_employeeselectable",
+        "OptionSetReferenceEntityName": "Leave Types"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "contoso_employeeselectable",
+    "RelatedEntityName": "Leave Types",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Has Balance (Leave Types)",
+    "Name": "contoso_leavetype_contoso_hasbalance",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_hasbalance",
+        "OptionSetReferenceEntityName": "Leave Types"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "contoso_hasbalance",
+    "RelatedEntityName": "Leave Types",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Require Supporting Document (Leave Types)",
+    "Name": "contoso_leavetype_contoso_requiresupportingdocument",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_requiresupportingdocument",
+        "OptionSetReferenceEntityName": "Leave Types"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "contoso_requiresupportingdocument",
+    "RelatedEntityName": "Leave Types",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Special Type (Leave Types)",
+    "Name": "contoso_leavetype_contoso_specialtype",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_specialtype",
+        "OptionSetReferenceEntityName": "Leave Types"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "contoso_specialtype",
+    "RelatedEntityName": "Leave Types",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Leave Types)",
+    "Name": "contoso_leavetype_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Leave Types"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Leave Types",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Leave Types)",
+    "Name": "contoso_leavetype_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Leave Types"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Leave Types",
+    "Type": "OptionSetInfo"
+  }
+]
