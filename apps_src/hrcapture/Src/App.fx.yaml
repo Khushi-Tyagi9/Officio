@@ -1,0 +1,30 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |-
+        =If(
+            IsBlank(Param("recordId")),
+            Set(
+                varRecordId,
+                "C8E42C53-4E9D-ED11-AAD1-000D3A25B1BB"
+            ),
+            Set(
+                varRecordId,
+                Substitute(
+                    Substitute(
+                        Param("recordId"),
+                        "}",
+                        ""
+                    ),
+                    "{",
+                    ""
+                )
+            )
+        );
+        Set(
+            varCurrentLeaveRequest,
+            LookUp(
+                'Leave Requests',
+                'Leave Request' = GUID(varRecordId)
+            )
+        )
+

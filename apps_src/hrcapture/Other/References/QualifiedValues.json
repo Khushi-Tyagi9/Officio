@@ -1,0 +1,19 @@
+{
+  "QualifiedValues": [
+    {
+      "Kind": "default.cds_contoso_leaverequest_forms",
+      "Namespace": "Leave Requests (Forms)",
+      "Values": {
+        "Information": "7b92ed60-9534-4cd6-a862-f803a688a539"
+      }
+    },
+    {
+      "Kind": "default.cds_aaduser_forms",
+      "Namespace": "AAD Users (Forms)",
+      "Values": {
+        "Employee Info": "0221d7ff-4f7c-ed11-81ad-000d3a25b1bb",
+        "Information": "dd5ded01-9aad-4e25-8d0e-e9acdaecbe4e"
+      }
+    }
+  ]
+}

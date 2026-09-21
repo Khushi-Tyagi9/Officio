@@ -1,0 +1,140 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "contoso_leaverequests",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "contoso_leaverequest",
+    "MaxGetRowsCount": 500,
+    "Name": "Leave Requests",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "contoso_approvalstatus": "Approval Status",
+      "contoso_approveremail": "Approver Email",
+      "contoso_approverid": "Approver ID",
+      "contoso_contoso_leaverequesthistory_LeaveRequest_": "Leave Request History",
+      "contoso_duration": "Duration",
+      "contoso_Employee": "Employee",
+      "contoso_enddate": "End Date",
+      "contoso_lastactor": "Last Actor",
+      "contoso_lastactoraction": "Last Actor Action",
+      "contoso_lastactorcomments": "Last Actor Comments",
+      "contoso_lastactortimestamp": "Last Actor Timestamp",
+      "contoso_leavedetail": "Leave Detail",
+      "contoso_leaverequest_AsyncOperations": "System Jobs",
+      "contoso_leaverequest_BulkDeleteFailures": "Bulk Delete Failures",
+      "contoso_leaverequest_DuplicateBaseRecord": "Duplicate Records (contoso_leaverequest_DuplicateBaseRecord)",
+      "contoso_leaverequest_DuplicateMatchingRecord": "Duplicate Records (contoso_leaverequest_DuplicateMatchingRecord)",
+      "contoso_leaverequest_FileAttachments": "FileAttachments",
+      "contoso_leaverequest_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "contoso_leaverequest_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "contoso_leaverequest_ProcessSession": "Process Sessions",
+      "contoso_leaverequest_SyncErrors": "Sync Errors",
+      "contoso_leaverequestid": "Leave Request",
+      "contoso_LeaveType": "Leave Type",
+      "contoso_name": "Name",
+      "contoso_persalnumber": "Persal Number",
+      "contoso_singledayduration": "Single Day Duration",
+      "contoso_startdate": "Start Date",
+      "contoso_supportingdocument": "Supporting Document",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Leave Requests",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Leave Requests (Views)",
+    "Name": "_contoso_leaverequest_views",
+    "RelatedEntityName": "Leave Requests",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "11480454-8ca0-ed11-aad1-000d3a25b1bb": "HR Pending Capture",
+      "24af5e11-d2a6-ed11-aad1-000d3a25b1bb": "Approved Leave Requests This Year",
+      "424bdead-e490-ed11-aad1-000d3a25b1bb": "Active Leave Requests Previous Years",
+      "5d1d7911-59e9-40ff-9b8d-6fe55a266a87": "Leave Request Lookup View",
+      "61d226be-0ea0-4005-80d4-fa602d31d13f": "Leave Request Advanced Find View",
+      "8a11cd30-8ca0-ed11-aad1-000d3a25b1bb": "HR Pending Approval",
+      "bce95d2d-87cd-466f-a106-332c63c70bde": "Leave Request Associated View",
+      "d4226530-8cb5-4727-a19c-527e4f7ee11d": "Inactive Leave Requests",
+      "eb9cb89b-575f-4322-b7cb-c41312dfd22a": "Active Leave Requests This Year"
+    }
+  },
+  {
+    "DisplayName": "Single Day Duration (Leave Requests)",
+    "Name": "contoso_leaverequest_contoso_singledayduration",
+    "OptionSetInfoNameMapping": {
+      "463270000": "All Day",
+      "463270001": "Half Day - Morning",
+      "463270002": "Half Day - Afternoon"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_singledayduration",
+        "OptionSetReferenceEntityName": "Leave Requests"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "contoso_singledayduration",
+    "RelatedEntityName": "Leave Requests",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Leave Requests)",
+    "Name": "contoso_leaverequest_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Leave Requests"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Leave Requests",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Leave Requests)",
+    "Name": "contoso_leaverequest_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Leave Requests"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Leave Requests",
+    "Type": "OptionSetInfo"
+  }
+]

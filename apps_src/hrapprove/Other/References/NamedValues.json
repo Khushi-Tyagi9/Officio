@@ -1,0 +1,14 @@
+{
+  "NamedValues": [
+    {
+      "Kind": "Page",
+      "Name": "Custom Page Template",
+      "Value": "custompage:cat_custompagetemplate_231d0"
+    },
+    {
+      "Kind": "Page",
+      "Name": "HRApprove",
+      "Value": "custompage:contoso_hrapprove_914d5"
+    }
+  ]
+}
