@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{b43890d5-5a60-449b-b8d6-f849dd584ce3}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="contoso_persalnumber" select="1" icon="1" preview="1">
+        <row name="result" id="contoso_employeeinfoid">
+          <cell name="contoso_persalnumber" width="210" />
+          <cell name="contoso_employee" width="196" />
+          <cell name="a_81182e1e5ba14385825e4b7ee5d44f17.mail" width="195" />
+          <cell name="a_81182e1e5ba14385825e4b7ee5d44f17.displayname" width="238" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="contoso_employeeinfo">
+          <attribute name="contoso_employeeinfoid" />
+          <attribute name="contoso_persalnumber" />
+          <attribute name="createdon" />
+          <order attribute="contoso_persalnumber" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="contoso_employee" />
+          <link-entity alias="a_81182e1e5ba14385825e4b7ee5d44f17" name="aaduser" to="contoso_employee" from="aaduserid" link-type="outer" visible="false">
+            <attribute name="mail" />
+            <attribute name="displayname" />
+          </link-entity>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Employee Info" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

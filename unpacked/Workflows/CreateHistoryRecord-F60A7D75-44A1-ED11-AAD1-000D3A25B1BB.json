@@ -1,0 +1,80 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "contoso_DVReference"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Leave_Request_Action_Taken": {
+          "metadata": {
+            "operationMetadataId": "75afffe4-9cbb-43c6-8dec-6b148f5b0970"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 4,
+              "subscriptionRequest/entityname": "contoso_leaverequest",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "contoso_lastactortimestamp"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Add_Action_to_History_Table": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "5c8dabd3-f5fa-4085-9aef-1accfcb40c90"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "CreateRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "contoso_leaverequesthistories",
+              "item/contoso_LeaveRequest@odata.bind": "contoso_leaverequests(@{triggerOutputs()?['body/contoso_leaverequestid']})",
+              "item/contoso_name": "@triggerOutputs()?['body/contoso_lastactoraction']",
+              "item/contoso_action": "@triggerOutputs()?['body/contoso_lastactoraction']",
+              "item/contoso_actor": "@triggerOutputs()?['body/contoso_lastactor']",
+              "item/contoso_actorcomments": "@triggerOutputs()?['body/contoso_lastactorcomments']",
+              "item/ownerid@odata.bind": "systemusers(@{triggerOutputs()?['body/_ownerid_value']})"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "outputs": {}
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

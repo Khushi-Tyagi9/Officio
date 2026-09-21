@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{e425aeb4-c222-4ce0-8559-69a1d50db69e}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="contoso_persalnumber" select="1" icon="1" preview="1">
+        <row name="result" id="contoso_employeeinfoid">
+          <cell name="contoso_persalnumber" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="contoso_employeeinfo">
+          <attribute name="contoso_employeeinfoid" />
+          <attribute name="contoso_persalnumber" />
+          <attribute name="createdon" />
+          <order attribute="contoso_persalnumber" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Employee Info" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

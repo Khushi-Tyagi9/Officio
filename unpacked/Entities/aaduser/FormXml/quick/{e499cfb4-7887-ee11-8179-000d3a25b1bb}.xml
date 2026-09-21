@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{e499cfb4-7887-ee11-8179-000d3a25b1bb}</formid>
+    <IntroducedVersion>1.0.0.15</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab id="ACBA75B7-97B6-4116-AA55-51312992B721" name="tab_1" showlabel="false" labelid="{61170215-a7b1-436c-ac6d-bed592c32871}">
+          <labels>
+            <label description="New Tab" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section id="AD49B5BF-256F-46A8-9C75-947146172EB9" name="tab_1_column_1_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{a2ba4a9d-fe35-4e88-8197-9613e3eef661}">
+                  <labels>
+                    <label description="Personal Details from Active Directory" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="C0550AC7-0F44-45A4-8EF5-D2911C0689D9" labelid="{ebb6feb8-0578-4e86-ad63-78ebb534ef67}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b590f869-b5b9-4d27-bb50-3398a2a54dcc}" locklevel="0" colspan="1" rowspan="1" labelid="{05369cb2-0135-4fad-8f52-a3c7c76cfe69}">
+                        <labels>
+                          <label description="Display Name" languagecode="1033" />
+                        </labels>
+                        <control id="displayname" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="displayname" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e1039c52-2384-48d6-8673-fd16a280b67e}" locklevel="0" colspan="1" rowspan="1" labelid="{bddce1fc-5b8e-42ab-840e-102d4ad5212d}">
+                        <labels>
+                          <label description="Job Title" languagecode="1033" />
+                        </labels>
+                        <control id="jobtitle" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="jobtitle" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ff304c92-1f5e-4995-a20d-0b67376484c5}" locklevel="0" colspan="1" rowspan="1" labelid="{64dd46f5-e449-48c1-bd89-a8b3874f9f95}">
+                        <labels>
+                          <label description="Business Phones" languagecode="1033" />
+                        </labels>
+                        <control id="businessphones" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="businessphones" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{cff03907-9c2d-4d75-a60b-d0be73ba619e}" locklevel="0" colspan="1" rowspan="1" labelid="{797c79ca-680e-4448-8cd9-ee675fb8e071}">
+                        <labels>
+                          <label description="Mail" languagecode="1033" />
+                        </labels>
+                        <control id="mail" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="mail" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{25dcc2ad-bf0d-4790-b91a-508037352f79}" locklevel="0" colspan="1" rowspan="1" labelid="{7ddca58b-3b90-4e1e-9b60-7ce83c2bb5a9}">
+                        <labels>
+                          <label description="Mobile Phone" languagecode="1033" />
+                        </labels>
+                        <control id="mobilephone" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="mobilephone" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{18b9779c-0879-4935-b8bf-cf48e67fe129}" locklevel="0" colspan="1" rowspan="1" labelid="{fd14f253-23e2-4f39-9d0e-de792d148918}">
+                        <labels>
+                          <label description="Office Location" languagecode="1033" />
+                        </labels>
+                        <control id="officelocation" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="officelocation" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8168df0f-4daf-4ed1-ba5f-8384cc976486}" locklevel="0" colspan="1" rowspan="1" labelid="{56d5eea0-37ff-4246-9bf6-cbd23ba78d60}">
+                        <labels>
+                          <label description="User Principal Name" languagecode="1033" />
+                        </labels>
+                        <control id="userprincipalname" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="userprincipalname" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="1" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Personal Details Quick View" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Quick view information from Active Directory" languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

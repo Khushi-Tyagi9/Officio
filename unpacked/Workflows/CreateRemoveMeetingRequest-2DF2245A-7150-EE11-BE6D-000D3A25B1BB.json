@@ -1,0 +1,333 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_office365_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_5d239"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
+      },
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "contoso_DVReference"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_leave_request_approval_status_changes": {
+          "metadata": {
+            "operationMetadataId": "1d706d8d-39f4-40d7-968d-e87007ade29e"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "contoso_leaverequest",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "contoso_approvalstatus",
+              "subscriptionRequest/filterexpression": "contoso_approvalstatus eq 'Approved' or contoso_approvalstatus eq 'Cancelled'",
+              "subscriptionRequest/runas": 3
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Get_Settings": {
+          "runAfter": {
+            "Initialize_EmployeeEmailAddress": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "80bad5ef-7211-4b30-9d89-7c97904ffdf6"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "contoso_leavemanagersettings",
+              "$filter": "contoso_name eq 'default'",
+              "$top": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Initialize_LeaveAppUrl": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "94f9fa82-3963-4e9e-8834-988d52e9d2a7"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "LeaveAppUrl",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "Initialize_SendMeetingRequests": {
+          "runAfter": {
+            "Initialize_LeaveAppUrl": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "421db171-5de6-4aec-8d44-e5bac551e21e"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "SendMeetingRequests",
+                "type": "boolean"
+              }
+            ]
+          }
+        },
+        "Apply_to_each": {
+          "foreach": "@outputs('Get_Settings')?['body/value']",
+          "actions": {
+            "Set_LeaveAppUrl": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "86b4e271-23c9-4a3a-ba88-a5e759fecdcd"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "LeaveAppUrl",
+                "value": "@items('Apply_to_each')?['contoso_appurl']"
+              }
+            },
+            "Set_SendMeetingRequests": {
+              "runAfter": {
+                "Set_LeaveAppUrl": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "79105918-0cb7-4b6c-9809-5cf634508654"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "SendMeetingRequests",
+                "value": "@items('Apply_to_each')?['contoso_sendmeetingrequest']"
+              }
+            }
+          },
+          "runAfter": {
+            "Get_Settings": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "8f3e933c-1bee-4e47-8bb5-22abf42b4b29"
+          },
+          "type": "Foreach"
+        },
+        "Condition": {
+          "actions": {
+            "Get_CreatedBy_User": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "81c4ad12-9cc4-42df-9b7d-fe8e4f7d89b9"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "systemusers",
+                  "recordId": "@triggerOutputs()?['body/_createdby_value']"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Set_EmployeeEmailAddress": {
+              "runAfter": {
+                "Get_CreatedBy_User": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f3222f25-7766-4fa3-9177-a4a090744a01"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "EmployeeEmailAddress",
+                "value": "@outputs('Get_CreatedBy_User')?['body/internalemailaddress']"
+              }
+            },
+            "Switch": {
+              "runAfter": {
+                "Set_EmployeeEmailAddress": [
+                  "Succeeded"
+                ]
+              },
+              "cases": {
+                "Approved": {
+                  "case": "Approved",
+                  "actions": {
+                    "Create_Meeting_Request": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "12879cb8-4206-4be5-9fa2-d4066a28d20b"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_office365_1",
+                          "operationId": "V4CalendarPostItem",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                        },
+                        "parameters": {
+                          "table": "AAMkADc0ZDA5NWQzLTZkYjItNGJlOC05YjkyLTllYjcyMmUxODg2MABGAAAAAAD-BzoLvTEfQqO7Pm1IcS7iBwBgyVTM3NgvRq94U-vT7D2yAAAAAAEGAABgyVTM3NgvRq94U-vT7D2yAAGNz-6HAAA=",
+                          "item/subject": "Approved time off",
+                          "item/start": "@formatDateTime(triggerOutputs()?['body/contoso_startdate'],'yyyy-MM-ddTHH:mm:ss')",
+                          "item/end": "@formatDateTime(triggerOutputs()?['body/contoso_enddate'],'yyyy-MM-ddTHH:mm:ss')",
+                          "item/timeZone": "(UTC+02:00) Harare, Pretoria",
+                          "item/requiredAttendees": "@variables('EmployeeEmailAddress')",
+                          "item/body": "<p>ATTENTION: This calendar item has been automatically generated by the request workflow in the leave application. Any updates or modifications made in Outlook to this leave request item will <strong>not </strong>reflect in the associated leave request. To modify or cancel this request please go to the leave request application.</p>",
+                          "item/isAllDay": "@if(startsWith(triggerOutputs()?['body/_contoso_singledayduration_label'],'Half'),false,true)",
+                          "item/showAs": "oof"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Save_Meeting_Request_ID": {
+                      "runAfter": {
+                        "Create_Meeting_Request": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "19b9b5a4-7d90-4fca-924e-693dfc0d457a"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps",
+                          "operationId": "UpdateRecord",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "contoso_leaverequests",
+                          "recordId": "@triggerOutputs()?['body/contoso_leaverequestid']",
+                          "item/contoso_meetingrequestid": "@outputs('Create_Meeting_Request')?['body/id']"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    }
+                  }
+                },
+                "Cancelled": {
+                  "case": "Cancelled",
+                  "actions": {
+                    "Delete_event_(V2)": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "2812ca2e-8153-4347-88ba-dee7483011d2"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_office365_1",
+                          "operationId": "CalendarDeleteItem_V2",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                        },
+                        "parameters": {
+                          "calendar": "AAMkADc0ZDA5NWQzLTZkYjItNGJlOC05YjkyLTllYjcyMmUxODg2MABGAAAAAAD-BzoLvTEfQqO7Pm1IcS7iBwBgyVTM3NgvRq94U-vT7D2yAAAAAAEGAABgyVTM3NgvRq94U-vT7D2yAAGNz-6HAAA=",
+                          "event": "@triggerOutputs()?['body/contoso_meetingrequestid']"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    }
+                  }
+                }
+              },
+              "default": {
+                "actions": {}
+              },
+              "expression": "@triggerOutputs()?['body/contoso_approvalstatus']",
+              "metadata": {
+                "operationMetadataId": "c1a7cb3c-a116-40d5-89ff-e2b9db5a0d08"
+              },
+              "type": "Switch"
+            }
+          },
+          "runAfter": {
+            "Apply_to_each": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "equals": [
+              "@variables('SendMeetingRequests')",
+              true
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "3329cabf-73f4-4bdf-adf9-7e17b61928b9"
+          },
+          "type": "If"
+        },
+        "Initialize_EmployeeEmailAddress": {
+          "runAfter": {
+            "Initialize_SendMeetingRequests": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ee9ba1c6-15fc-4106-a38d-2eddbd2a2f11"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "EmployeeEmailAddress",
+                "type": "string"
+              }
+            ]
+          }
+        }
+      },
+      "outputs": {}
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

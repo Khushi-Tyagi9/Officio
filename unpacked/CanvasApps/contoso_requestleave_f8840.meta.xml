@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>contoso_requestleave_f8840</Name>
+  <AppVersion>2023-11-22T10:05:41Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.23105.18.0</CreatedByClientVersion>
+  <MinClientVersion>3.23105.18.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","publisherVersion":"3.23105.18","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false","sienaVersion":"20231121T101523Z-3.23105.18.0","showStatusBar":"false"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>rgba(0, 176, 240, 1)</BackgroundColor>
+  <DisplayName>Request Leave</DisplayName>
+  <Description>Submit a leave request for manager approval. Select leave type, date ranges, add notes and manage your time off.</Description>
+  <CommitMessage xsi:nil="true"></CommitMessage>
+  <Publisher xsi:nil="true"></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{"828dcb9f-e6ce-48f1-9af4-4129b110a4b8":{"id":"/providers/microsoft.powerapps/apis/shared_office365users","displayName":"Office 365 Users","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1664/1.0.1664.3477/office365users/icon.png","dataSources":["Office365Users"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["DirectReports_V2","MyProfile","Manager","UserPhotoMetadata","UserPhoto","SearchUser","UserProfile"]}}</ConnectionReferences>
+  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds","overrideValues":{"status":"NotSpecified"}},"dataSources":{"Leave Types":{"entitySetName":"contoso_leavetypes","logicalName":"contoso_leavetype"},"Holidays":{"entitySetName":"contoso_holidaies","logicalName":"contoso_holiday"},"Leave Balances":{"entitySetName":"contoso_leavebalances","logicalName":"contoso_leavebalance"},"Security Roles":{"entitySetName":"roles","logicalName":"role"},"Users":{"entitySetName":"systemusers","logicalName":"systemuser"},"Leave Request History":{"entitySetName":"contoso_leaverequesthistories","logicalName":"contoso_leaverequesthistory"},"Leave Manager Settings":{"entitySetName":"contoso_leavemanagersettings","logicalName":"contoso_leavemanagersetting"},"Leave Requests":{"entitySetName":"contoso_leaverequests","logicalName":"contoso_leaverequest"},"Employee Info":{"entitySetName":"contoso_employeeinfos","logicalName":"contoso_employeeinfo"},"Microsoft Entra IDs":{"entitySetName":"aadusers","logicalName":"aaduser"}}}}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[{"appComponentName":"5e809f71963940fb9090606b496a074c","appName":"550e11bb-9d71-4408-9ca1-d098fd2a6ef8","appComponentLibraryName":"fa15803c-03b2-4ea6-a995-2ebf31c904d3","appComponentLibraryVersion":"2023-02-07T09:11:17Z","appComponentLibraryLogicalName":"cr245_popupdialog_df241","environmentName":"c4259b43-dd33-e1d7-a99c-3805d2faca57"}]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>0</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"logicalname":"contoso_leavetype","componenttype":1},{"logicalname":"contoso_holiday","componenttype":1},{"logicalname":"contoso_leavebalance","componenttype":1},{"logicalname":"role","componenttype":1},{"logicalname":"systemuser","componenttype":1},{"logicalname":"contoso_leaverequesthistory","componenttype":1},{"logicalname":"contoso_leavemanagersetting","componenttype":1},{"logicalname":"contoso_leaverequest","componenttype":1},{"logicalname":"contoso_employeeinfo","componenttype":1},{"logicalname":"aaduser","componenttype":1},{"logicalname":"cr245_popupdialog_df241","componenttype":300,"componenttypeplatformname":"CanvasApp"}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/contoso_requestleave_f8840_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/contoso_requestleave_f8840_DocumentUri.msapp</DocumentUri>
+</CanvasApp>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{11480454-8ca0-ed11-aad1-000d3a25b1bb}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="contoso_name" select="1" icon="1" preview="1">
+        <row name="result" id="contoso_leaverequestid">
+          <cell name="contoso_name" width="141" />
+          <cell name="contoso_employee" width="156" />
+          <cell name="contoso_persalnumber" width="120" />
+          <cell name="contoso_startdate" width="140" />
+          <cell name="contoso_leavetype" width="121" />
+          <cell name="contoso_duration" width="95" />
+          <cell name="contoso_singledayduration" width="116" />
+          <cell name="contoso_approvalstatus" width="157" />
+          <cell name="createdon" width="128" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical" distinct="true">
+        <entity name="contoso_leaverequest">
+          <attribute name="contoso_leaverequestid" />
+          <attribute name="contoso_name" />
+          <attribute name="createdon" />
+          <order attribute="contoso_name" descending="false" />
+          <attribute name="contoso_employee" />
+          <attribute name="contoso_duration" />
+          <attribute name="contoso_approvalstatus" />
+          <attribute name="contoso_startdate" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+            <condition attribute="contoso_approvalstatus" operator="eq" value="Pending HR Capture" />
+          </filter>
+          <attribute name="contoso_leavetype" />
+          <attribute name="contoso_persalnumber" />
+          <attribute name="contoso_singledayduration" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.2</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="HR Pending Capture" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

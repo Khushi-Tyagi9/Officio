@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{5b2a1462-cf90-ed11-aad1-000d3a25b1bb}</WebResourceId>
+  <Name>contoso_LeaveRequestIcon</Name>
+  <DisplayName>LeaveRequestIcon</DisplayName>
+  <WebResourceType>11</WebResourceType>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/contoso_LeaveRequestIcon5B2A1462-CF90-ED11-AAD1-000D3A25B1BB</FileName>
+</WebResource>

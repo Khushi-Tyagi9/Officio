@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{1065ec79-4d6e-ee11-9ae7-000d3a25b1bb}</formid>
+    <IntroducedVersion>1.0.0.15</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{cdbd8b6d-c00b-4121-9935-ab9514ca52aa}" IsUserDefined="1" name="General" labelid="{84e331ae-cb30-4cab-86c5-313349539b5d}">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{86838d46-a3ee-43f3-ac47-7105833f961a}" labelid="{2cc849dd-80cd-4f9d-ac04-748663771151}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{5e55b904-396a-42c2-9462-ba10a257160f}" labelid="{ea12a2da-e604-41eb-9bed-504b41818e2d}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="contoso_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{180c54aa-5297-4ad3-9740-8ab487ca336e}" locklevel="0" colspan="1" rowspan="6" labelid="{a76ce401-9264-43db-a677-f27d0d0d1f76}">
+                        <labels>
+                          <label description="Leave Description" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_leavedescription" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="contoso_leavedescription" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row>
+                      <cell id="{a3792536-e30c-4819-a0cc-9ae4ee528905}" locklevel="0" colspan="1" rowspan="1" labelid="{3b96357e-5814-469f-a6e5-1d829025c96a}">
+                        <labels>
+                          <label description="Special Leave Type" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_specialtype" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="contoso_specialtype" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{69646290-40c0-4cd4-b6e6-4c17027694d7}" locklevel="0" colspan="1" rowspan="1" labelid="{1fe81ae2-2fce-42dd-8c67-d1332b611106}">
+                        <labels>
+                          <label description="Employee Selectable?" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_employeeselectable" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="contoso_employeeselectable" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0fbb885f-2a7f-48d6-bb19-9142a0dd761d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Allow Start Date in Past" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_allowstartdateinpast" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="contoso_allowstartdateinpast" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ff889595-5a73-4f39-926b-a9d988d95f75}" locklevel="0" colspan="1" rowspan="1" labelid="{61768d7a-6e0e-4623-8bce-bfa919baba8c}">
+                        <labels>
+                          <label description="Has Balance (Allowance)?" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_hasbalance" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="contoso_hasbalance" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f7b40226-966f-4899-b029-60520d432118}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Allow Hourly Requests" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_allowhourlyrequest" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="contoso_allowhourlyrequest" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{bce5d6ff-affc-4d4c-a513-ea38c70242bf}" locklevel="0" colspan="1" rowspan="1" labelid="{b74f905c-8ba1-4bcc-9210-683efdf37341}">
+                        <labels>
+                          <label description="Is Default Leave Type?" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_default" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="contoso_default" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ad0610a4-9228-41e5-aea1-ea4e06754639}" locklevel="0" colspan="1" rowspan="1" labelid="{6e5663b8-c017-4660-bd69-236299a0c8fb}">
+                        <labels>
+                          <label description="Always Require Supporting Document?" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_requiresupportingdocument" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="contoso_requiresupportingdocument" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{31de26bc-0a2a-4ad0-9e4f-9da98ff9f8f7}" locklevel="0" colspan="1" rowspan="1" labelid="{2d3c2fa2-9681-423b-aa88-c638e7a1bc99}">
+                        <labels>
+                          <label description="Require Supporting Document After x Days" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_requiresupportingdocdays" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="contoso_requiresupportingdocdays" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{96321d70-5b17-45b2-ac72-06c8d81ba266}" locklevel="0" colspan="1" rowspan="1" labelid="{2538a103-06dc-4d88-b09b-bc822b4c7457}">
+                        <labels>
+                          <label description="Require Supporting Document Look Back Days" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_requiresupportdocinpastdays" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="contoso_requiresupportdocinpastdays" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{abe29995-6b81-4fee-8a5b-d9aa1fa78471}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{658eb097-cea2-4d9d-ae2c-4349de9a16df}" showlabel="false" labelid="{a4af2c6f-767a-4edc-a61c-06e1861f2340}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{9b2a0274-30ee-4921-9897-463a3d0019e8}" showlabel="false" labelid="{6cb95bf0-e199-4cdc-894a-003d9615c52f}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{73a8fc1e-6d7b-4ba6-a471-1710e86587c2}" showlabel="false" labelid="{889a2ab0-25dd-42d7-a149-f5f103f6beb2}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{6d641c99-b66f-4ef1-aa26-7495e0951d42}" colspan="1" rowspan="1" labelid="{9e332f2c-d1a0-47f8-ad31-dd3aaf01488a}">
+              <labels>
+                <label description="Owner" languagecode="1033" />
+              </labels>
+              <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{c53c2dcc-2f98-48b5-951b-f5dccc0acfa6}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{55d3c656-026f-46ea-8e93-040f952675d8}" showlabel="false" labelid="{64563045-6662-465c-8962-a039f0ebb3f6}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f84440d1-7758-487f-a728-a2b4dbcbce1f}" showlabel="false" labelid="{a1e4b41d-95cb-463a-b056-86421a27b590}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{ff0f9f82-03b9-4345-88f8-90635abe41d3}" showlabel="false" labelid="{0d80afe9-e75c-4064-af9f-b9c87333a9d6}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="1" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{fc2657ac-a4a0-ed11-aad1-000d3a25b1bb}</WebResourceId>
+  <Name>contoso_ApproveLeaveDialogJS</Name>
+  <DisplayName>ApproveLeaveDialogJS</DisplayName>
+  <LanguageCode>0</LanguageCode>
+  <WebResourceType>3</WebResourceType>
+  <IntroducedVersion>1.0.0.2</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/contoso_ApproveLeaveDialogJSFC2657AC-A4A0-ED11-AAD1-000D3A25B1BB</FileName>
+</WebResource>

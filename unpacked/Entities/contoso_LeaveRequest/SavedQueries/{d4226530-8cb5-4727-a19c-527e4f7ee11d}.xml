@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{d4226530-8cb5-4727-a19c-527e4f7ee11d}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="contoso_name" select="1" icon="1" preview="1">
+        <row name="result" id="contoso_leaverequestid">
+          <cell name="contoso_name" width="194" />
+          <cell name="contoso_employee" width="130" />
+          <cell name="contoso_persalnumber" width="173" />
+          <cell name="contoso_leavetype" width="167" />
+          <cell name="contoso_duration" width="100" />
+          <cell name="contoso_approvalstatus" width="209" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="contoso_leaverequest">
+          <attribute name="contoso_leaverequestid" />
+          <attribute name="contoso_name" />
+          <attribute name="createdon" />
+          <order attribute="contoso_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+          <attribute name="contoso_employee" />
+          <attribute name="contoso_persalnumber" />
+          <attribute name="contoso_leavetype" />
+          <attribute name="contoso_approvalstatus" />
+          <attribute name="contoso_duration" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Leave Requests" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

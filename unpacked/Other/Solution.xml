@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml version="9.2.23121.190" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SolutionManifest>
+    <UniqueName>LeaveManager</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="Leave Manager" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions />
+    <Version>1.0.0.16</Version>
+    <Managed>0</Managed>
+    <Publisher>
+      <UniqueName>contoso</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="Contoso" languagecode="1033" />
+      </LocalizedNames>
+      <Descriptions />
+      <EMailAddress xsi:nil="true"></EMailAddress>
+      <SupportingWebsiteUrl xsi:nil="true"></SupportingWebsiteUrl>
+      <CustomizationPrefix>contoso</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>46327</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="1" schemaName="aaduser" behavior="1" />
+      <RootComponent type="1" schemaName="contoso_employeeinfo" behavior="0" />
+      <RootComponent type="1" schemaName="contoso_holiday" behavior="0" />
+      <RootComponent type="1" schemaName="contoso_leavebalance" behavior="0" />
+      <RootComponent type="1" schemaName="contoso_leavemanagersetting" behavior="0" />
+      <RootComponent type="1" schemaName="contoso_leaverequest" behavior="0" />
+      <RootComponent type="1" schemaName="contoso_leaverequesthistory" behavior="0" />
+      <RootComponent type="1" schemaName="contoso_leavetype" behavior="0" />
+      <RootComponent type="1" schemaName="systemuser" behavior="1" />
+      <RootComponent type="20" id="{46506b25-b29b-ed11-aad1-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="20" id="{8f3df58c-b19b-ed11-aad1-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="20" id="{d09e9026-b19b-ed11-aad1-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="29" id="{07d077e0-4d6e-ee11-9ae7-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="29" id="{2df2245a-7150-ee11-be6d-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="29" id="{4db2c766-4e6e-ee11-9ae7-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="29" id="{75dcf411-475c-ee11-be6e-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="29" id="{87367883-3997-ed11-aad1-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="29" id="{b21bd399-7189-ee11-8179-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="29" id="{e61a3b2e-4b8f-ee11-be36-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="29" id="{f60a7d75-44a1-ed11-aad1-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="29" id="{f9f8dee8-cfa6-ed11-aad1-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="300" schemaName="contoso_hrapprove_914d5" behavior="0" />
+      <RootComponent type="300" schemaName="contoso_hrcapture_18d19" behavior="0" />
+      <RootComponent type="300" schemaName="contoso_manageleavedefaultcommandlibrary_56cd8" behavior="0" />
+      <RootComponent type="300" schemaName="contoso_requestleave_f8840" behavior="0" />
+      <RootComponent type="300" schemaName="cr245_popupdialog_df241" behavior="0" />
+      <RootComponent type="60" id="{585588d2-d4a6-ed11-aad1-000d3a25b1bb}" behavior="0" />
+      <RootComponent type="61" schemaName="contoso_ApproveLeaveDialogJS" behavior="0" />
+      <RootComponent type="61" schemaName="contoso_calendaricon" behavior="0" />
+      <RootComponent type="61" schemaName="contoso_clipboard" behavior="0" />
+      <RootComponent type="61" schemaName="contoso_clipboardicon" behavior="0" />
+      <RootComponent type="61" schemaName="contoso_HierachyIcon" behavior="0" />
+      <RootComponent type="61" schemaName="contoso_LeaveRequestIcon" behavior="0" />
+      <RootComponent type="61" schemaName="contoso_LineChartIcon" behavior="0" />
+      <RootComponent type="61" schemaName="contoso_pencil" behavior="0" />
+      <RootComponent type="61" schemaName="contoso_pencilicon" behavior="0" />
+      <RootComponent type="61" schemaName="contoso_personicon" behavior="0" />
+      <RootComponent type="61" schemaName="contoso_SettingsIcon" behavior="0" />
+      <RootComponent type="61" schemaName="contoso_thumbsicon" behavior="0" />
+      <RootComponent type="62" schemaName="contoso_ManageLeave" behavior="0" />
+      <RootComponent type="80" schemaName="contoso_ManageLeave" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="1" schemaName="aaduser" displayName="Microsoft Entra ID" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="10" schemaName="contoso_contoso_leavebalance_Employee_aaduser" displayName="contoso_contoso_leavebalance_Employee_aaduser" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="10" schemaName="contoso_contoso_leaverequest_Employee_aaduser" displayName="contoso_contoso_leaverequest_Employee_aaduser" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="10" schemaName="contoso_employeeinfo_Employee_aaduser" displayName="contoso_employeeinfo_Employee_aaduser" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Data Issue - Missing Employee Record Association" displayName="Data Issue - Missing Employee Record Association" parentSchemaName="contoso_employeeinfo" parentDisplayName="Employee Info" id="{89e70e61-728f-ee11-be36-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Active Employee Info" displayName="Active Employee Info" parentSchemaName="contoso_employeeinfo" parentDisplayName="Employee Info" id="{b43890d5-5a60-449b-b8d6-f849dd584ce3}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Provisioned Active Employees" displayName="Provisioned Active Employees" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" id="{d02aaa73-7b87-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="300" schemaName="contoso_hrapprove_914d5" displayName="HRApprove" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="300" schemaName="contoso_hrcapture_18d19" displayName="HRCapture" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="300" schemaName="contoso_requestleave_f8840" displayName="Request Leave" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Employee Info" parentDisplayName="Microsoft Entra ID" id="{0221d7ff-4f7c-ed11-81ad-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Personal Details Quick View" parentDisplayName="Microsoft Entra ID" id="{e499cfb4-7887-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="62" schemaName="contoso_ManageLeave" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="80" schemaName="contoso_ManageLeave" displayName="Manage Leave" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="aaduserid" displayName="Id" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="10" schemaName="contoso_contoso_leavebalance_Employee_aaduser" displayName="contoso_contoso_leavebalance_Employee_aaduser" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="aaduserid" displayName="Id" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="10" schemaName="contoso_contoso_leaverequest_Employee_aaduser" displayName="contoso_contoso_leaverequest_Employee_aaduser" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="aaduserid" displayName="Id" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="10" schemaName="contoso_employeeinfo_Employee_aaduser" displayName="contoso_employeeinfo_Employee_aaduser" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="aaduserid" displayName="Id" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Data Issue - Missing Employee Record Association" displayName="Data Issue - Missing Employee Record Association" parentSchemaName="contoso_employeeinfo" parentDisplayName="Employee Info" id="{89e70e61-728f-ee11-be36-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="aaduserid" displayName="Id" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Active Employee Info" displayName="Active Employee Info" parentSchemaName="contoso_employeeinfo" parentDisplayName="Employee Info" id="{b43890d5-5a60-449b-b8d6-f849dd584ce3}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="aaduserid" displayName="Id" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Provisioned Active Employees" displayName="Provisioned Active Employees" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" id="{d02aaa73-7b87-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="accountenabled" displayName="Microsoft Entra ID Account Enabled" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Provisioned Active Employees" displayName="Provisioned Active Employees" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" id="{d02aaa73-7b87-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="accountenabled" displayName="Microsoft Entra ID Account Enabled" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Employee Info" parentDisplayName="Microsoft Entra ID" id="{0221d7ff-4f7c-ed11-81ad-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="businessphones" displayName="Business Phones" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Personal Details Quick View" parentDisplayName="Microsoft Entra ID" id="{e499cfb4-7887-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="displayname" displayName="Display Name" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="10" schemaName="contoso_contoso_leavebalance_Employee_aaduser" displayName="contoso_contoso_leavebalance_Employee_aaduser" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="displayname" displayName="Display Name" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="10" schemaName="contoso_contoso_leaverequest_Employee_aaduser" displayName="contoso_contoso_leaverequest_Employee_aaduser" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="displayname" displayName="Display Name" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="10" schemaName="contoso_employeeinfo_Employee_aaduser" displayName="contoso_employeeinfo_Employee_aaduser" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="displayname" displayName="Display Name" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Data Issue - Missing Employee Record Association" displayName="Data Issue - Missing Employee Record Association" parentSchemaName="contoso_employeeinfo" parentDisplayName="Employee Info" id="{89e70e61-728f-ee11-be36-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="displayname" displayName="Display Name" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Active Employee Info" displayName="Active Employee Info" parentSchemaName="contoso_employeeinfo" parentDisplayName="Employee Info" id="{b43890d5-5a60-449b-b8d6-f849dd584ce3}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="displayname" displayName="Display Name" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Provisioned Active Employees" displayName="Provisioned Active Employees" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" id="{d02aaa73-7b87-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="displayname" displayName="Display Name" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Employee Info" parentDisplayName="Microsoft Entra ID" id="{0221d7ff-4f7c-ed11-81ad-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="displayname" displayName="Display Name" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Personal Details Quick View" parentDisplayName="Microsoft Entra ID" id="{e499cfb4-7887-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="givenname" displayName="Given Name" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Employee Info" parentDisplayName="Microsoft Entra ID" id="{0221d7ff-4f7c-ed11-81ad-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="jobtitle" displayName="Job Title" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Provisioned Active Employees" displayName="Provisioned Active Employees" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" id="{d02aaa73-7b87-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="jobtitle" displayName="Job Title" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Employee Info" parentDisplayName="Microsoft Entra ID" id="{0221d7ff-4f7c-ed11-81ad-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="jobtitle" displayName="Job Title" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Personal Details Quick View" parentDisplayName="Microsoft Entra ID" id="{e499cfb4-7887-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="mail" displayName="Mail" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Data Issue - Missing Employee Record Association" displayName="Data Issue - Missing Employee Record Association" parentSchemaName="contoso_employeeinfo" parentDisplayName="Employee Info" id="{89e70e61-728f-ee11-be36-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="mail" displayName="Mail" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Active Employee Info" displayName="Active Employee Info" parentSchemaName="contoso_employeeinfo" parentDisplayName="Employee Info" id="{b43890d5-5a60-449b-b8d6-f849dd584ce3}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="mail" displayName="Mail" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Provisioned Active Employees" displayName="Provisioned Active Employees" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" id="{d02aaa73-7b87-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="mail" displayName="Mail" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Employee Info" parentDisplayName="Microsoft Entra ID" id="{0221d7ff-4f7c-ed11-81ad-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="mail" displayName="Mail" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Personal Details Quick View" parentDisplayName="Microsoft Entra ID" id="{e499cfb4-7887-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="mobilephone" displayName="Mobile Phone" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Employee Info" parentDisplayName="Microsoft Entra ID" id="{0221d7ff-4f7c-ed11-81ad-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="mobilephone" displayName="Mobile Phone" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Personal Details Quick View" parentDisplayName="Microsoft Entra ID" id="{e499cfb4-7887-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="officelocation" displayName="Office Location" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Personal Details Quick View" parentDisplayName="Microsoft Entra ID" id="{e499cfb4-7887-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="surname" displayName="Surname" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Employee Info" parentDisplayName="Microsoft Entra ID" id="{0221d7ff-4f7c-ed11-81ad-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="userprincipalname" displayName="User Principal Name" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="26" schemaName="Provisioned Active Employees" displayName="Provisioned Active Employees" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" id="{d02aaa73-7b87-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="userprincipalname" displayName="User Principal Name" parentSchemaName="aaduser" parentDisplayName="Microsoft Entra ID" solution="MetadataExtension (1.0.2.85)" />
+        <Dependent type="60" displayName="Personal Details Quick View" parentDisplayName="Microsoft Entra ID" id="{e499cfb4-7887-ee11-8179-000d3a25b1bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
+        <Dependent type="80" schemaName="contoso_ManageLeave" displayName="Manage Leave" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>

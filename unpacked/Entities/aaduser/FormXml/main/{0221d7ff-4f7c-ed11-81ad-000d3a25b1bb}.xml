@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{0221d7ff-4f7c-ed11-81ad-000d3a25b1bb}</formid>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{0aba9517-357d-4c2d-9b97-fb6d71235827}" IsUserDefined="1" labelid="{6bb9698c-a1a1-4150-90d7-a536769e619a}">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{6ad54a72-d561-4bfd-a62d-53eae435dd71}" columns="11" labelid="{252c6f45-fd4a-4669-bab4-d54bd1b25bcb}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{4e3a03cc-4149-4286-93d8-de7d623f8306}" labelid="{23c26c73-ee44-4881-aca5-5a789b279d2a}">
+                        <labels>
+                          <label description="Display Name" languagecode="1033" />
+                        </labels>
+                        <control id="displayname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="displayname" disabled="true" />
+                      </cell>
+                      <cell id="{5c344ce7-bdd9-4ded-b57f-23411ddd04b1}" locklevel="0" colspan="1" rowspan="1" labelid="{b1eef03f-84e5-4e5d-afb4-18d34c1d3626}">
+                        <labels>
+                          <label description="Mail" languagecode="1033" />
+                        </labels>
+                        <control id="mail" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="mail" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6697dae0-df25-4454-9e22-83f5451e73a2}" locklevel="0" colspan="1" rowspan="1" labelid="{dd814d0f-e527-440f-93bc-b4c340a49a10}">
+                        <labels>
+                          <label description="Given Name" languagecode="1033" />
+                        </labels>
+                        <control id="givenname" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="givenname" disabled="true" />
+                      </cell>
+                      <cell id="{3121cfa7-9d81-4275-913c-3d2f9b784ba7}" locklevel="0" colspan="1" rowspan="1" labelid="{3300a978-f740-44e9-8ed6-4e2c2e1d47ea}">
+                        <labels>
+                          <label description="Mobile Phone" languagecode="1033" />
+                        </labels>
+                        <control id="mobilephone" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="mobilephone" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c9340aae-402d-4223-a860-9c0d689ee830}" locklevel="0" colspan="1" rowspan="1" labelid="{58458cb7-fe27-4214-af96-f305007a58bb}">
+                        <labels>
+                          <label description="Surname" languagecode="1033" />
+                        </labels>
+                        <control id="surname" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="surname" disabled="true" />
+                      </cell>
+                      <cell id="{1600eb05-5acf-4fb4-8942-4b31681ca45d}" locklevel="0" colspan="1" rowspan="1" labelid="{f9fbc409-aa64-46eb-974d-6fdef11be99a}">
+                        <labels>
+                          <label description="AAD User Account Enabled" languagecode="1033" />
+                        </labels>
+                        <control id="accountenabled" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="accountenabled" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6cacb2cf-8ae2-44c7-a8e8-02d628801fc6}" locklevel="0" colspan="1" rowspan="1" labelid="{4e8c4c81-c260-4e4e-9574-69d733e0f54b}">
+                        <labels>
+                          <label description="Job Title" languagecode="1033" />
+                        </labels>
+                        <control id="jobtitle" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="jobtitle" disabled="true" />
+                      </cell>
+                      <cell locklevel="0" id="{6120df4f-1729-407e-a5ea-dc92f7c39fbb}" labelid="{c474a6e5-cc70-4bb9-938b-275b038d6856}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="section_leaverequests" id="1f2b0dd2-3c5b-4821-89dd-bb0947cdbc53" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Leave Requests" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell locklevel="0" id="{dc6eda89-4652-475f-8ac5-e37c0094532e}" rowspan="4" colspan="1" auto="false" showlabel="false">
+                        <labels>
+                          <label description="New SG control 1671091923717" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_1" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <TargetEntityType>contoso_leaverequest</TargetEntityType>
+                            <ViewId>{EB9CB89B-575F-4322-B7CB-C41312DFD22A}</ViewId>
+                            <ViewIds>{EB9CB89B-575F-4322-B7CB-C41312DFD22A}</ViewIds>
+                            <RelationshipName>contoso_contoso_leaverequest_Employee_aaduser</RelationshipName>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{21a81c90-6c0f-4269-9720-2ad3fd525317}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{0f667463-73a5-45c1-9020-02426882072e}" showlabel="false" labelid="{befc9d79-f6c2-47ed-8652-67a2c284856b}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{55ddf450-9d87-468b-80ee-15abfaa1c048}" showlabel="false" labelid="{4456d4ff-9df3-4209-a855-50204f6c86fe}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{ae5c4518-f9bc-421d-b4bf-2308a4afc7b4}" showlabel="false" labelid="{80081cda-5a90-452d-bd14-3320ad9b1684}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{cab9cb58-36f5-46b3-a7b5-9409f6e6d1d1}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{73b1f2b3-847e-4345-a78c-efa4c23c5040}" showlabel="false" labelid="{1b273a95-503f-4f5c-896e-c4800dc755a1}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{55f0ffa6-fa8e-4743-bdc5-9924b5071f62}" showlabel="false" labelid="{3219b7cf-c6e0-480c-9b5a-e636ea0a8b45}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{9407ae81-9cd1-4137-8817-56b9bdddfd24}" showlabel="false" labelid="{07e267b4-13a2-4187-a986-bfaeeb389847}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="1" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Employee Info" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

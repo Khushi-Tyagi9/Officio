@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>cr245_popupdialog_df241</Name>
+  <AppVersion>2023-02-07T09:11:17Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.23014.14.0</CreatedByClientVersion>
+  <MinClientVersion>3.23014.14.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"640","primaryDeviceHeight":"1136","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Phone","publisherVersion":"3.23014.14","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false","sienaVersion":"20230105T083202Z-3.22122.15.0"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>RGBA(251,101,60,255)</BackgroundColor>
+  <DisplayName>Popupdialog</DisplayName>
+  <Description xsi:nil="true"></Description>
+  <CommitMessage xsi:nil="true"></CommitMessage>
+  <Publisher xsi:nil="true"></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{"3f281771-fe57-4622-81d5-9de641fcc709":{"id":"/providers/microsoft.powerapps/apis/shared_office365users","displayName":"Office 365 Users","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1611/1.0.1611.3104/office365users/icon.png","dataSources":["Office365Users"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["SearchUser"]}}</ConnectionReferences>
+  <DatabaseReferences>{}</DatabaseReferences>
+  <AppComponents>[{"appComponentName":"5e809f71963940fb9090606b496a074c","displayName":"cmpModalDialog","appName":"fa15803c-03b2-4ea6-a995-2ebf31c904d3","appVersion":"2023-02-07T09:11:17Z","appComponentLibraryLogicalName":"cr245_popupdialog_df241","appDisplayName":"Popupdialog","environmentName":"c4259b43-dd33-e1d7-a99c-3805d2faca57","owner":{"id":"e1054d7e-dcc1-48e4-8773-4acb5b127093","displayName":"System Administrator","email":"admin@D365DEMOTSS243869.OnMicrosoft.com","type":"User","tenantId":"72da9820-1cb9-4a06-8c6e-1b9ec880dad7","userPrincipalName":"admin@D365DEMOTSS243869.onmicrosoft.com"},"allowCustomization":true,"createdOn":"2023-01-05T08:27:00.868Z","lastModifiedOn":"2023-02-07T09:07:00.131Z","connectionReferences":{"3f281771-fe57-4622-81d5-9de641fcc709":{"id":"/providers/microsoft.powerapps/apis/shared_office365users","dataSources":["Office365Users"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"dataSets":{},"actions":["SearchUser"]}},"databaseReferences":{}}]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>1</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/cr245_popupdialog_df241_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/cr245_popupdialog_df241_DocumentUri.msapp</DocumentUri>
+</CanvasApp>

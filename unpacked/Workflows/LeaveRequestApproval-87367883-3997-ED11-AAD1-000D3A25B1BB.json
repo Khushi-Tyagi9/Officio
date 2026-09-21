@@ -1,0 +1,373 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_office365": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "contoso_OutReference"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
+      },
+      "shared_commondataserviceforapps_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "contoso_DVReference"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Approval_Status_Column_Changes": {
+          "metadata": {
+            "operationMetadataId": "6f69b5be-084f-40c3-bf25-e6b9ab419509"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 4,
+              "subscriptionRequest/entityname": "contoso_leaverequest",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "contoso_approvalstatus",
+              "subscriptionRequest/runas": 3,
+              "subscriptionRequest/name": "87367883-3997-ed11-aad1-000d3a25b1bb"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "conditions": []
+        }
+      },
+      "actions": {
+        "Switch": {
+          "runAfter": {
+            "Apply_to_each": [
+              "Succeeded"
+            ]
+          },
+          "cases": {
+            "Submitted": {
+              "case": "Pending Manager Approval",
+              "actions": {
+                "Send_an_email_to_manager": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "22bdb267-19f3-4a07-ab33-586f6af959ab"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_office365",
+                      "operationId": "SendEmailV2",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                    },
+                    "parameters": {
+                      "emailMessage/To": "@triggerOutputs()?['body/contoso_approveremail']",
+                      "emailMessage/Subject": "Leave request waiting for your approval",
+                      "emailMessage/Body": "<p>Hi,<br>\n<br>\nYou have a new leave request waiting for your approval. Below are the details:<br>\n<br>\nSubmitted by: <b>@{outputs('Get_Created_By_User')?['body/fullname']}</b><br>\nLeave Type: <b>@{outputs('Get_Leave_Type')?['body/contoso_name']}</b><br>\nLeave Start Date: <b>@{triggerOutputs()?['body/contoso_startdate']}</b><br>\nLeave End Date: <b>@{triggerOutputs()?['body/contoso_enddate']}</b><br>\nLeave Duration: <b>@{triggerOutputs()?['body/contoso_duration']}</b><br>\nLeave Comments: <b>@{triggerOutputs()?['body/contoso_leavedetail']}</b><br>\n<br>\nYou can open the leave manager app and approve/decline the request. Follow <b><a href=\"@{variables('LeaveManagerPowerAppURL')}\">this link</a></b> directly to the approval section in the application.<br>\n<br>\nRegards.<br>\nLeave System<br>\n<br>\nNote - do no reply directly to this email, it comes from a mailbox which is not monitored.<br>\n<br>\n</p>",
+                      "emailMessage/Cc": "@variables('EmployeeEmailAddress')",
+                      "emailMessage/Importance": "Normal"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              }
+            },
+            "Approved": {
+              "case": "Approved",
+              "actions": {
+                "Send_an_email_to_creator": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "5774b0e4-5eb8-4890-a28b-668ff49a3345"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_office365",
+                      "operationId": "SendEmailV2",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                    },
+                    "parameters": {
+                      "emailMessage/To": "@variables('EmployeeEmailAddress')",
+                      "emailMessage/Subject": "Leave request has been approved",
+                      "emailMessage/Body": "<p>Hi,<br>\n<br>\nYour leave request been captured by HR, which means it is now fully approved. Below are the details:<br>\n<br>\nSubmitted by: <b>@{outputs('Get_Created_By_User')?['body/fullname']}</b><br>\nLeave Type: <b>@{outputs('Get_Leave_Type')?['body/contoso_name']}</b><br>\nLeave Start Date: <b>@{triggerOutputs()?['body/contoso_startdate']}</b><br>\nLeave End Date: <b>@{triggerOutputs()?['body/contoso_enddate']}</b><br>\nLeave Duration: <b>@{triggerOutputs()?['body/contoso_duration']}</b><br>\nLeave Comments: <b>@{triggerOutputs()?['body/contoso_leavedetail']}</b><br>\nLast Approver Comments: <b>@{triggerOutputs()?['body/contoso_lastactorcomments']}</b><br>\n<br>\n<br>\n<br>\nRegards.<br>\nLeave System<br>\n<br>\nNote - do no reply directly to this email, it comes from a mailbox which is not monitored.</p>",
+                      "emailMessage/Importance": "Normal"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              }
+            },
+            "Declined": {
+              "case": "Declined",
+              "actions": {
+                "Send_decline_email_to_creator": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "4bca1ff1-b75c-4803-895c-3b76e8e58656"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_office365",
+                      "operationId": "SendEmailV2",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                    },
+                    "parameters": {
+                      "emailMessage/To": "@variables('EmployeeEmailAddress')",
+                      "emailMessage/Subject": "Your leave request has been declined",
+                      "emailMessage/Body": "<p>Hi,<br>\n<br>\nYour leave request has been declined. Below are the details:<br>\n<br>\nSubmitted by: <b>@{outputs('Get_Created_By_User')?['body/fullname']}</b><br>\nLeave Type: <b>@{outputs('Get_Leave_Type')?['body/contoso_name']}</b><br>\nLeave Start Date: <b>@{triggerOutputs()?['body/contoso_startdate']}</b><br>\nLeave End Date: <b>@{triggerOutputs()?['body/contoso_enddate']}</b><br>\nLeave Duration: <b>@{triggerOutputs()?['body/contoso_duration']}</b><br>\nLeave Comments: <b>@{triggerOutputs()?['body/contoso_leavedetail']}</b><br>\n<br>\nDeclined by: <b>@{triggerOutputs()?['body/contoso_lastactor']}</b><br>\nComments: <b>@{triggerOutputs()?['body/contoso_lastactorcomments']}</b><br>\n<br>\nOpen the leave app to view additional details, or re-submit if appropriate.<br>\n<br>\nRegards.<br>\nLeave System<br>\n<br>\nNote - do no reply directly to this email, it comes from a mailbox which is not monitored.</p>",
+                      "emailMessage/Importance": "Normal"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              }
+            },
+            "Pending_HR_Approval": {
+              "case": "Pending HR Approval",
+              "actions": {
+                "Send_email_after_HR_approval": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "350f9773-a4bc-4a48-965b-afca529c9c34"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_office365",
+                      "operationId": "SendEmailV2",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                    },
+                    "parameters": {
+                      "emailMessage/To": "@variables('EmployeeEmailAddress')",
+                      "emailMessage/Subject": "Your leave request is pending HR approval",
+                      "emailMessage/Body": "<p>Hi,<br>\n<br>\nYour leave request has been approved by your manager/supervisor and is now waiting for HR approval. Below are the details:<br>\n<br>\nSubmitted by: <b>@{outputs('Get_Created_By_User')?['body/fullname']}</b><br>\nLeave Type: <b>@{outputs('Get_Leave_Type')?['body/contoso_name']}</b><br>\nLeave Start Date: <b>@{triggerOutputs()?['body/contoso_startdate']}</b><br>\nLeave End Date: <b>@{triggerOutputs()?['body/contoso_enddate']}</b><br>\nLeave Duration: <b>@{triggerOutputs()?['body/contoso_duration']}</b><br>\nLeave Comments: <b>@{triggerOutputs()?['body/contoso_leavedetail']}</b><br>\n<br>\nApproved By: <b>@{triggerOutputs()?['body/contoso_lastactor']}</b><br>\nManager Approver Comments: <b>@{triggerOutputs()?['body/contoso_lastactorcomments']}</b><br>\n<br>\n<br>\nRegards.<br>\nLeave System<br>\n<br>\nNote - do no reply directly to this email, it comes from a mailbox which is not monitored.</p>",
+                      "emailMessage/Cc": "@triggerOutputs()?['body/contoso_approveremail']",
+                      "emailMessage/Importance": "Normal"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              }
+            },
+            "Pending_HR_Capture": {
+              "case": "Pending HR Capture",
+              "actions": {
+                "Send_an_email_(V2)": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "e4c28a77-420b-40a5-8ac1-f328a296701a"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_office365",
+                      "operationId": "SendEmailV2",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                    },
+                    "parameters": {
+                      "emailMessage/To": "@variables('EmployeeEmailAddress')",
+                      "emailMessage/Subject": "Your leave request is pending HR capture",
+                      "emailMessage/Body": "<p>Hi,<br>\n<br>\nYour leave request has been approved by HR and is now waiting to be captured into Persal by HR. Below are the details:<br>\n<br>\nSubmitted by:<br>\n<br>\nLeave Type: <b>@{outputs('Get_Leave_Type')?['body/contoso_name']}</b><br>\nLeave Start Date: <b>@{triggerOutputs()?['body/contoso_startdate']}</b><br>\nLeave End Date: <b>@{triggerOutputs()?['body/contoso_enddate']}</b><br>\nLeave Duration: <b>@{triggerOutputs()?['body/contoso_duration']}</b><br>\nLeave Comments: <b>@{triggerOutputs()?['body/contoso_leavedetail']}</b><br>\n<br>\nApproved By: <b>@{triggerOutputs()?['body/contoso_lastactor']}</b><br>\nManager Approver Comments: <b>@{triggerOutputs()?['body/contoso_lastactorcomments']}</b><br>\n<br>\nRegards.<br>\nLeave System<br>\n<br>\nNote - do no reply directly to this email, it comes from a mailbox which is not monitored.</p>",
+                      "emailMessage/Importance": "Normal"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              }
+            },
+            "Draft_-_Recalled": {
+              "case": "Draft",
+              "actions": {
+                "Send_an_email_(V2)_2": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "6b625aba-ed79-4f58-951e-2c88282728b6"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_office365",
+                      "operationId": "SendEmailV2",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                    },
+                    "parameters": {
+                      "emailMessage/To": "@triggerOutputs()?['body/contoso_approveremail']",
+                      "emailMessage/Subject": "Leave request recalled",
+                      "emailMessage/Body": "<p>Hi,<br>\n<br>\n@{outputs('Get_Created_By_User')?['body/fullname']} has recalled their leave request. You will not be able to approve/decline this request, it will be removed from your pending approval list. Below are the details of the recalled leave request:<br>\n<br>\nSubmitted by: <b>@{outputs('Get_Created_By_User')?['body/fullname']}</b><br>\nLeave Type: <b>@{outputs('Get_Leave_Type')?['body/contoso_name']}</b><br>\nLeave Start Date: <b>@{triggerOutputs()?['body/contoso_startdate']}</b><br>\nLeave End Date: <b>@{triggerOutputs()?['body/contoso_enddate']}</b><br>\nLeave Duration: <b>@{triggerOutputs()?['body/contoso_duration']}</b><br>\nLeave Comments: <b>@{triggerOutputs()?['body/contoso_leavedetail']}</b><br>\n<br>\n<br>\n<br>\nRegards.<br>\nLeave System<br>\n<br>\nNote - do no reply directly to this email, it comes from a mailbox which is not monitored.</p>",
+                      "emailMessage/Cc": "@variables('EmployeeEmailAddress')",
+                      "emailMessage/Importance": "Normal"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "actions": {}
+          },
+          "expression": "@triggerOutputs()?['body/contoso_approvalstatus']",
+          "metadata": {
+            "operationMetadataId": "fd7e1b52-da28-40e3-b8f1-2abdc67b7dd5"
+          },
+          "type": "Switch"
+        },
+        "Get_Leave_Manager_Settings_Row": {
+          "runAfter": {
+            "Initialize_Power_App_URL_Variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4fe3b0cc-60aa-4116-9b00-29b0a5905e8f"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "contoso_leavemanagersettings",
+              "$filter": "contoso_name eq 'default'",
+              "$top": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Initialize_Power_App_URL_Variable": {
+          "runAfter": {
+            "Initialize_CreatedBy_Email_Address": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "dd94a36a-54d4-4ab8-873e-501990530980"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "LeaveManagerPowerAppURL",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "Apply_to_each": {
+          "foreach": "@outputs('Get_Leave_Manager_Settings_Row')?['body/value']",
+          "actions": {
+            "Set_Power_App_URL_Variable": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "01da28d5-5a6a-48a9-895e-46f327525010"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "LeaveManagerPowerAppURL",
+                "value": "@{items('Apply_to_each')?['contoso_appurl']}&approvals=1"
+              }
+            }
+          },
+          "runAfter": {
+            "Get_Leave_Manager_Settings_Row": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b793cf9e-4e41-4ce9-9fca-8f275c6b90e1"
+          },
+          "type": "Foreach"
+        },
+        "Get_Created_By_User": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "09e2858d-fc24-40af-92f5-a3291bab62c1"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "systemusers",
+              "recordId": "@triggerOutputs()?['body/_createdby_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Initialize_CreatedBy_Email_Address": {
+          "runAfter": {
+            "Get_Leave_Type": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "bebeb158-dd61-4e51-8772-4d18b2ad6056"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "EmployeeEmailAddress",
+                "type": "string",
+                "value": "@outputs('Get_Created_By_User')?['body/internalemailaddress']"
+              }
+            ]
+          }
+        },
+        "Get_Leave_Type": {
+          "runAfter": {
+            "Get_Created_By_User": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "8a96c317-79d7-4c5d-bb26-82b20e40d386"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "contoso_leavetypes",
+              "recordId": "@triggerOutputs()?['body/_contoso_leavetype_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

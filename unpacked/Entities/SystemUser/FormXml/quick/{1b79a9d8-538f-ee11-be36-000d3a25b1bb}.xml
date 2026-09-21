@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{1b79a9d8-538f-ee11-be36-000d3a25b1bb}</formid>
+    <IntroducedVersion>1.0.0.15</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab id="ACBA75B7-97B6-4116-AA55-51312992B721" name="tab_1" showlabel="false" labelid="{3ca21c30-f534-43ac-8dc1-c205f8d52bd1}">
+          <labels>
+            <label description="New Tab" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section id="AD49B5BF-256F-46A8-9C75-947146172EB9" name="tab_1_column_1_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{8c9e6c19-36b0-452c-91d0-a4dc0a6f2c2a}">
+                  <labels>
+                    <label description="Personal Details from Dataverse Record" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="C0550AC7-0F44-45A4-8EF5-D2911C0689D9" labelid="{d47fa841-8658-48ca-9777-57366348bc33}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{24d2509e-8e96-46de-80be-20a34060cc92}" locklevel="0" colspan="1" rowspan="1" labelid="{2e0f810f-093f-46a0-98b4-b18c8319dc71}">
+                        <labels>
+                          <label description="Full Name" languagecode="1033" />
+                        </labels>
+                        <control id="fullname" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="fullname" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2191501e-6d92-45fa-aa3d-f02c6a00f0ef}" locklevel="0" colspan="1" rowspan="1" labelid="{39a3fff8-cd57-4067-8fd1-bba32c8e8cbc}">
+                        <labels>
+                          <label description="Job Title" languagecode="1033" />
+                        </labels>
+                        <control id="jobtitle" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="jobtitle" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{aa8e3a06-9168-44ff-8603-9b094a38fb03}" locklevel="0" colspan="1" rowspan="1" labelid="{96eac483-3435-4be2-9843-02446e8abbc4}">
+                        <labels>
+                          <label description="Manager" languagecode="1033" />
+                        </labels>
+                        <control id="parentsystemuserid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="parentsystemuserid" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{833330aa-cfa0-4349-908b-b28dcb02f0f7}" locklevel="0" colspan="1" rowspan="1" labelid="{99b47483-6198-483c-89aa-4bcd3e160835}">
+                        <labels>
+                          <label description="Primary Email" languagecode="1033" />
+                        </labels>
+                        <control id="internalemailaddress" classid="{ADA2203E-B4CD-49BE-9DDF-234642B43B52}" datafieldname="internalemailaddress" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="1" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="User quick view form" languagecode="1033" />
+    </LocalizedNames>
+  </systemform>
+</forms>

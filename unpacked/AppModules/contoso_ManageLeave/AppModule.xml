@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModule>
+  <UniqueName>contoso_ManageLeave</UniqueName>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <WebResourceId>953b9fac-1e5e-e611-80d6-00155ded156f</WebResourceId>
+  <OptimizedFor></OptimizedFor>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <FormFactor>1</FormFactor>
+  <ClientType>4</ClientType>
+  <NavigationType>0</NavigationType>
+  <AppModuleComponents>
+    <AppModuleComponent type="1" schemaName="aaduser" />
+    <AppModuleComponent type="1" schemaName="contoso_employeeinfo" />
+    <AppModuleComponent type="1" schemaName="contoso_holiday" />
+    <AppModuleComponent type="1" schemaName="contoso_leavebalance" />
+    <AppModuleComponent type="1" schemaName="contoso_leavemanagersetting" />
+    <AppModuleComponent type="1" schemaName="contoso_leaverequest" />
+    <AppModuleComponent type="1" schemaName="contoso_leavetype" />
+    <AppModuleComponent type="29" id="{bcd43793-5686-4fd4-b3b4-c0c26d6f7e40}" />
+    <AppModuleComponent type="60" id="{585588d2-d4a6-ed11-aad1-000d3a25b1bb}" />
+    <AppModuleComponent type="62" schemaName="contoso_ManageLeave" />
+  </AppModuleComponents>
+  <AppModuleRoleMaps>
+    <Role id="{d09e9026-b19b-ed11-aad1-000d3a25b1bb}" />
+    <Role id="{627090ff-40a3-4053-8790-584edc5be201}" />
+    <Role id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+  </AppModuleRoleMaps>
+  <LocalizedNames>
+    <LocalizedName description="Manage Leave" languagecode="1033" />
+  </LocalizedNames>
+  <appelements>
+    <appelement uniquename="contoso_contoso_ManageLeave_canvasappid_contoso_hrapprove_914d5">
+      <canvasappid>
+        <name>contoso_hrapprove_914d5</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>contoso_contoso_ManageLeave_canvasappid_contoso_hrapprove_914d5</name>
+    </appelement>
+    <appelement uniquename="contoso_contoso_ManageLeave_canvasappid_contoso_hrcapture_18d19">
+      <canvasappid>
+        <name>contoso_hrcapture_18d19</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>contoso_contoso_ManageLeave_canvasappid_contoso_hrcapture_18d19</name>
+    </appelement>
+    <appelement uniquename="contoso_contoso_ManageLeave_canvasappid_contoso_manageleavedefaultcommandlibrary_56cd8">
+      <canvasappid>
+        <name>contoso_manageleavedefaultcommandlibrary_56cd8</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>contoso_contoso_ManageLeave_canvasappid_contoso_manageleavedefaultcommandlibrary_56cd8</name>
+    </appelement>
+  </appelements>
+</AppModule>

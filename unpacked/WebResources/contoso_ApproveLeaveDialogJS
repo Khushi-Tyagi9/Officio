@@ -1,0 +1,41 @@
+function openDialog(primaryControl, selectedItem, reason) {
+
+    // Side Dialog
+    if(reason == "Capture")
+    { var pageInput = {
+        pageType: "custom",
+        name: "contoso_hrcapture_18d19",
+        recordId: selectedItem
+    };}
+    else{
+        var pageInput = {
+            pageType: "custom",
+            name: "contoso_hrapprove_914d5",
+            recordId: selectedItem + ":" + reason
+        };
+    }
+
+    var navigationOptions = {
+        target: 2,
+        position: 2,
+        width: { value: 500, unit: "px" },
+        title: reason + " Leave Request"
+    };
+    Xrm.Navigation.navigateTo(pageInput, navigationOptions)
+        .then(
+            function () {
+                // Called when the dialog closes
+
+                primaryControl.data.refresh();
+                primaryControl.ui.refresh();
+                // primaryControl.ui.refreshRibbon;
+                //primaryControl.ui.formContext.ui.refreshRibbon();
+
+            }
+        ).catch(
+            function (error) {
+                // Handle error
+            }
+        );
+
+}

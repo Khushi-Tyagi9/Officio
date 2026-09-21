@@ -1,0 +1,44 @@
+<appaction uniquename="contoso__MarkasCaptured!afdbc1c35aaa4ba3b315d87a4ce7037f!contoso_ManageLeave!contoso_leaverequest!0">
+  <appmoduleid>
+    <uniquename>contoso_ManageLeave</uniquename>
+  </appmoduleid>
+  <buttonaccessibilitytext default="Capture request">
+    <label description="Capture request" languagecode="1033" />
+  </buttonaccessibilitytext>
+  <buttonlabeltext default="Mark as Captured">
+    <label description="Mark as Captured" languagecode="1033" />
+  </buttonlabeltext>
+  <buttonsequencepriority>10.5000000000</buttonsequencepriority>
+  <buttontooltipdescription default="Capture request">
+    <label description="Capture request" languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Capture request">
+    <label description="Capture request" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>contoso_leaverequest</logicalname>
+  </contextentity>
+  <contextvalue>contoso_leaverequest</contextvalue>
+  <fonticon>$clientsvg:Accept</fonticon>
+  <hidden>0</hidden>
+  <iscustomizable>1</iscustomizable>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>MarkasCaptured!afdbc1c35aaa4ba3b315d87a4ce7037f</name>
+  <onclickeventjavascriptfunctionname>openDialog</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5},{"type":4},{"type":21,"value":"Capture"}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>fc2657ac-a4a0-ed11-aad1-000d3a25b1bb</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>contoso_manageleavedefaultcommandlibrary_56cd8</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>2f603358d30e43d0b7e039c114378bb6</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

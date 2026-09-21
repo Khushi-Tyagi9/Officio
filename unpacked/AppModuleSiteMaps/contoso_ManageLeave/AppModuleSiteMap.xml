@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModuleSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SiteMapUniqueName>contoso_ManageLeave</SiteMapUniqueName>
+  <EnableCollapsibleGroups>False</EnableCollapsibleGroups>
+  <ShowHome>True</ShowHome>
+  <ShowPinned>True</ShowPinned>
+  <ShowRecents>True</ShowRecents>
+  <SiteMap IntroducedVersion="7.0.0.0">
+    <Area Id="area_2d668ccb" ResourceId="SitemapDesigner.NewTitle" DescriptionResourceId="SitemapDesigner.NewTitle" ShowGroups="true" IntroducedVersion="7.0.0.0">
+      <Titles>
+        <Title LCID="1033" Title="Main" />
+      </Titles>
+      <Group Id="group_f20e3fa0" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
+        <Titles>
+          <Title LCID="1033" Title="Dashboards" />
+        </Titles>
+        <SubArea Id="subarea_0c14cda7" DescriptionResourceId="Dashboards_Description" Icon="/_imgs/imagestrips/transparent_spacer.gif" Url="/workplace/home_dashboards.aspx" DefaultDashboard="585588d2-d4a6-ed11-aad1-000d3a25b1bb" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" ToolTipResourseId="DashboardTooltip">
+          <Titles>
+            <Title LCID="1033" Title="Leave Summary" />
+          </Titles>
+        </SubArea>
+      </Group>
+      <Group Id="group_7874f203" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
+        <Titles>
+          <Title LCID="1033" Title="Actions" />
+        </Titles>
+        <SubArea Id="subarea_c79ebf88" ResourceId="SitemapDesigner.NewSubArea" VectorIcon="/WebResources/contoso_thumbsicon" Icon="/WebResources/contoso_thumbsicon" Url="/main.aspx?appid=0d7f4ab6-597c-ed11-81ad-000d3a25b1bb&amp;pagetype=entitylist&amp;etn=contoso_leaverequest&amp;viewid=8a11cd30-8ca0-ed11-aad1-000d3a25b1bb&amp;viewType=1039" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+          <Titles>
+            <Title LCID="1033" Title="HR Approvals" />
+          </Titles>
+        </SubArea>
+        <SubArea Id="subarea_3ac894ca" ResourceId="SitemapDesigner.NewSubArea" VectorIcon="/WebResources/contoso_pencilicon" Icon="/WebResources/contoso_pencilicon" Url="/main.aspx?appid=0d7f4ab6-597c-ed11-81ad-000d3a25b1bb&amp;pagetype=entitylist&amp;etn=contoso_leaverequest&amp;viewid=11480454-8ca0-ed11-aad1-000d3a25b1bb&amp;viewType=1039" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+          <Titles>
+            <Title LCID="1033" Title="HR Capture" />
+          </Titles>
+        </SubArea>
+      </Group>
+      <Group Id="group_717ee7a6" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
+        <Titles>
+          <Title LCID="1033" Title="Manage" />
+        </Titles>
+        <SubArea Id="subarea_f257da2d" VectorIcon="/WebResources/contoso_LeaveRequestIcon" Icon="/WebResources/contoso_LeaveRequestIcon" Entity="contoso_leaverequest" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+          <Titles>
+            <Title LCID="1033" Title="Requests" />
+          </Titles>
+        </SubArea>
+        <SubArea Id="subarea_d7f4ac6b" VectorIcon="/WebResources/contoso_LineChartIcon" Icon="/WebResources/contoso_LineChartIcon" Entity="contoso_leavebalance" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+          <Titles>
+            <Title LCID="1033" Title="Balances" />
+          </Titles>
+        </SubArea>
+        <SubArea Id="subarea_ff113d59" VectorIcon="/WebResources/contoso_personicon" Icon="/WebResources/contoso_personicon" Entity="aaduser" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+          <Titles>
+            <Title LCID="1033" Title="Employees" />
+          </Titles>
+        </SubArea>
+      </Group>
+    </Area>
+    <Area Id="area_6d65d9a2" ResourceId="SitemapDesigner.NewTitle" DescriptionResourceId="SitemapDesigner.NewTitle" ShowGroups="true" IntroducedVersion="7.0.0.0">
+      <Titles>
+        <Title LCID="1033" Title="Settings" />
+      </Titles>
+      <Group Id="group_27dbf764" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
+        <Titles>
+          <Title LCID="1033" Title="Master Data" />
+        </Titles>
+        <SubArea Id="subarea_753685cf" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="contoso_leavetype" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_a9374e66" VectorIcon="/WebResources/contoso_calendaricon" Icon="/WebResources/contoso_calendaricon" Entity="contoso_holiday" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_b392ab44" VectorIcon="/WebResources/contoso_personicon" Icon="/WebResources/contoso_personicon" Entity="contoso_employeeinfo" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+          <Titles>
+            <Title LCID="1033" Title="Employee Mapping" />
+          </Titles>
+        </SubArea>
+      </Group>
+      <Group Id="group_4ff5c861" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
+        <Titles>
+          <Title LCID="1033" Title="Configuration" />
+        </Titles>
+        <SubArea Id="subarea_b8e3fd09" VectorIcon="/WebResources/contoso_SettingsIcon" Icon="/WebResources/contoso_SettingsIcon" Entity="contoso_leavemanagersetting" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+          <Titles>
+            <Title LCID="1033" Title="Settings" />
+          </Titles>
+        </SubArea>
+      </Group>
+    </Area>
+  </SiteMap>
+  <LocalizedNames>
+    <LocalizedName description="Manage Leave" languagecode="1033" />
+  </LocalizedNames>
+</AppModuleSiteMap>

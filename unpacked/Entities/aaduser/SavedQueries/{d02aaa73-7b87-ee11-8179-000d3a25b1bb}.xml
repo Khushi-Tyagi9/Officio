@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{d02aaa73-7b87-ee11-8179-000d3a25b1bb}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="displayname" select="1" icon="1" preview="1">
+        <row name="result" id="aaduserid">
+          <cell name="displayname" width="200" />
+          <cell name="jobtitle" width="223" />
+          <cell name="userprincipalname" width="300" />
+          <cell name="mail" width="299" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+        <entity name="aaduser">
+          <attribute name="displayname" />
+          <attribute name="aaduserid" />
+          <attribute name="userprincipalname" />
+          <attribute name="jobtitle" />
+          <attribute name="mail" />
+          <order attribute="displayname" descending="false" />
+          <filter type="and">
+            <condition attribute="accountenabled" operator="eq" value="1" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.15</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Provisioned Active Employees" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

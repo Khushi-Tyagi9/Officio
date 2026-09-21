@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{2bd7ffe1-08ac-4f69-877f-ef3406f24be2}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{d5e53ccf-c0a5-4749-9979-0285fdbd446b}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{689ba1ae-6149-4c3d-b986-7f0dafcffba7}" name="General_Tab">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{8f6fc9ab-e1cb-4ba2-a606-a21c77f1ab7f}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="contoso_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c0ea126e-c64e-466c-b668-71ca85d782d4}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Holiday Type" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_holidaytype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="contoso_holidaytype" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6acda9c5-c86c-4a27-9fc5-5c117a1ed2e4}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Holiday Date" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_holidaydate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="contoso_holidaydate" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{074f7006-462e-4c38-bc2b-39f1e255bbbd}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Working Day?" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_workingday" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="contoso_workingday" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{dde62edc-ab70-488e-8d4a-dbff52babb5d}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{e4982a6d-150b-415b-ade8-3cfeb60fb0bc}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{92cbbba9-8422-4d03-bdba-6d8d1864a50a}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{b8e7d0f3-87c5-4738-b23b-2b44c6b60d0d}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d9028c79-0196-4551-b109-3a10c8949e82}" colspan="1" rowspan="1">
+              <labels>
+                <label description="Owner" languagecode="1033" />
+              </labels>
+              <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{50db529b-3d1c-45f1-ae6c-a2173a132728}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{153f5e25-8da2-4fe8-a965-d55db2628df8}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{96fa26a8-1938-46c0-8317-87b146540b6e}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{ec48a2d8-65ab-45a6-84d4-4796e77bb269}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

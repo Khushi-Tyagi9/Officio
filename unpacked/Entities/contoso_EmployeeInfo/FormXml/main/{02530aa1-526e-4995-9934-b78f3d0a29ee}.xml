@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{02530aa1-526e-4995-9934-b78f3d0a29ee}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{a6a4710e-0141-40d0-85d1-5b52acb5987b}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="50%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{d6450027-e805-4b9e-88fe-91977a2e7a28}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{2a2d92e6-957d-4448-8478-dbbbf39927fb}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Employee (Active Directory)" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_employee" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="contoso_employee" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1a1d2a85-dc21-49cb-8703-b1af00e22b92}">
+                        <labels>
+                          <label description="Persal Number" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_persalnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="contoso_persalnumber" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2b8f6c4c-5107-4839-bff4-940f087a3e66}" locklevel="1" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Dataverse User" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_dataverseuser" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="contoso_dataverseuser" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="50%">
+              <sections>
+                <section name="_section_548" id="c29522b4-22e0-4649-a070-b2cbf08b7851" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell locklevel="0" id="{887bac10-ff37-4fd1-b4d1-3e5bc6e58dd7}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="New QV control 1700466462201" languagecode="1033" />
+                        </labels>
+                        <control id="QuickviewControl1700466462201" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="contoso_employee">
+                          <parameters>
+                            <DisplayAsCustomer360Tile>false</DisplayAsCustomer360Tile>
+                            <QuickForms>&lt;QuickFormIds&gt;&lt;QuickFormId entityname="aaduser"&gt;e499cfb4-7887-ee11-8179-000d3a25b1bb&lt;/QuickFormId&gt;&lt;/QuickFormIds&gt;</QuickForms>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{55ece779-24e3-46c1-8bf2-915a10267653}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="New QV control 1701330238568" languagecode="1033" />
+                        </labels>
+                        <control id="QuickviewControl1701330238568" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="contoso_dataverseuser">
+                          <parameters>
+                            <DisplayAsCustomer360Tile>false</DisplayAsCustomer360Tile>
+                            <QuickForms>&lt;QuickFormIds&gt;&lt;QuickFormId entityname="systemuser"&gt;1b79a9d8-538f-ee11-be36-000d3a25b1bb&lt;/QuickFormId&gt;&lt;/QuickFormIds&gt;</QuickForms>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{468aea0d-73a0-4495-afc3-f34e9b448fc5}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{6a3bd908-aee1-45c3-a746-bd9778d6257a}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{b6a402cf-eb64-4f98-ae84-2c212678f2cb}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{ccd0a288-3ad1-42db-99b4-f6250331dde1}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{9193883e-7d6e-44f8-9c8f-0795a7eb04f9}" colspan="1" rowspan="1">
+              <labels>
+                <label description="Owner" languagecode="1033" />
+              </labels>
+              <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{569a26e1-f5fe-42f5-87e5-0e80567f2927}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{9f94c072-096f-4e02-bf18-7cd4fbd5bdcb}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f7fe2080-21b7-45e3-9548-c5a471dd1142}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{95826131-fadd-43c0-81b0-2e9f537aea4c}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <controlDescriptions />
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{59e7928c-2818-490d-9141-f69e36e22dfe}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{820209b1-2bb2-4508-94ac-239b6d4816c6}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="50%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{721dcd33-bc3b-4d47-8d32-e97569ac262e}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{1dbcd647-b007-4218-8276-eb34e3b9a721}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="contoso_name" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="null_section_4" id="6cb96e9a-6e00-41a7-8450-faaef53555bf" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Behaviour" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{08dc14f7-7637-43c8-92af-a7baf2798006}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Max Consecutive Days" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_maxconsecutivedays" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="contoso_maxconsecutivedays" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{08813c8a-2243-48c0-a064-5950c9419367}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Send Meeting Request" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_sendmeetingrequest" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="contoso_sendmeetingrequest" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a801a3ec-2948-402f-961a-baab836ad0ce}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Enable App Feedback" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_enableappfeedback" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="contoso_enableappfeedback" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="50%">
+              <sections>
+                <section name="null_section_5" id="fa3f95e5-2063-4ebf-89c9-31a2ef746cb2" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Policy" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{e74637d4-09ea-46b0-9253-da010bdb0fb3}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Leave Policy Link" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_leavepolicyurl" classid="{71716B6C-711E-476C-8AB8-5D11542BFB47}" datafieldname="contoso_leavepolicyurl" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="_section_430" id="09c57233-763f-4792-8ae3-88131c904d28" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Configuration" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{9da95a40-7e21-4ad2-ad16-f653d059869d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="App URL" languagecode="1033" />
+                        </labels>
+                        <control id="contoso_appurl" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="contoso_appurl" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{ff4d2fd4-bcff-4e3c-9492-dc965e2f60f2}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{78ccbac8-3171-49e4-bd8f-b836d627be23}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{6b775d6f-4be5-4649-b6dc-b61aaeeafff4}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{ac1dab7e-f500-412f-87ce-ebb49b4b13af}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{1a0ab0b5-1f85-46ff-b9df-b47ddf1746e2}" colspan="1" rowspan="1">
+              <labels>
+                <label description="Owner" languagecode="1033" />
+              </labels>
+              <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{422dabcd-5032-4415-be72-c70a10979a88}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{52ccb5cd-1235-40b4-b059-c591bf46e36b}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{20dd7e9b-26b7-486f-b133-60159c7635e0}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{6ec45b51-35fd-4136-857d-5e9368d245e9}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>
