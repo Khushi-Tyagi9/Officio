@@ -118,9 +118,42 @@ Set(_workDaysInRequest,
 
 ---
 
-## A second copy of this code
+## The copy in HomeScreen.fx.yaml is dead code: no fix needed there
 
-`apps_src/requestleave/Src/HomeScreen.fx.yaml` lines 381-411 contain another copy of the same calculation, including the same Wednesday pattern on line 393. It counts holidays with `CountIf(Holidays, StartDate >= ThisItem.StartDate, ...)`, but the Holidays table has a `Holiday Date` column, not `StartDate`, so this looks like leftover template code. Check in Studio whether it shows formula errors or is reachable; if it is live, apply the same two fixes there.
+`apps_src/requestleave/Src/HomeScreen.fx.yaml` lines 381-411 hold a second copy of the day-count block. **It never runs**: it is inside a block comment, so neither bug can occur from it. This section was previously a guess ("looks like leftover template code"); it is now checked against the file.
+
+### Is the logic identical?
+
+The weekday chain is; the surrounding statements are not.
+
+| Part | HomeScreen (lines 381-411) | LeaveDatesScreen (lines 227-253) |
+|---|---|---|
+| Weekday `If` chain (`_numFullDaysPartialWeek` 6 down to 0) | **Identical**: compared with whitespace removed, HomeScreen 389-407 equals LeaveDatesScreen 232-250 character for character. It therefore contains BUG-002 too (line 393 has the same `_startWeekday = 4`). | |
+| Where the dates come from | `ThisItem.StartDate`, `ThisItem.EndDate` (a legacy record shape) | `LeaveStartDatePicker.SelectedDate`, `LeaveEndDatePicker.SelectedDate` |
+| Day unit | `Days` | `TimeUnit.Days` |
+| Weekday variables | Set in sequence | Set inside `Concurrent(...)` |
+| Holiday count | `CountIf(Holidays, StartDate >= ..., StartDate <= ...)` | `CountIf(HolidaysCollection, 'Holiday Date' >= ..., 'Holiday Date' <= ...)` |
+| Subtraction | `_workDaysInRequest - _holidaysInRequest` | Same, so it has the BUG-001 flaw in principle |
+
+The HomeScreen holiday count could not have worked as written: the `Holidays` data source has no `StartDate` column (its columns are `Holiday Date`, `Holiday Type`, `Name` and `Working Day?`), and it reads the raw table rather than the filtered `HolidaysCollection`. The block also refers to `Leave`, `Balance`, `Requester` and `Vacation/Sick/Floating` names that belong to a different, earlier data model (`HomeScreen` lines 11-17, 366-372).
+
+### Is it referenced anywhere?
+
+No. Evidence:
+
+- **It is commented out.** `GalleryRequests.OnSelect` starts at line 358. Only lines 359 (`Set(_requestType, ...)`), 361 (`ClearCollect(ColTmpLeaveRequest, ...)`) and 363 (`Navigate(LeaveReviewScreen)`) run. Line 365 opens `/*` and line 413 closes it (`Set(_showDetails, true);*/`); the calculation is between them. The screen's `OnVisible` (lines 6-20) is commented out the same way.
+- **Nothing else runs it.** I stripped all block and line comments from `HomeScreen.fx.yaml` and searched for the calculation variables (`_holidaysInRequest`, `_workDaysInRequest`, `_numFullWeeks`, `_numFullDaysPartialWeek`, `_numPartialWeekdays`, `_inclusiveTotalDaysRequested`, `_startWeekday`, `_endWeekday`). None remains in active code. The only surviving mention of `_requestedDays` is `Set(_requestedDays, 0)` on line 98, which resets it and does not calculate it.
+- **No other screen reads these variables from HomeScreen.** They appear only in HomeScreen (all inside comments) and LeaveDatesScreen.
+- **Nothing triggers the control.** No `Select(GalleryRequests)` or reference to its `OnSelect` exists in any screen.
+
+### What this means
+
+- **No change is needed in `HomeScreen`.** Apply the fixes only in `LeaveDatesScreen`. Optionally delete the commented block in Studio to avoid confusing the next reader.
+- **The history list does not recalculate days.** The live path copies the stored value: `ClearCollect(ColTmpLeaveRequest, {..., Duration: ThisItem.Duration, ...})` (line 361), then opens `LeaveReviewScreen`. Fixing the formula changes only requests created afterwards. Rows already saved with a wrong `contoso_duration` (from BUG-001 or BUG-002) keep the wrong value until someone corrects the data.
+
+### Limits of this check
+
+This is a read of the unpacked source, not a run of the app. Power Fx ignores comments, so a commented block cannot execute, but the `apps_src` copy may differ from the version published in the environment. If the live app differs, re-unpack it and repeat the check.
 
 ## Applying the fixes in Studio
 
